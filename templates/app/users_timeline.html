@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<P>ユーザーのタイムライン</P>
+
+{% for project in projects %}
+<a href="{% url 'app:projects_detail' project.id %}">
+    <img src="{{ project.image.url }}" class="photo-img">
+</a>
+
+{% endfor %}
+{% endblock %}

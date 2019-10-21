@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>add user</h2>
+
+<form method="post" action="{% url 'accounts:signup' %}">{% csrf_token %}
+    <label>user name</label>
+    {{ form.username }}
+    {{ form.username.errors }}
+    <br>
+    <label>password</label>
+    {{ form.password1 }}
+    {{ form.password1.errors }}
+    <br>
+    <label>re password</label>
+    {{ form.password2 }}
+    {{ form.password2.errors }}
+    <br>
+    <input type="submit" value="regist">
+</form>
+
+<p><a href="{% url 'accounts:login' %}">login</a></p>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="photo-detail">
+
+    <img src="{{ project.image.url }}" class="photo-img">
+    <div class="photo-info">
+        <a href="{% url 'app:users_detail' project.user.id %}">@{{ project.user }}</a>
+    </div>
+
+    <h2>{{ project.title }}</h2>
+    <p>{{ project.comment }}</p>
+
+    <!-- 削除ボタン -->
+    {% if request.user == project.user %}
+    <form method="post" action="{% url 'app:projects_delete' project.id %}">{% csrf_token %}
+        <button class="btn" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+    </form>
+    {% endif %}
+
+</div>
+{% endblock %}
