@@ -22,3 +22,10 @@ class Photo(models.Model):
 
     def __str__(self):
         return self.title
+
+class Relationship(models.Model):
+    follow = models.ForeignKey(User, related_name='follow', on_delete=models.CASCADE)
+    follower = models.ForeignKey(User, related_name='follower', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.follow
