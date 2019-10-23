@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
-from .models import Photo
+from .models import Photo, Relationship
 from django.contrib.auth.decorators import login_required
 from .forms import PhotoForm
 from django.contrib import messages
@@ -40,7 +40,12 @@ def index(request):
 def users_detail(request, pk):
     user = get_object_or_404(User, pk=pk)
     projects = user.photo_set.all().order_by('-created_at')
-    return render(request, 'app/users_detail.html', {'user': user, 'projects': projects})
+
+    # フォローとフォロワーを取得
+    follows = Relationship.objects.filter(follow=user.id)
+    followers = Relationship.objects.filter(follower=user.id)
+
+    return render(request, 'app/users_detail.html', {'user': user, 'projects': projects, 'follows': follows, 'followers': followers})
 
 # タイムライン
 def users_timeline(request):

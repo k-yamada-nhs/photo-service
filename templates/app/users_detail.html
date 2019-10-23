@@ -4,8 +4,17 @@
 
 <h2 class="user-name">@{{ user.username }}のmypage</h2>
 
-<p>フォロー</p>
-<p>フォロワー</p>
+<p>{{ user.username }}がフォローしてる人 =>
+    {% for follow in follows %}
+    <p>{{ follow.follower }}</p>
+    {% endfor %}
+</p>
+
+<p>{{ user.username }}のフォロワー =>
+    {% for follower in followers %}
+    <p>{{ follower.follow }}</p>
+    {% endfor %}
+</p>
 <hr>
 
 {% for message in messages %}
