@@ -2,16 +2,22 @@
 
 {% block content %}
 
-<h2>ユーザーのタイムライン</h2>
+<p>ユーザーのタイムライン</p>
 <p>ログインしているユーザー => @{{ user.username }}</p>
 
-{% for project in projects %}
-<div style="border: 1px solid black;">
-    <a href="{% url 'app:projects_detail' project.id %}">
-        <img src="{{ project.image.url }}" class="photo-img">
-    </a>
-    <p>@{{ project.user.username }}</p>
+<div class="row">
+    {% for project in projects %}
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <a href="{% url 'app:projects_detail' project.id %}">
+                <img src="{{ project.image.url }}" class="rounded" alt="参考画像" style="width:100%">
+                <div class="caption">
+                    <p>@{{ project.user.username }}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
 </div>
-{% endfor %}
 
 {% endblock %}
