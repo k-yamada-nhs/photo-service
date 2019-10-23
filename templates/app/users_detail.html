@@ -2,19 +2,22 @@
 
 {% block content %}
 
-<h2 class="user-name">@{{ user.username }}</h2>
-{% if user.is_superuser %}
-<p>管理者</p>
-{% else %}
-<p>一般ユーザー</p>
-{% endif %}
+<h2 class="user-name">@{{ user.username }}のmypage</h2>
+
+<p>フォロー</p>
+<p>フォロワー</p>
+<hr>
 
 {% for message in messages %}
 <p class="message-success">{{ message }}</p>
 {% endfor %}
 
-{% for photo in photos %}
-<img src="{{ photo.image.url }}" class="photo-img">
+
+<p>ギャラリー</p>
+{% for project in projects %}
+<a href="{% url 'app:projects_detail' project.id %}">
+    <img src="{{ project.image.url }}" class="photo-img">
+</a>
 {% endfor %}
 
 {% endblock %}
