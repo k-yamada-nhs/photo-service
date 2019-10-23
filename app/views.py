@@ -44,5 +44,6 @@ def users_detail(request, pk):
 
 # タイムライン
 def users_timeline(request):
+    user = request.user
     projects = Photo.objects.all()
-    return render(request, 'app/users_timeline.html', {'projects': projects})
+    return render(request, 'app/users_timeline.html', {'projects': projects, 'user': user})
