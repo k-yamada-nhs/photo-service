@@ -2,41 +2,66 @@
 
 {% block content %}
 
-<h2 class="user-name">@{{ user.username }}のmypage</h2>
-
-<p>{{ user.username }}がフォローしてる人 =>
-    {% for follow in follows %}
-    <p>{{ follow.follower }}</p>
-    {% endfor %}
-</p>
-
-<p>{{ user.username }}のフォロワー =>
-    {% for follower in followers %}
-    <p>{{ follower.follow }}</p>
-    {% endfor %}
-</p>
-<hr>
-
-{% for message in messages %}
-<p class="message-success">{{ message }}</p>
-{% endfor %}
-
-
-<p>ギャラリー</p>
-
 <div class="row">
-    {% for project in projects %}
-    <div class="col-md-4">
-        <div class="thumbnail">
-            <a href="{% url 'app:projects_detail' project.id %}">
-                <img src="{{ project.image.url }}" alt="参考画像" style="width:100%">
-                <div class="caption">
-                    <p>{{ project.title }}</p>
-                </div>
-            </a>
-        </div>
+    <div class="col-3">
+        <p>@{{ user.username }}のmypage</p>
     </div>
-    {% endfor %}
+    <div class="col-9">
+        <p>{{ user.username }}がフォローしてる人 =>
+            {% for follow in follows %}
+            <p>{{ follow.follower }}</p>
+            {% endfor %}
+        </p>
+
+        <p>{{ user.username }}のフォロワー =>
+            {% for follower in followers %}
+            <p>{{ follower.follow }}</p>
+            {% endfor %}
+        </p>
+    </div>
 </div>
 
+<div class="row">
+    <div class="col-12">
+
+        {% for message in messages %}
+        <p class="message-success">{{ message }}</p>
+        {% endfor %}
+
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a href="#photo1" class="nav-link active" data-toggle="tab">ギャラリー</a>
+            </li>
+            <li class="nav-item">
+                <a href="#photo2" class="nav-link" data-toggle="tab">フォロワー</a>
+            </li>
+            <li class="nav-item">
+                <a href="#photo3" class="nav-link" data-toggle="tab">タブ3</a>
+            </li>
+
+            <div class="tab-content">
+                <div id="photo1" class="tab-pane active">
+                    {% for project in projects %}
+
+                    <a href="{% url 'app:projects_detail' project.id %}">
+                        <img src="{{ project.image.url }}" alt="参考画像" style="width:100%">
+                        <div class="caption">
+                            <p>{{ project.title }}</p>
+                        </div>
+                    </a>
+
+                    {% endfor %}
+                </div>
+                <div id="photo2" class="tab-pane">
+
+                </div>
+                <div id="photo3" class="tab-pane">
+                    <img src="images/photo3.jpg" class="img-fluid" alt="" />
+                </div>
+
+            </div>
+        </ul>
+
+    </div>
+</div>
 {% endblock %}
