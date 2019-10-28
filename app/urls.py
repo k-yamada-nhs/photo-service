@@ -10,4 +10,6 @@ urlpatterns = [
     path('projects/create/', views.projects_create, name='projects_create'),
     path('projects/<int:pk>/', views.projects_detail, name='projects_detail'),
     path('projects/<int:pk>/delete', views.projects_delete, name='projects_delete'),
+    #path("", views.test_ajax_app),
+    path('styletransfer', views.test_ajax_response, name='style_transfer'),
 ]
