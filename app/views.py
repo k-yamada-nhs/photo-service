@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 from .forms import PhotoForm
 from django.contrib import messages
 from django.views.decorators.http import require_POST
+from django.http import JsonResponse
+from django.http import HttpResponse
+
 
 # Create your views here.
 @login_required
@@ -55,3 +58,12 @@ def users_timeline(request):
     projects = Photo.objects.all()
 
     return render(request, 'app/users_timeline.html', {'projects': projects, 'user': user})
+
+def test_ajax_response(request):
+    #input_text = request.POST.getlist("name_input_text")
+    
+    hoge = {
+        'hoge':'bb',
+    }   
+    return JsonResponse(hoge)
+    #return render(request, 'app/project_crate.html', {'hoge': hoeg})
