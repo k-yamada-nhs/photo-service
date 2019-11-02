@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
-from .models import Photo, Relationship
+from .models import Photo, Relationship, UploadImage
 from django.contrib.auth.decorators import login_required
 from .forms import PhotoForm
 from django.contrib import messages
@@ -22,6 +22,8 @@ def projects_create(request):
         return redirect('app:users_detail', pk=request.user.pk)
     else:
         form = PhotoForm()
+        
+    # 投稿用フォームと画像用フォーム
     return render(request, 'app/projects_create.html', {'form': form})
 
 
@@ -59,11 +61,28 @@ def users_timeline(request):
 
     return render(request, 'app/users_timeline.html', {'projects': projects, 'user': user})
 
-def test_ajax_response(request):
-    #input_text = request.POST.getlist("name_input_text")
+@require_POST
+def test_ajax(request):
+
+    # POST
+    #uploadimageform = UploadImageForm(request.POST, request.FILES)
+    #if uploadimageform.is_valid():
+        # 単体画像アップロード
+        #up = UploadImage()
+        #up.image = request.FILES['image']
+        #up.save()
+
+    # 複数選択の画像アップロード
+    #for ff in request.FILES.getlist('image'):
+        #p = UploadImage(image=ff)
+        #p.save()
+
+    base = request.FILES['image']
+    style = request.FILES['style']
+
+    p = UploadImage(image=base, style=style)
+    p.save()
+
+    hoge = "upload success"
     
-    hoge = {
-        'hoge':'bb',
-    }   
-    return JsonResponse(hoge)
-    #return render(request, 'app/project_crate.html', {'hoge': hoeg})
+    return HttpResponse(hoge)

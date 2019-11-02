@@ -5,6 +5,28 @@
     <a href="{% url 'app:index' %}">ホームに戻る</a>
 </div>
 
+
+<form class="ahoform" name="name_form" action="{% url 'app:test_ajax' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div id="base_area" style="cursor: pointer;">
+        <p>ベース画像</p>
+        <input type="file" accept="image/*" name="image" id="id_image">
+    </div>
+
+    <div id="style_area" style="cursor: pointer;">
+        <p>スタイル画像</p>
+        <input type="file" accept="image/*" name="style" id="id_style">
+    </div>
+
+    <input type="submit" value="スタイル変換">
+</form>
+
+<p id="id_div_ajax_response">
+    ajax response here
+</p>
+
+
+
 <form action="{% url 'app:projects_create' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
     <table>
         <tr>
@@ -24,81 +46,56 @@
             <td>{{ form.category }}</td>
         </tr>
     </table>
-    <button type="submit" class="btn">保存</button>
+    <button type="submit">保存</button>
 </form>
-
-<form action="{% url 'app:style_transfer' %}" class="ajax_fm" method="POST" >
-    <!-- <form name="name_form" action="/test_ajax_app/" method="POST"> -->
-    {% csrf_token %}
-    <input type="text" id="id_input_text" name="name_input_text" value="">
-    <button>submit</button>
-    <!--
-        <input class="btn" type="submit">
-    -->
-    </form>
-
-<span id="id_div_ajax_response">
-    AJAX RESPONSE
-</span>
 
 {% endblock %}
 {% block extrajs %}
 <script>
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
 
-    var csrftoken = getCookie('csrftoken');
+    $(document).ready(function () {
 
-    function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
+        // 指定部分にドラッグしたときの処理
+        var base = $("#base_area");
+        var style = $("#style_area");
 
-    $.ajaxSetup({
-        beforeSend: function (xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
+        // 指定部分の上に乗っかっているときの処理
+        base.on("dragover", function (e) {
+            e.preventDefault();
+            console.log("DragOver");
+        });
 
-    // 送信ボタンで呼ばれる
-    $('.ajax_fm').on('submit', e => {
-        //確認用
-        alert("SubmitPush");
-        // デフォルトのイベントをキャンセルし、ページ遷移しないように!
-        e.preventDefault();
+        style.on("dragover", function (e) {
+            e.preventDefault();
+            console.log("DragOver");
+        });
 
-        $.ajax({
-            'url': '{% url "app:style_transfer" %}',
-            'type': 'POST',
-            'data': {
-                //'title': $('#id_title').val(),  // 記事タイトル
-            },
-            'dataType': 'json'
-        }).done(function(data){
-            // <p>はろー</p>のような要素を作成し、それを記事一覧エリアに追加し、入力欄をクリアする。
-            // const p = $('<p>', { text: response.title });
-            // $('#posts').prepend(p);
-            // $('#id_title').val('');
-            console.log(data);
-        }).fail(function (data) {
-            alert("失敗");
-        })
+        // 指定部分でドロップしたときの処理
+        base.on("drop", function (e) {
+            e.preventDefault();
+            document.getElementById("id_image").files = e.originalEvent.dataTransfer.files;
+            console.log("Drop");
+        });
 
+        style.on("drop", function (e) {
+            e.preventDefault();
+            document.getElementById("id_style").files = e.originalEvent.dataTransfer.files;
+            console.log("Drop");
+        });
+
+        $(".ahoform").submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "/test_ajax",
+                method: "POST",
+                data: new FormData($(".ahoform").get(0)),
+                processData: false,
+                contentType: false,
+            }).done(function (data) {
+                $("#id_div_ajax_response").text(data);
+                console.log(data);
+            });
+        });
     });
 </script>
 {% endblock %}
