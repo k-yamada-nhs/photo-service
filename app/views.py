@@ -64,19 +64,6 @@ def users_timeline(request):
 @require_POST
 def test_ajax(request):
 
-    # POST
-    #uploadimageform = UploadImageForm(request.POST, request.FILES)
-    #if uploadimageform.is_valid():
-        # 単体画像アップロード
-        #up = UploadImage()
-        #up.image = request.FILES['image']
-        #up.save()
-
-    # 複数選択の画像アップロード
-    #for ff in request.FILES.getlist('image'):
-        #p = UploadImage(image=ff)
-        #p.save()
-
     base = request.FILES['image']
     style = request.FILES['style']
 
