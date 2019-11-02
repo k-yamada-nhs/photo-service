@@ -29,3 +29,7 @@ class Relationship(models.Model):
 
     def __str__(self):
         return "{} : {}".format(self.follow.username, self.follower.username)
+
+class UploadImage(models.Model):
+    image = models.ImageField(upload_to='base')
+    style = models.ImageField(upload_to='style')

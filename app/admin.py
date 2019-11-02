@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Photo, Category, Relationship
+from .models import Photo, Category, Relationship, UploadImage
 
 # Register your models here.
 
@@ -22,3 +22,4 @@ class RelationshipAdmin(admin.ModelAdmin):
 admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Relationship, RelationshipAdmin)
+admin.site.register(UploadImage)
