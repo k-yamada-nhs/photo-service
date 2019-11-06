@@ -4,7 +4,7 @@
 
 <div class="photo-detail">
 
-    <img src="{{ project.image.url }}" class="photo-img">
+    <img src="{{ project.outputimagepath }}" class="photo-img">
     <div class="photo-info">
         <a href="{% url 'app:users_detail' project.user.id %}">@{{ project.user }}</a>
     </div>

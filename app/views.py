@@ -19,11 +19,14 @@ def projects_create(request):
             photo.user = request.user
             photo.save()
             messages.success(request, "投稿が完了しました")
-        return redirect('app:users_detail', pk=request.user.pk)
+        #return redirect('app:users_detail', pk=request.user.pk)
+
+        hoge = "プロジェクトを保存しました"
+    
+        return HttpResponse(hoge)
     else:
         form = PhotoForm()
-        
-    # 投稿用フォームと画像用フォーム
+    
     return render(request, 'app/projects_create.html', {'form': form})
 
 
@@ -70,6 +73,11 @@ def test_ajax(request):
     p = UploadImage(image=base, style=style)
     p.save()
 
-    hoge = "upload success"
+    #画像の保存先のpath
+    hoge = {
+        "base": p.image.url,
+        "style": p.style.url,
+        "output_image": "/pasususususus"
+    }
     
-    return HttpResponse(hoge)
+    return JsonResponse(hoge)

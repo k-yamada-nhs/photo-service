@@ -5,4 +5,4 @@ from django import forms
 class PhotoForm(ModelForm):
     class Meta:
         model = Photo
-        fields = ['title', 'comment', 'image', 'category']
+        fields = ['title', 'comment', 'baseimagepath', 'styleimagepath', 'outputimagepath']
