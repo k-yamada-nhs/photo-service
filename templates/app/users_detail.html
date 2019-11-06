@@ -9,15 +9,17 @@
     <div class="col-9">
         <p>{{ user.username }}がフォローしてる人 =>
             {% for follow in follows %}
-            <p>{{ follow.follower }}</p>
+            {{ follow.follower }}
             {% endfor %}
         </p>
 
         <p>{{ user.username }}のフォロワー =>
             {% for follower in followers %}
-            <p>{{ follower.follow }}</p>
+            {{ follower.follow }}
             {% endfor %}
         </p>
+
+        <a href="{% url 'app:projects_create' %}">プロジェクト作成</a>
     </div>
 </div>
 
@@ -46,7 +48,7 @@
                     <div class="col-md-4">
                         <div class="thumbnail">
                             <a href="{% url 'app:projects_detail' project.id %}">
-                                <img src="{{ project.image.url }}" class="rounded" alt="img" style="width:100%">
+                                <img src="{{ project.outputimagepath }}" class="rounded" alt="img" style="width:100%">
                                 <div class="caption">
                                     <p>{{ project.title }}</p>
                                 </div>

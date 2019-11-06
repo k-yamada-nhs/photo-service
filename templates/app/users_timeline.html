@@ -10,7 +10,7 @@
     <div class="col-md-4">
         <div class="thumbnail">
             <a href="{% url 'app:projects_detail' project.id %}">
-                <img src="{{ project.image.url }}" class="rounded" alt="参考画像" style="width:100%">
+                <img src="{{ project.outputimagepath }}" class="rounded" alt="image" style="width:100%">
                 <div class="caption">
                     <p>@{{ project.user.username }}</p>
                 </div>
