@@ -1,12 +1,12 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from .models import Profile
 
-from .models import User
+#usercreateform
+class UserCreateForm(UserCreationForm):
+    pass
 
-class SignUpForm(UserCreationForm):
-    
-    profile_image = forms.ImageField()
-
+class ProfileForm(forms.ModelForm):
     class Meta:
-        mdoel = User
-        fields = ("username", "password1", "password2", "profile_image")
+        model = Profile
+        fields = ['profileimage',]

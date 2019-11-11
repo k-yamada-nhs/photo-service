@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-#from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from django.conf import settings
-User = settings.AUTH_USER_MODEL
 
 from .models import Photo, Relationship, UploadImage
 from django.contrib.auth.decorators import login_required
