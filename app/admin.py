@@ -1,13 +1,7 @@
 from django.contrib import admin
-from .models import Photo, Category, Relationship, UploadImage
+from .models import Photo, Relationship, UploadImage
 
 # Register your models here.
-
-
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title')
-    list_display_links = ('id', 'title')
-
 
 # django adminに出すリスト ID TITLE
 class PhotoAdmin(admin.ModelAdmin):
@@ -20,6 +14,5 @@ class RelationshipAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Photo, PhotoAdmin)
-admin.site.register(Category, CategoryAdmin)
 admin.site.register(Relationship, RelationshipAdmin)
 admin.site.register(UploadImage)
