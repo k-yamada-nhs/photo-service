@@ -1,22 +1,26 @@
 #base_area{
     width: 80%;
     height: 500px;
-    border: 4px solid #ddd;
     margin: auto;
 }
 
 #style_area{
-    width: 40%;
-    height: 100px;
-    border: 4px solid #ddd;
+    width: 60%;
+    height: 260px;
+    border: 4px solid #000;
     margin: auto;
 }
 
-/*particlejs*/
-.background{
-    position: absolute;
-    display: block;
-    top: 0;
-    left: 0;
-    z-index: 0;
+#preview{
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#stylepreview{
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
 }

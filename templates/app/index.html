@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+<div class="container-fulid" id="particles">
 
+</div>
 
 {% endblock %}
 
 {% block extrajs %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.js"></script>
+<script src="{% static 'js/vanta.net.min.js' %}"></script>
+<script>
+    VANTA.NET({
+        el: "#particles"
+    })
+</script>
 
 {% endblock %}

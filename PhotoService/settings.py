@@ -130,3 +130,5 @@ MEDIA_URL = '/media/'  # ユーザーが生成したコンテンツのurlを表�
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'app:users_timeline' # タイムラインへ
 LOGOUT_REDIRECT_URL = '/'
+
+AUTH_USER_MODEL = 'accounts.User'
