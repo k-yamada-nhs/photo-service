@@ -9,19 +9,23 @@ from django.contrib.auth import authenticate, login
 
 def signup(request):
     
-    user_form = UserCreateForm(request.POST or None)
-    profile_form = ProfileForm(request.POST or None)
+    if request.method == 'POST':
 
-    if request.method == 'POST' and user_form.is_valid() and profile_form.is_valid():
+        user_form = UserCreateForm(request.POST)
+        profile_form = ProfileForm(request.POST, request.FILES)
+
+        if user_form.is_valid() and profile_form.is_valid():
         
-        user = user_form.save(commit=False)
-        user.is_staff = True
-        user.save()
-
-        profile = profile_form.save(commit=False)
-        profile.user = user
-        profile.save()
-        return redirect("app:index")
+            user = user_form.save(commit=False)
+            #user.is_staff = True
+            user.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+            return redirect("app:index")
+    else:
+        user_form = UserCreateForm()
+        profile_form = ProfileForm()
 
     context = {
         "user_form": user_form,

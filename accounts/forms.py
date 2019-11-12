@@ -7,6 +7,7 @@ class UserCreateForm(UserCreationForm):
     pass
 
 class ProfileForm(forms.ModelForm):
+
     class Meta:
         model = Profile
         fields = ['profileimage',]

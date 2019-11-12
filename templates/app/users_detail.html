@@ -5,7 +5,9 @@
 <div class="container">
     <div class="row">
         <div class="col-3">
-            <p>@{{ user.username }}のmypage</p>
+            <img src="{{ user.profile.profileimage.url }}" style="width: 100px; height: 100px; border: solid 1px black;"
+                class="rounded-circle">
+            @{{ user.username }}
         </div>
         <div class="col-9">
             <p>{{ user.username }}がフォローしてる人 =>
