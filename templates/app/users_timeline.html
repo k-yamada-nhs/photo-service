@@ -1,23 +1,71 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container">
+    <p>ユーザーのタイムライン</p>
+    <p>ログインしているユーザー => @{{ user.username }}</p>
 
-<p>ユーザーのタイムライン</p>
-<p>ログインしているユーザー => @{{ user.username }}</p>
+    <form id="ajax-search-post" action="{% url 'app:ajax_post_search' %}" method="GET">
+        <input type="text" id="id_title">
+        <button type="submit">検索</button>
+    </form>
 
-<div class="row">
-    {% for project in projects %}
-    <div class="col-md-4">
-        <div class="thumbnail">
-            <a href="{% url 'app:projects_detail' project.id %}">
-                <img src="{{ project.image.url }}" class="rounded" alt="参考画像" style="width:100%">
-                <div class="caption">
-                    <p>@{{ project.user.username }}</p>
-                </div>
-            </a>
+
+
+    <div class="row">
+        <div class="col-6">
+
+            <div id="posts">
+                {% for project in projects %}
+                <a href="{% url 'app:projects_detail' project.id %}">
+                    <img src="{{ project.outputimagepath }}" class="rounded-circle " alt="image"
+                        style="width: 200px; height: 200px; border: solid 1px black;">
+                    <div class="caption">
+                        <p>@{{ project.user.username }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+
         </div>
     </div>
-    {% endfor %}
 </div>
+{% endblock %}
 
+{% block extrajs %}
+<script>
+    $(function () {
+
+        // 送信ボタンで呼ばれる
+        $('#ajax-search-post').on('submit', e => {
+            // デフォルトのイベントをキャンセルし、ページ遷移しないように!
+            e.preventDefault();
+
+            $.ajax({
+                'url': '{% url "app:ajax_post_search" %}',
+                'type': 'GET',
+                'data': {
+                    'title': $('#id_title').val(),  // 記事タイトル
+                },
+                'dataType': 'json'
+            }).done(function (data) {
+                // 記事欄を真っ白にする。
+                $('#posts').empty();
+
+                var bjson = JSON.parse(data['projects']);
+
+                console.log(JSON.stringify(bjson));
+                console.log('件数:' + bjson.length);
+
+                for (var i = 0; i < bjson.length; i++) {
+                    $('#posts').append("<p>" + JSON.stringify(bjson[i]["fields"], undefined, "    ") + "</p>");
+                    //console.log(JSON.stringify(bjson[i]["fields"], undefined, "    "));
+                }
+
+            });
+        });
+
+    });
+
+</script>
 {% endblock %}

@@ -33,13 +33,14 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'app',
     'accounts',
-    'django_cleanup',
+    'django_cleanup',#image clean
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',#bootstrap
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,4 @@ MEDIA_URL = '/media/'  # ユーザーが生成したコンテンツのurlを表�
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'app:users_timeline' # タイムラインへ
 LOGOUT_REDIRECT_URL = '/'
+

@@ -1,13 +1,26 @@
 #base_area{
     width: 80%;
-    height: 200px;
-    border: 1px dotted black;
+    height: 500px;
     margin: auto;
 }
 
 #style_area{
-    width: 40%;
-    height: 100px;
-    border: 1px dotted black;
+    width: 60%;
+    height: 260px;
+    border: 1px solid #000;
     margin: auto;
+}
+
+#preview{
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#stylepreview{
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
 }

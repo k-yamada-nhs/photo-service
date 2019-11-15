@@ -1,19 +1,28 @@
 {% extends 'base.html' %}
-
+{% load widget_tweaks %}
 {% block content %}
 
-<form class="form-signin" method="post">{% csrf_token %}
-    {% if form.errors %}
-    <p>ユーザー名かパスワードが間違っています。もう一度入力してください。</p>
-    {% endif %}
-    <h2>ログイン</h2>
-    <label>ユーザー名</label>
-    <input name="username">
-    <br>
-    <label>パスワード</label>
-    <input type="password" name="password">
-    <br>
-    <input type="submit" value="ログイン">
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <form class="form-signin" method="post">{% csrf_token %}
+                <div class="form-group">
+                    <label>ユーザー名</label>
+                    <input class="form-control" name="username">
+                </div>
+
+                <div class="form-group">
+                    <label>パスワード</label>
+                    <input type="password" class="form-control" name="password">
+                    <br>
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="ログイン">
+            </form>
+
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
