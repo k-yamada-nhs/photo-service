@@ -39,6 +39,7 @@
 
                     <a class="nav-link" href="{% url 'accounts:login' %}">ログイン</a>
                     <a class="nav-link" href="{% url 'accounts:logout' %}">ログアウト</a>
+                    <a class="nav-link" href="{% url 'app:users_detail' request.user.id %}">マイページ</a>
 
                     <div class="dropdown-menu signin">
                         <form class="px-4 py-3">
