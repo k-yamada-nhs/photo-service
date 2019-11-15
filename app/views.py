@@ -1,12 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
+from django.conf import settings
+
 from .models import Photo, Relationship, UploadImage
 from django.contrib.auth.decorators import login_required
 from .forms import PhotoForm
 from django.contrib import messages
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 from django.http import JsonResponse
 from django.http import HttpResponse
+from django.core import serializers
 
 
 # Create your views here.
@@ -81,3 +84,24 @@ def test_ajax(request):
     }
     
     return JsonResponse(hoge)
+
+def realtime_transfer(request):
+    return render(request, 'app/realtime_transfer.html')
+
+#検索
+def ajax_post_search(request):
+    keyword = request.GET.get("title")
+
+    if keyword:
+
+        projects_to_json = serializers.serialize("json", Photo.objects.filter(title__icontains=keyword))
+        #project_list = [project.title for project in Photo.objects.filter(title__icontains=keyword)]
+    else:
+        #project_list = [project.title for project in Photo.objects.all()]
+        projects_to_json = serializers.serialize("json", Photo.objects.all())
+    
+    d = {
+        'projects': projects_to_json,
+    }
+
+    return JsonResponse(d)

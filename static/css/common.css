@@ -1,0 +1,200 @@
+body {
+  margin:0;
+  padding:0;
+  /* background:#ccc; */
+  /* background:#f7fcfe; */
+  /* font-family: 'Roboto Condensed', sans-serif; */
+  text-align: left!important;
+}
+
+a{
+  /* color: #707070; */
+  color: #000;
+}
+
+a:hover{
+  color: #000;
+  text-decoration: none;
+}
+
+a:after{
+  color: #707070;
+}
+
+a:focus, *:focus {
+  outline:none;
+}
+
+
+
+
+.user-head{
+  background-image: url("../image/user/header.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.filter{
+  background: rgba(255,255,255,0.5);
+  overflow: hidden;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+
+.user-icon img{
+  width: 200px;
+  height: 200px;
+  border-radius: 50% 50%;
+  margin-left: 32%;
+  margin-top: 2rem;
+}
+
+.user-profile{
+  background: rgba(255,255,255,0.6);
+  border-radius: 5px;
+}
+
+.user-profile i{
+  margin-right: 100%;
+}
+
+.user-profile h1{
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.user-profile h2{
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.user-profile p{
+
+}
+
+.tab{
+  margin: 0 auto!important;
+  text-align: center!important;
+}
+
+.tabbar{
+  width: 2px;
+  height: 100%;
+  background: lightgray;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+
+.tabline {
+display: flex;
+align-items: center;
+justify-content: center;  //全幅で線を引く場合は不要。
+}
+.tabline:before,
+.tabline:after {
+border-top: 1px solid;
+content: "";
+flex-grow: 1; //全幅で線を引く場合。widthで線幅を短くしたい場合は不要もしくは0（初期値が0だから）
+width:5em; //全幅で線を引く場合は不要。
+}
+
+
+
+
+
+
+.g-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.left{
+  position: absolute;
+  left: -125px;
+}
+
+.signin{
+  position: absolute;
+  left: -225px;
+}
+
+
+
+
+
+
+#wrap {/*全体*/
+  margin: 7px 10px;
+  display: inline-block;
+  position: relative;
+  /* height: 60px; */
+  float: right;
+  padding: 0;
+  position: relative;
+}
+
+input[type="text"] {/*入力部分スタイリング。width: 0px;にしておく*/
+  /* height: 60px; */
+  font-size: 20px;
+  display: inline-block;
+  font-weight: 100;
+  border: none;
+  outline: none;
+  color: #555;
+  /* padding: 3px; */
+  padding-right: 60px;
+  width: 0px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  z-index: 3;
+  transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
+  cursor: pointer;
+}
+
+input[type="text"]:focus:hover {
+  border-bottom: 1px solid #BBB;
+}
+
+input[type="text"]:focus {
+  width: 250px;/*テキストボックスの長さ*/
+  z-index: 1;
+  border-bottom: 1px solid #BBB;
+  cursor: text;
+}
+input[type="submit"] {/*アイコン部分*/
+  /* height: 67px; */
+  /* width: 63px; */
+  display: inline-block;
+  color:red;
+  float: right;
+  text-indent: -10000px;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity .4s ease;
+}
+
+
+#search{
+  font-size: 14px;
+}
+
+
+
+
+
+
+

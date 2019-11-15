@@ -1,54 +1,64 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
 {% block content %}
-<div class="row">
-    <div class="col">
-        <div>
-            <a href="{% url 'app:index' %}">ホームに戻る</a>
-        </div>
-        <div>
-            <form class="ahoform" name="name_form" action="{% url 'app:test_ajax' %}" method="POST"
-                enctype="multipart/form-data">
-                {% csrf_token %}
+<div class="container-fulid">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
 
-                <p>ベース画像</p>
-                <div id="base_area" style="cursor: pointer; border: 20px groove #8b4513;">
+            <div>
+                <div>
+                    <p class="text-center">ベース画像</p>
+                    <div id="base_area" style="cursor: pointer; border: 20px groove #8b4513;">
+                        <img id="preview">
+                    </div>
+
+                    <p class="text-center">スタイル画像</p>
+                    <div id="style_area" style="cursor: pointer;">
+                        <img id="stylepreview">
+                    </div>
+                </div>
+
+                <form class="ahoform" style="display: none;" name="name_form" action="{% url 'app:test_ajax' %}"
+                    method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
                     <input type="file" accept="image/*" name="image" id="id_image">
-                </div>
-
-                <p>スタイル画像</p>
-                <div id="style_area" style="cursor: pointer;">
                     <input type="file" accept="image/*" name="style" id="id_style">
-                </div>
+                    <input type="submit" id="formsubmit">
+                </form>
+                <button id="subbtn" class="btn btn-primary">スタイル変換</button>
 
-                <input type="submit" value="スタイル変換" class="btn btn-primary">
-            </form>
+            </div>
+            <p id="id_div_ajax_response">
+                ajax response here
+            </p>
+
+
+            <div>
+                <form class="fm" name="fm_name" action="{% url 'app:projects_create' %}" method="POST"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {% for field in form.visible_fields %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {% render_field field class="form-control form-control-sm" %}
+                    </div>
+                    {% endfor %}
+
+                    <!-- hidden field -->
+                    {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                    {% endfor %}
+
+                    <input type="submit" class="btn btn-primary" value="保存"></button>
+                </form>
+            </div>
         </div>
-        <p id="id_div_ajax_response">
-            ajax response here
-        </p>
+        <!--col-->
 
-
-        <div>
-            <form class="fm" name="fm_name" action="{% url 'app:projects_create' %}" method="POST"
-                enctype="multipart/form-data">
-                {% csrf_token %}
-
-                <p>タイトル</p>
-                <p>{{ form.title }}</p>
-
-                <p>コメント</p>
-                <p>{{ form.comment }}</p>
-
-                {{ form.baseimagepath.as_hidden }}
-                {{ form.styleimagepath.as_hidden }}
-                {{ form.outputimagepath.as_hidden }}
-
-                <input type="submit" class="btn btn-primary" value="保存"></button>
-            </form>
-        </div>
     </div>
-    <!--col-->
-
 </div>
 {% endblock %}
 {% block extrajs %}
@@ -73,22 +83,54 @@
 
         // 指定部分でドロップしたときの処理
         base.on("drop", function (e) {
+            console.log("Drop");
             e.preventDefault();
+            //input type="file"に設定
             document.getElementById("id_image").files = e.originalEvent.dataTransfer.files;
-            console.log("Drop");
+            console.log(e.originalEvent.dataTransfer.files);
+
+            //ドロップした画像ファイルのデータはe.originalEvent.dataTransfer.filesに配列で格納される
+            const file = e.originalEvent.dataTransfer.files;
+            const reader = new FileReader();
+
+            // 画像の読み込み
+            reader.readAsDataURL(e.originalEvent.dataTransfer.files[0]);
+
+            //サムネイル作成
+            reader.addEventListener('load', function () {
+                $('#preview').attr('src', reader.result);
+            });
+
         });
 
+        // style
         style.on("drop", function (e) {
-            e.preventDefault();
-            document.getElementById("id_style").files = e.originalEvent.dataTransfer.files;
             console.log("Drop");
+            e.preventDefault();
+            //input type="file"に設定
+            document.getElementById("id_style").files = e.originalEvent.dataTransfer.files;
+            console.log(e.originalEvent.dataTransfer.files);
+
+            const file = e.originalEvent.dataTransfer.files;
+            const reader = new FileReader();
+
+            // 画像の読み込み
+            reader.readAsDataURL(e.originalEvent.dataTransfer.files[0]);
+
+            //サムネイル作成
+            reader.addEventListener('load', function () {
+                $('#stylepreview').attr('src', reader.result);
+            });
+
         });
 
-        $(".ahoform").submit(function (event) {
-            event.preventDefault();
+        //button押されたらフォームデータを送信
+        $("#subbtn").click(function () {
             $.ajax({
                 url: "/test_ajax",
                 method: "POST",
+                cache: false,
+                timeout: 10000,
                 data: new FormData($(".ahoform").get(0)),
                 processData: false,
                 contentType: false,
