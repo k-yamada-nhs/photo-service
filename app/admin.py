@@ -3,7 +3,6 @@ from .models import Photo, Relationship, UploadImage
 
 # Register your models here.
 
-
 # django adminに出すリスト ID TITLE
 class PhotoAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
