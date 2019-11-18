@@ -58,7 +58,9 @@ def users_detail(request, pk):
 
     return render(request, 'app/users_detail.html', {'user': user, 'projects': projects, 'follows': follows, 'followers': followers})
 
+
 # タイムライン
+@login_required
 def users_timeline(request):
     user = request.user
 
