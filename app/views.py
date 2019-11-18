@@ -63,9 +63,9 @@ def users_timeline(request):
     user = request.user
 
     # 自分とフォローしているユーザーの投稿を取得
-    projects = Photo.objects.all()
+    #projects = Photo.objects.all()
 
-    return render(request, 'app/users_timeline.html', {'projects': projects, 'user': user})
+    return render(request, 'app/users_timeline.html', {'user': user})
 
 @require_POST
 def test_ajax(request):
@@ -95,9 +95,8 @@ def ajax_post_search(request):
     if keyword:
 
         projects_to_json = serializers.serialize("json", Photo.objects.filter(title__icontains=keyword))
-        #project_list = [project.title for project in Photo.objects.filter(title__icontains=keyword)]
     else:
-        #project_list = [project.title for project in Photo.objects.all()]
+        
         projects_to_json = serializers.serialize("json", Photo.objects.all())
     
     d = {

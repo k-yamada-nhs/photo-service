@@ -16,7 +16,7 @@
         <div class="col-6">
 
             <div id="posts">
-                {% for project in projects %}
+                <!-- {% for project in projects %}
                 <a href="{% url 'app:projects_detail' project.id %}">
                     <img src="{{ project.outputimagepath }}" class="rounded-circle " alt="image"
                         style="width: 200px; height: 200px; border: solid 1px black;">
@@ -24,17 +24,53 @@
                         <p>@{{ project.user.username }}</p>
                     </div>
                 </a>
-                {% endfor %}
+                {% endfor %} -->
             </div>
 
         </div>
+
     </div>
+</div>
 </div>
 {% endblock %}
 
 {% block extrajs %}
 <script>
     $(function () {
+
+        //ページロード時に全件表示
+        $.ajax({
+            'url': '{% url "app:ajax_post_search" %}',
+            'type': 'GET',
+            'data': {
+                'title': $('#id_title').val(),  // 記事タイトル
+            },
+            'dataType': 'json'
+        }).done(function (data) {
+            // 記事欄を真っ白にする。
+            $('#posts').empty();
+
+            var bjson = JSON.parse(data['projects']);
+
+            console.log(JSON.stringify(bjson));
+            console.log('件数:' + bjson.length);
+
+            for (var i = 0; i < bjson.length; i++) {
+                //$('#posts').append("<p>" + JSON.stringify(bjson[i]["fields"], undefined, "    ") + "</p>");
+
+                $('#posts').append('<div class="col-md-4">');
+                $('#posts').append('<div>');
+
+                $('#posts').append("<img width='200' height='200' class='rounded-circle' src='" + bjson[i]["fields"]["outputimagepath"] + "'>");
+
+                $('#posts').append("<p>" + bjson[i]["fields"]["title"] + "</p>");
+
+                $('#posts').append("</div>");
+                $('#posts').append("</div>");
+            }
+
+        });
+
 
         // 送信ボタンで呼ばれる
         $('#ajax-search-post').on('submit', e => {
@@ -58,8 +94,19 @@
                 console.log('件数:' + bjson.length);
 
                 for (var i = 0; i < bjson.length; i++) {
-                    $('#posts').append("<p>" + JSON.stringify(bjson[i]["fields"], undefined, "    ") + "</p>");
+                    //$('#posts').append("<p>" + JSON.stringify(bjson[i]["fields"], undefined, "    ") + "</p>");
                     //console.log(JSON.stringify(bjson[i]["fields"], undefined, "    "));
+                    $('#posts').append('<div class="col-md-4">');
+                    $('#posts').append('<div>');
+
+                    $('#posts').append("<img width='200' height='200' class='rounded-circle' src='" + bjson[i]["fields"]["outputimagepath"] + "'>");
+
+                    $('#posts').append("<div class='card-body'>");
+                    $('#posts').append("<p class='card-text'>" + bjson[i]["fields"]["title"] + "</p>");
+
+                    $('#posts').append("</div>");
+                    $('#posts').append("</div>");
+                    $('#posts').append("</div>");
                 }
 
             });
