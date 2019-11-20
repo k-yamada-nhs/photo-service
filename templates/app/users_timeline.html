@@ -12,11 +12,11 @@
 
 
 
-    <div class="row">
-        <div class="col-6">
+    <div class="row" id=posts>
 
-            <div id="posts">
-                <!-- {% for project in projects %}
+
+        <!-- <div id="posts" class="col"> -->
+        <!-- {% for project in projects %}
                 <a href="{% url 'app:projects_detail' project.id %}">
                     <img src="{{ project.outputimagepath }}" class="rounded-circle " alt="image"
                         style="width: 200px; height: 200px; border: solid 1px black;">
@@ -25,9 +25,7 @@
                     </div>
                 </a>
                 {% endfor %} -->
-            </div>
-
-        </div>
+        <!-- </div> -->
 
     </div>
 </div>
@@ -58,15 +56,9 @@
             for (var i = 0; i < bjson.length; i++) {
                 //$('#posts').append("<p>" + JSON.stringify(bjson[i]["fields"], undefined, "    ") + "</p>");
 
-                $('#posts').append('<div class="col-md-4">');
-                $('#posts').append('<div>');
 
-                $('#posts').append("<img width='200' height='200' class='rounded-circle' src='" + bjson[i]["fields"]["outputimagepath"] + "'>");
+                $('#posts').append("<div class='col'><img width='200' height='200' class='rounded-circle' src='" + bjson[i]["fields"]["outputimagepath"] + "'><p>" + bjson[i]["fields"]["title"] + "</p></div>");
 
-                $('#posts').append("<p>" + bjson[i]["fields"]["title"] + "</p>");
-
-                $('#posts').append("</div>");
-                $('#posts').append("</div>");
             }
 
         });
@@ -96,17 +88,11 @@
                 for (var i = 0; i < bjson.length; i++) {
                     //$('#posts').append("<p>" + JSON.stringify(bjson[i]["fields"], undefined, "    ") + "</p>");
                     //console.log(JSON.stringify(bjson[i]["fields"], undefined, "    "));
-                    $('#posts').append('<div class="col-md-4">');
-                    $('#posts').append('<div>');
 
-                    $('#posts').append("<img width='200' height='200' class='rounded-circle' src='" + bjson[i]["fields"]["outputimagepath"] + "'>");
 
-                    $('#posts').append("<div class='card-body'>");
-                    $('#posts').append("<p class='card-text'>" + bjson[i]["fields"]["title"] + "</p>");
+                    $('#posts').append("<div class='col'><img width='200' height='200' class='rounded-circle' src='" + bjson[i]["fields"]["outputimagepath"] + "'><p>" + bjson[i]["fields"]["title"] + "</p></div>");
 
-                    $('#posts').append("</div>");
-                    $('#posts').append("</div>");
-                    $('#posts').append("</div>");
+
                 }
 
             });
