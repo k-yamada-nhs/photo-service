@@ -23,6 +23,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
     path('', include('app.urls')),
+    path('map/', include('map.urls')),
 ]
 
 # media_rootを公開

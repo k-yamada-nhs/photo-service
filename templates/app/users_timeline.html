@@ -1,7 +1,224 @@
-{% extends 'base.html' %}
+{% load static %}
+<!doctype html>
+<html lang="ja">
 
-{% block content %}
-<div class="container">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <title>Hello, world!</title>
+    <style>
+        body {
+            background-image: url("{% static 'images/bg.jpg' %}");
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fulid">
+        <nav class="navbar navbar-dark bg-dark">
+            <!-- Navbar content -->
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>
+                </ul>
+        </nav>
+    </div>
+
+
+    <div class="row">
+        <div class="col-8 mx-auto">
+
+            <div class="row">
+
+                <div class="col-4 wow bounceIn" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="2s"
+                    data-wow-delay="1s"><img src="https://placehold.jp/200x200.png"
+                        class="rounded-circle d-block mx-auto m-4">
+                </div>
+
+                <div class="col-4 wow bounceInDown" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="3s"
+                    data-wow-delay="2s"><img src="https://placehold.jp/300x300.png"
+                        class="rounded-circle d-block mx-auto m-4">
+                </div>
+
+                <div class="col-4 wow bounceInUp" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="4s"
+                    data-wow-delay="1s"><img src="https://placehold.jp/200x200.png"
+                        class="rounded-circle d-block mx-auto m-4">
+                </div>
+
+                <div class="col-4 wow rollIn" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="1s"
+                    data-wow-delay="3s"><img src="https://placehold.jp/100x100.png"
+                        class="rounded-circle d-block mx-auto m-4">
+                </div>
+
+                <div class="col-4 wow rotateInDownLeft" data-wow-iteration="10" data-wow-offset="5"
+                    data-wow-duration="2s" data-wow-delay="2s"><img src="https://placehold.jp/300x300.png"
+                        class="rounded-circle d-block mx-auto m-4">
+                </div>
+
+
+
+
+
+                <div class="col-4 wow bounceIn" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="4s"
+                    data-wow-delay="1s"><img src="https://placehold.jp/200x200.png"
+                        class="rounded-circle d-block mx-auto m-4">
+                </div>
+
+                <div class="col-4 wow bounceInDown" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="3s"
+                    data-wow-delay="2s"><img src="https://placehold.jp/300x300.png"
+                        class="rounded-circle d-block mx-auto m-4">
+                </div>
+
+                <div class="col-4 wow bounceInUp" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="2s"
+                    data-wow-delay="1s"><img src="https://placehold.jp/100x100.png"
+                        class="rounded-circle d-block mx-auto m-4">
+                </div>
+
+                <div class="col-4 wow rollIn" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="4s"
+                    data-wow-delay="1s"><img src="https://placehold.jp/200x200.png"
+                        class="rounded-circle d-block mx-auto m-4">
+                </div>
+
+                <div class="col-4 wow rotateInDownLeft" data-wow-iteration="10" data-wow-offset="5"
+                    data-wow-duration="3s" data-wow-delay="2s"><img src="https://placehold.jp/250x250.png"
+                        class="rounded-circle d-block mx-auto m-4">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script>new WOW().init();</script>
+
+
+
+    <script>
+        $(function () {
+
+            //ページロード時に全件表示
+            $.ajax({
+                'url': '{% url "app:ajax_post_search" %}',
+                'type': 'GET',
+                'data': {
+                    'title': $('#id_title').val(),  // 記事タイトル
+                },
+                'dataType': 'json'
+            }).done(function (data) {
+                // 記事欄を真っ白にする。
+                $('#posts').empty();
+
+                var bjson = JSON.parse(data['projects']);
+
+                console.log(JSON.stringify(bjson));
+                console.log('件数:' + bjson.length);
+
+                for (var i = 0; i < bjson.length; i++) {
+                    //$('#posts').append("<p>" + JSON.stringify(bjson[i]["fields"], undefined, "    ") + "</p>");
+
+
+                    $('#posts').append("<div class='col'><img width='200' height='200' class='rounded-circle' src='" + bjson[i]["fields"]["outputimagepath"] + "'><p>" + bjson[i]["fields"]["title"] + "</p></div>");
+
+                }
+
+            });
+
+
+            // 送信ボタンで呼ばれる
+            $('#ajax-search-post').on('submit', e => {
+                // デフォルトのイベントをキャンセルし、ページ遷移しないように!
+                e.preventDefault();
+
+                $.ajax({
+                    'url': '{% url "app:ajax_post_search" %}',
+                    'type': 'GET',
+                    'data': {
+                        'title': $('#id_title').val(),  // 記事タイトル
+                    },
+                    'dataType': 'json'
+                }).done(function (data) {
+                    // 記事欄を真っ白にする。
+                    $('#posts').empty();
+
+                    var bjson = JSON.parse(data['projects']);
+
+                    console.log(JSON.stringify(bjson));
+                    console.log('件数:' + bjson.length);
+
+                    for (var i = 0; i < bjson.length; i++) {
+                        //$('#posts').append("<p>" + JSON.stringify(bjson[i]["fields"], undefined, "    ") + "</p>");
+                        //console.log(JSON.stringify(bjson[i]["fields"], undefined, "    "));
+
+
+                        $('#posts').append("<div class='col'><img width='200' height='200' class='rounded-circle' src='" + bjson[i]["fields"]["outputimagepath"] + "'><p>" + bjson[i]["fields"]["title"] + "</p></div>");
+
+
+                    }
+
+                });
+            });
+
+        });
+
+    </script>
+
+
+
+
+</body>
+
+</html>
+
+
+
+<!-- <div class="container">
     <p>ユーザーのタイムライン</p>
     <p>ログインしているユーザー => @{{ user.username }}</p>
 
@@ -12,11 +229,11 @@
 
 
 
-    <div class="row" id=posts>
+    <div class="row" id=posts> -->
 
 
-        <!-- <div id="posts" class="col"> -->
-        <!-- {% for project in projects %}
+<!-- <div id="posts" class="col"> -->
+<!-- {% for project in projects %}
                 <a href="{% url 'app:projects_detail' project.id %}">
                     <img src="{{ project.outputimagepath }}" class="rounded-circle " alt="image"
                         style="width: 200px; height: 200px; border: solid 1px black;">
@@ -25,15 +242,13 @@
                     </div>
                 </a>
                 {% endfor %} -->
-        <!-- </div> -->
+<!-- </div> -->
 
-    </div>
+<!-- </div>
 </div>
-</div>
-{% endblock %}
+</div> -->
 
-{% block extrajs %}
-<script>
+<!-- <script>
     $(function () {
 
         //ページロード時に全件表示
@@ -100,5 +315,4 @@
 
     });
 
-</script>
-{% endblock %}
+</script> -->
