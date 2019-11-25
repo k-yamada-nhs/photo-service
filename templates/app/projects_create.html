@@ -2,34 +2,46 @@
 {% load widget_tweaks %}
 {% load static %}
 {% block content %}
-<div class="container-fulid">
+<div class="container-fulid" id="create-bg">
     <div class="row">
-        <div class="col-md-8 mx-auto">
+        <div class="col-10 mx-auto">
 
-            <div>
-                <div>
-                    <p class="text-center">ベース画像</p>
-                    <div id="base_area" style="cursor: pointer; border: 20px groove #8b4513;">
-                        <img id="preview">
-                    </div>
+            <!-- ベース画像 -->
+            <div class="row">
+                <div class="col mx-auto mt-5" id="basewrap">
 
-                    <p class="text-center">スタイル画像</p>
-                    <div id="style_area" style="cursor: pointer;">
-                        <img id="stylepreview">
-                    </div>
+                    <img src="{% static 'images/frame/frame.png' %}" id="base_area" class="d-block mx-auto" width="60%"
+                        style="cursor: pointer;">
+                    <img id="preview" class="d-block mx-auto">
+
                 </div>
-
-                <form class="ahoform" style="display: none;" name="name_form" action="{% url 'app:test_ajax' %}"
-                    method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-
-                    <input type="file" accept="image/*" name="image" id="id_image">
-                    <input type="file" accept="image/*" name="style" id="id_style">
-                    <input type="submit" id="formsubmit">
-                </form>
-                <button id="subbtn" class="btn btn-primary">スタイル変換</button>
-
             </div>
+
+            <!-- name plate -->
+            <div class="row">
+                <div class="col mx-auto">
+                    <p class="text-center">name plate</p>
+                </div>
+            </div>
+
+            <!-- スタイル画像 -->
+            <div class="row">
+                <div id="style_area" style="cursor: pointer;">
+                    <img id="stylepreview">
+                </div>
+            </div>
+
+            <form class="ahoform" style="display: none;" name="name_form" action="{% url 'app:test_ajax' %}"
+                method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <input type="file" accept="image/*" name="image" id="id_image">
+                <input type="file" accept="image/*" name="style" id="id_style">
+                <input type="submit" id="formsubmit">
+            </form>
+            <button id="subbtn" class="btn btn-primary">スタイル変換</button>
+
+
             <p id="id_div_ajax_response">
                 ajax response here
             </p>

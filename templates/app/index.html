@@ -37,47 +37,22 @@
                 </ul>
 
                 <ul class="navbar-nav">
+
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'app:projects_create' %}">プロジェクト作成</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">マイページ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">タイムライン</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">マップ</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            account
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
+                        <a class="nav-link" href="{% url 'app:users_detail' request.user.id %}">account</a>
                     </li>
 
                 </ul>
-
-
         </nav>
-
-
     </div>
 
 
     <div class="container-fulid">
         <div class="row">
             <div class="col" id="particles" style="width: 100vw;height: 100vh;">
-
+                <a href="{% url 'app:projects_create' %}">創造の世界を体験する</a>
             </div>
         </div>
-    </div>
     </div>
 
     <!-- Optional JavaScript -->
