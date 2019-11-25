@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'app',
     'accounts',
+    'map',
     'django_cleanup',#image clean
     'django.contrib.admin',
     'django.contrib.auth',
