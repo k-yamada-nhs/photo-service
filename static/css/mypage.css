@@ -1,0 +1,252 @@
+html,body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+body{
+}
+
+a{
+  color: #000;
+}
+
+a:hover{
+  color: #000;
+  text-decoration: none;
+}
+
+a:after{
+  color: #707070;
+}
+
+a:focus, *:focus {
+  outline:none;
+}
+
+/********************** mp-main **********************/
+.mp-main{
+  width: 100%;
+  margin: 0 auto;
+  background: #fafafa;
+}
+
+
+
+/********************** mp-left **********************/
+.mp-left{}
+
+/** ユーザアイコン **/
+.mp-usericon{
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 20%;
+  margin-bottom: 20%;
+}
+
+.mp-usericon img{
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.mp-profile{
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+
+.mp-pro-id{
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.mp-pro-name{
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.mp-pro-sen{
+  font-size: 14px;
+  font-weight: 400;
+}
+
+
+.fw-btn{
+  display: block;
+  font-size: 0.5rem;
+  margin: 0 auto;
+}
+
+/** modal **/
+.form-group{}
+
+.form-group img{
+  width: 50%;
+  height: auto;
+}
+
+
+
+/********************** mp-right **********************/
+.mp-right{}
+
+/** ヘッダー画像 **/
+.mp-header{
+  margin: 0 auto;
+  text-align: center;
+  padding: 0;
+}
+
+.mp-header img{
+  width: 100%;
+  height: auto;
+}
+
+
+.menutab{
+  padding: 0;
+  background: #fafafa;
+}
+
+
+
+
+
+
+
+
+
+/********************** album **********************/
+.album{
+  background: #D4D5D9;
+  margin: 0 auto;
+}
+
+.card{
+  border: none;
+}
+
+
+
+
+
+/********************** tab **********************/
+
+.tab a{
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 2% 6%;
+
+}
+
+.tab-bg{
+  background: #fff;
+  border-radius: 0!important;
+  border-style: none;
+}
+
+.tab-bg:hover{
+  border: none;
+}
+
+.tab-bg a{
+  color: #fff;
+}
+
+.triangle{
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 16px 20px 0 20px;
+  border-color: #41465C transparent transparent transparent;
+  margin: 0 auto;
+}
+
+
+.tab-triangle{
+  width: 99%;
+  margin: 0 auto;
+}
+
+.tab-triangle-bg{
+  background: #D4D5D9;
+  margin: 0 auto;
+  padding: 0;
+}
+
+
+
+.triangle-space{
+  width: 33%;
+  /* margin-left: 52%; */
+  margin-bottom: 2%;
+}
+.triangle-space2{
+  width: 33%;
+  margin-left: 33.5%;
+  margin-bottom: 2%;
+}
+.triangle-space3{
+  width: 33%;
+  margin-left: 67%;
+  margin-bottom: 2%;
+}
+
+
+.active{
+  background: #41465C;
+  border-style: none;
+}
+
+.tab-pane{
+  background: #D4D5D9;
+  width: 100%;
+  margin: 0 auto;
+}
+
+nav .active{
+  color: #fff;
+}
+
+.tab-width{
+  width: 100%;
+  margin-top: 2%;
+}
+
+.tab-content{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.user-list{
+  width: 100%;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding-bottom: 1%;
+}
+
+.btn-follow{
+  font-size: 11px;
+  margin-top: -3%;
+}
+
+.follow-mark{
+  font-size: 11px;
+  border-radius: 5px;
+  padding: 1% 1% 1% 1%;
+  background: #D4D5D9;
+  box-sizing: border-box;
+}
+
+.card-img{
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 3%;
+}
+
+
+
