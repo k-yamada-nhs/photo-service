@@ -79,29 +79,6 @@ a:focus, *:focus {
   text-align: center!important;
 }
 
-.tabbar{
-  width: 2px;
-  height: 100%;
-  background: lightgray;
-  margin: 0 auto;
-  text-align: center;
-}
-
-
-
-.tabline {
-display: flex;
-align-items: center;
-justify-content: center;  //全幅で線を引く場合は不要。
-}
-.tabline:before,
-.tabline:after {
-border-top: 1px solid;
-content: "";
-flex-grow: 1; //全幅で線を引く場合。widthで線幅を短くしたい場合は不要もしくは0（初期値が0だから）
-width:5em; //全幅で線を引く場合は不要。
-}
-
 
 
 
@@ -111,6 +88,7 @@ width:5em; //全幅で線を引く場合は不要。
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 0.25rem;
 }
 
 

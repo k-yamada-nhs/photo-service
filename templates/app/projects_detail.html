@@ -1,7 +1,78 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10 art-main">
+            <div class="row">
+                <div class="col-8 art-left">
+                    <!-- 左側 -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="col-12 art-img">
+                                <!-- 作品画像 -->
+                                <img src="{{ project.outputimagepath }}" alt="作品画像">
+                            </div><!-- 作品画像 -->
+                        </div>
+                    </div>
+
+                </div><!-- 左側 -->
+
+                <div class="col-4 art-right">
+                    <!-- 右側 -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="art-des">
+                                <!-- 作品説明 -->
+                                <div class="d-flex justify-content-between art-des-tag">
+                                    <!-- 作品タグ -->
+                                    <a href="#" class="art-des-id">@{{ project.user }}</a>
+                                    <a class="btn btn-outline-primary mt-2 mb-3 fw-btn" href="#">フォローする</a>
+                                </div><!-- 作品タグ -->
+                                <div class="art-des-sen">
+                                    <!-- 作品文エリア -->
+                                    <div class="d-flex justify-content-between art-tit">
+                                        <!-- 作品文タイトル -->
+                                        <p class="art-tit-name">{{ project.title }}</p>
+                                        <p class="art-tit-user">username</p>
+                                    </div><!-- 作品文タイトル -->
+                                    <div class="art-sen">
+                                        <!-- 作品文 -->
+                                        <p class="">作品の説明など.....</p>
+                                    </div><!-- 作品文 -->
+                                </div><!-- 作品文エリア -->
+                                <div class="art-des-share">
+                                    <!-- 作品共有 -->
+                                    <a class="btn btn-info mt-2 mb-3 fw-btn" href="#"><i class="far fa-heart"></i></a>
+                                    <a class="btn btn-info mt-2 mb-3 fw-btn" href="#"><i class="far fa-comment"></i></a>
+                                    <a class="btn btn-info mt-2 mb-3 fw-btn" href="#"><i
+                                            class="fas fa-share-alt"></i></a>
+                                    <a class="btn btn-info mt-2 mb-3 fw-btn" href="#"><i
+                                            class="fas fa-map-marked-alt"></i></a>
+                                </div><!-- 作品共有 -->
+                                <div class="art-des-comment">
+                                    <!-- 作品へのコメント -->
+                                    <p class="art-des-comment-tit">{{ project.comment }}</p>
+
+                                    <p class="art-des-comment-user">とても素敵な作品ですね！</p>
+                                    <p class="art-des-comment-user">すごい！！</p>
+                                    <p class="art-des-comment-user">綺麗。</p>
+                                    <p class="art-des-comment-user">すごく参考になります。これからも作品楽しみにしています。</p>
+                                    <p class="art-des-comment-user">フォローさせていただきました。</p>
+                                </div><!-- 作品へのコメント -->
+                            </div><!-- 作品説明 -->
+                        </div>
+                    </div>
+                </div><!-- 右側 -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="container">
     <div class="row">
 
 
@@ -26,7 +97,8 @@
 
 
                     <a href="{% url 'map:locationmap' %}" class="">マップへ移動</a>
-                    <!-- 削除ボタン -->
+                    
+
                     {% if request.user == project.user %}
                     <form method="post" action="{% url 'app:projects_delete' project.id %}">{% csrf_token %}
                         <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
@@ -39,7 +111,6 @@
         </div>
 
     </div>
-</div>
+</div> -->
 
-</div>
 {% endblock %}

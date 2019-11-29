@@ -6,8 +6,132 @@
     <div class="row">
         <div class="col-10 mx-auto">
 
+            <div class="bg-art">
+                <!-- bg-art -->
+                <div class="row img-up">
+                    <!-- img-up -->
+                    <!-- <div class="col-8 mx-auto img-up-bg">
+                        <div class="col-12 mx-auto img-uparea">
+                        </div>
+                    </div> -->
+                    <div class="col mx-auto mt-5" id="basewrap">
+
+                        <img src="{% static 'images/frame/frame.png' %}" id="base_area" class="d-block mx-auto"
+                            width="60%" style="cursor: pointer;">
+                        <img id="preview" class="d-block mx-auto">
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-4 mx-auto metal-plate-area">
+                        <div class="d-flex justify-content-between metal-plate">
+                            <p>作品名</p>
+                            <p>春 太郎　画</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- bg-art -->
+
+            <!-- タブ -->
+            <div class="contener select-img">
+
+                <nav class="row mx-auto tab-width">
+                    <div class="nav col-8 mx-auto tab-triangle-bg" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link col-6 tab tab-bg mx-auto active" id="nav-home-tab" data-toggle="tab"
+                            href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">ベース画像</a>
+                        <a class="nav-item nav-link col-6 tab tab-bg" id="nav-profile-tab" data-toggle="tab"
+                            href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">スタイル画像</a>
+                    </div>
+                </nav>
+
+                <div class="tab-content col-8 mx-auto" id="nav-tabContent">
+                    <div class="tab-pane active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="triangle-space">
+                            <div class="triangle"></div>
+                        </div>
+
+                        <div class="user-list">
+                            <!-- ベース　-->
+
+                            <article id="demo-carousel" class="demo">
+                                <div id="carousel">
+                                    <ul class="flip-items">
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/base/base01.jpg' %}">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/base/base02.jpg' %}">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/base/base03.jpg' %}">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/base/base04.jpg' %}">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/base/base05.jpg' %}">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                        </div><!-- ベース -->
+
+                    </div><!-- tab-content -->
+
+                    <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="triangle-space2">
+                            <div class="triangle"></div>
+                        </div>
+
+                        <div class="user-list">
+                            <!-- スタイル -->
+
+                            <article id="demo-carousel" class="demo">
+                                <div id="carousel2">
+                                    <ul class="flip-items">
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/style/style06.jpg' %}">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/style/style05.jpg' %}">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/style/style04.jpg' %}">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/style/style03.jpg' %}">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/style/style02.jpg' %}">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/style/style01.jpg' %}">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                        </div><!-- スタイル -->
+                    </div>
+
+                </div>
+            </div><!-- select-img -->
+
+
+
+
+
+
+
+
+
+
             <!-- ベース画像 -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col mx-auto mt-5" id="basewrap">
 
                     <img src="{% static 'images/frame/frame.png' %}" id="base_area" class="d-block mx-auto" width="60%"
@@ -15,31 +139,48 @@
                     <img id="preview" class="d-block mx-auto">
 
                 </div>
-            </div>
+            </div> -->
 
             <!-- name plate -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col mx-auto">
                     <p class="text-center">name plate</p>
                 </div>
-            </div>
+            </div> -->
 
-            <!-- スタイル画像 -->
-            <div class="row">
-                <div id="style_area" style="cursor: pointer;">
-                    <img id="stylepreview">
+            <!-- style image -->
+            <!-- <div class="row">
+                <div class="col">
+                    <img src="{% static 'images/style/la_muse.jpg' %}" alt="" class="img-fluid">
                 </div>
-            </div>
+                <div class="col">
+                    <img src="{% static 'images/style/rain_princess.jpg' %}" alt="" class="img-fluid">
+                </div>
+                <div class="col">
+                    <img src="{% static 'images/style/the_scream.jpg' %}" alt="" class="img-fluid">
+                </div>
+                <div class="col">
+                    <img src="{% static 'images/style/the_shipwreck_of_the_minotaur.jpg' %}" alt="" class="img-fluid">
+                </div>
+                <div class="col">
+                    <img src="{% static 'images/style/udnie.jpg' %}" alt="" class="img-fluid">
+                </div>
+                <div class="col">
+                    <img src="{% static 'images/style/wave.jpg' %}" alt="" class="img-fluid">
+                </div>
+            </div> -->
 
-            <form class="ahoform" style="display: none;" name="name_form" action="{% url 'app:test_ajax' %}"
-                method="POST" enctype="multipart/form-data">
+
+            <!-- スタイル変換用フォーム -->
+            <form class="style_form" style="display: none;" name="name_form" method="POST"
+                enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <input type="file" accept="image/*" name="image" id="id_image">
-                <input type="file" accept="image/*" name="style" id="id_style">
+                <!-- <input type="file" accept="image/*" name="style" id="id_style"> -->
                 <input type="submit" id="formsubmit">
             </form>
-            <button id="subbtn" class="btn btn-primary">スタイル変換</button>
+            <button id="style_change_btn" class="btn btn-primary">スタイル変換</button>
 
 
             <p id="id_div_ajax_response">
@@ -70,25 +211,80 @@
         </div>
         <!--col-->
 
+
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div><!-- /.modal-header -->
+                    <div class="modal-body">
+                        <p>画像処理中...</p>
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div><!-- /.modal-body -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                    </div><!-- /.modal-footer -->
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
     </div>
 </div>
 {% endblock %}
 {% block extrajs %}
+
+<script src="{% static 'js/jquery.flipster.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/dropify.js' %}" type="text/javascript"></script>
+
+<script>
+    var carousel = $("#carousel").flipster({
+        style: 'carousel',
+        spacing: -0.3,
+        nav: false,
+        buttons: true,
+        loop: true,
+    });
+</script>
+
+<script>
+    var carousel = $("#carousel2").flipster({
+        style: 'carousel',
+        spacing: -0.3,
+        nav: false,
+        buttons: true,
+        loop: true,
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.dropify').dropify();
+    });
+</script>
+
+
+
+
+
+<!-- ################################################# -->
+
+
+
 <script>
 
     $(document).ready(function () {
 
         // 指定部分にドラッグしたときの処理
         var base = $("#base_area");
-        var style = $("#style_area");
 
         // 指定部分の上に乗っかっているときの処理
         base.on("dragover", function (e) {
-            e.preventDefault();
-            console.log("DragOver");
-        });
-
-        style.on("dragover", function (e) {
             e.preventDefault();
             console.log("DragOver");
         });
@@ -97,61 +293,51 @@
         base.on("drop", function (e) {
             console.log("Drop");
             e.preventDefault();
-            //input type="file"に設定
+            // input type="file"に設定
             document.getElementById("id_image").files = e.originalEvent.dataTransfer.files;
             console.log(e.originalEvent.dataTransfer.files);
 
-            //ドロップした画像ファイルのデータはe.originalEvent.dataTransfer.filesに配列で格納される
+            // ドロップした画像ファイルのデータはe.originalEvent.dataTransfer.filesに配列で格納される
             const file = e.originalEvent.dataTransfer.files;
             const reader = new FileReader();
 
             // 画像の読み込み
             reader.readAsDataURL(e.originalEvent.dataTransfer.files[0]);
 
-            //サムネイル作成
+            // サムネイル作成
             reader.addEventListener('load', function () {
                 $('#preview').attr('src', reader.result);
             });
 
         });
 
-        // style
-        style.on("drop", function (e) {
-            console.log("Drop");
-            e.preventDefault();
-            //input type="file"に設定
-            document.getElementById("id_style").files = e.originalEvent.dataTransfer.files;
-            console.log(e.originalEvent.dataTransfer.files);
+        // スタイル変換押されたらフォームデータを送信
+        $("#style_change_btn").click(function () {
 
-            const file = e.originalEvent.dataTransfer.files;
-            const reader = new FileReader();
+            // モーダル表示
+            $('.modal').modal();
 
-            // 画像の読み込み
-            reader.readAsDataURL(e.originalEvent.dataTransfer.files[0]);
-
-            //サムネイル作成
-            reader.addEventListener('load', function () {
-                $('#stylepreview').attr('src', reader.result);
-            });
-
-        });
-
-        //button押されたらフォームデータを送信
-        $("#subbtn").click(function () {
             $.ajax({
                 url: "/test_ajax",
                 method: "POST",
                 cache: false,
                 timeout: 10000,
-                data: new FormData($(".ahoform").get(0)),
+                data: new FormData($(".style_form").get(0)),
                 processData: false,
                 contentType: false,
             }).done(function (data) {
-                $("#id_div_ajax_response").html('<p id="style">' + data.style +
-                    '</p><p id="base">' + data.base + '</p>');
 
-                console.log('style is ->' + data.style);
-                console.log('base is ->' + data.base);
+                $("#id_div_ajax_response").html(data.msg);
+                $("#id_div_ajax_response").html(data.base);
+
+                console.log(data.msg);
+                console.log(data.base);
+
+                $('.modal').modal('hide');
+
+            }).fail(function () {
+                $('.modal').modal('hide');
+                console.log("error");
             });
         });
 
@@ -173,10 +359,8 @@
                 contentType: false,
             }).done(function (data) {
                 $("#id_div_ajax_response").html(data);
-
             });
         });
-
     });
 </script>
 {% endblock %}

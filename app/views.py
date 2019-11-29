@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.conf import settings
-
+import os
 from .models import Photo, Relationship, UploadImage
 from django.contrib.auth.decorators import login_required
 from .forms import PhotoForm
@@ -11,8 +11,14 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from django.core import serializers
 
+#style transfer module import
+from app.modules.faststyle import styletransfer
 
 # Create your views here.
+
+#style transfer
+
+
 @login_required
 def projects_create(request):
     if request.method == "POST":
@@ -72,17 +78,25 @@ def users_timeline(request):
 @require_POST
 def test_ajax(request):
 
+    #ベース画像の受け取り
     base = request.FILES['image']
-    style = request.FILES['style']
+    # style = request.FILES['style']
 
-    p = UploadImage(image=base, style=style)
+    p = UploadImage(image=base)
     p.save()
+
+    #p.image.url
+    #保存した画像に対してstyle transfer
+    path = os.getcwd()
+    styletransfer.ffwd_to_img(path+p.image.url, "out.jpg", "model/scream.ckpt")
 
     #画像の保存先のpath
     hoge = {
         "base": p.image.url,
-        "style": p.style.url,
-        "output_image": "/pasususususus"
+        # "style": p.style.url,
+        # "output_image": "/pasususususus"
+        
+        "msg": "send-ok"
     }
     
     return JsonResponse(hoge)

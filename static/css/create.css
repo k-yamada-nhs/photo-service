@@ -1,0 +1,286 @@
+html,body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  /* background: #FAFAFA; */
+/* 
+  background-image: url("../image/bg/waterfall01.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+ */
+
+}
+
+body{
+
+}
+
+a{
+  color: #000;
+}
+
+a:hover{
+  color: #000;
+  text-decoration: none;
+}
+
+a:after{
+  color: #707070;
+}
+
+a:focus, *:focus {
+  outline:none;
+}
+
+
+.main{
+  /* background: rgba(255,255,255,0.5); *//* 白半透明 */
+  /* background: rgba(0,0,0,0.2); *//* 黒半透明 */
+}
+
+.header-bg{
+  background: rgba(0,0,0,0);
+  color: #000;
+  z-index: 99;
+}
+
+
+
+.select-img{
+  padding-top: 2%;
+  padding-bottom: 2%;
+
+  /* background: linear-gradient(-180deg, #fff 0%, #000 100%); */
+  /* background: linear-gradient(45deg, purple, orange, skyblue); */
+  background: linear-gradient(45deg, #fff, #000);
+  background-size: 600% 600%;
+  animation: AnimationName 10s ease infinite;
+
+}
+
+ 
+@keyframes AnimationName {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+
+.tab a{
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 2% 6%;
+
+}
+
+.tab-bg{
+  background: #fff;
+  border-radius: 0!important;
+  border-style: none;
+}
+
+.tab-bg:hover{
+  border: none;
+}
+
+.tab-bg a{
+  color: #fff;
+}
+
+.triangle{
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 16px 20px 0 20px;
+  border-color: #41465C transparent transparent transparent;
+  margin: 0 auto;
+}
+
+
+.tab-triangle{
+  width: 99%;
+  margin: 0 auto;
+}
+
+.tab-triangle-bg{
+  background: #D4D5D9;
+  margin: 0 auto;
+  padding: 0;
+}
+
+
+
+.triangle-space{
+  width: 50%;
+  /* margin-left: 52%; */
+  margin-bottom: 2%;
+}
+.triangle-space2{
+  width: 50%;
+  margin-left: 50%;
+  margin-bottom: 2%;
+}
+
+
+.active{
+  background: #41465C;
+  border-style: none;
+}
+
+.tab-pane{
+  background: #D4D5D9;
+  width: 100%;
+  margin: 0 auto;
+}
+
+nav .active{
+  color: #fff;
+}
+
+.tab-width{
+  width: 100%;
+  /* margin-top: 2%; */
+}
+
+.tab-content{
+  padding-left: 0px;
+  padding-right: 0px;
+  /* margin-bottom: 2%; */
+}
+
+.user-list{
+  width: 100%;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  /* padding-bottom: 1%; */
+  padding-top: 5%;
+  padding-bottom: 7%;
+}
+
+.btn-follow{
+  font-size: 11px;
+  margin-top: -3%;
+}
+
+.follow-mark{
+  font-size: 11px;
+  border-radius: 5px;
+  padding: 1% 1% 1% 1%;
+  background: #D4D5D9;
+  box-sizing: border-box;
+}
+
+.card-img{
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 3%;
+}
+
+
+
+
+
+
+
+.bg-art{
+  background-image: url("../image/bg/bg-white-lg.jpg");
+  background-size: 100%;
+}
+
+.img-up{
+  margin-right: 0;
+  margin-left: 0;
+  box-sizing: border-box;
+
+}
+
+.img-up-bg{
+  /* background: #fff; */
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-top: 3%;
+}
+
+.img-uparea{
+  padding-right: 0;
+  padding-left: 0;
+  box-sizing: border-box;
+}
+
+.img-uparea{
+  height: 678px;
+  max-height: 2480px;
+  min-height: 678px;
+
+  background-image: url("../image/frame/frame04.png")!important;
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  background-size: 100%;
+  vertical-align: bottom;
+  box-shadow: inset 0 0 0 0px #000, 0px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+
+.img-trimming{
+    overflow: hidden;
+    width: 300px;
+    height: 300px;
+    position: relative;
+}
+
+.img-trimming img{
+  position: absolute;
+
+}
+
+#demo-carousel{
+  margin: 0 auto;
+}
+
+.flipster{
+  display: block!important;
+}
+
+.flipster__nav{
+  display: none;
+}
+
+
+
+
+/* プレート部分 */
+
+.metal-plate-area{
+  background-image: url("../image/bg/plate/metal_01.jpg")!important;
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  background-size: 100%;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 0px #000, 0px 5px 5px rgba(0, 0, 0, 0.5);
+  padding-top: 1%;
+  padding-bottom: 1%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+.metal-plate{
+  padding-top: 4%;
+}
+
+.metal-plate p{
+  font-size: 24px;
+  font-weight: 400;
+  text-shadow: hsla(0,0%,40%,.5) 0 -1px 0, hsla(0,0%,100%,.6) 0 2px 1px;
+}
+
+
+
+
+
+
+
