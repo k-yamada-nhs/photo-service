@@ -21,31 +21,49 @@
 </head>
 
 <body>
-    <div class="container-fuild">
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark navbar-expand-sm" style="background-color:black;opacity: 0.5;filter:(opacity=50);">
+        <!-- Navbar content -->
+        <a class="navbar-brand" href="{% url 'app:index' %}">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <nav class="navbar navbar-dark navbar-expand-lg">
-            <!-- Navbar content -->
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+            </ul>
 
-                </ul>
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'app:projects_create' %}">プロジェクト作成</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'app:users_timeline' %}">タイムライン</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'app:users_detail' request.user.id %}">マイページ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">マップ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:logout' %}">ログアウト</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:login' %}">ログイン</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:signup' %}">サインイン</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
 
-                <ul class="navbar-nav">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'app:users_detail' request.user.id %}">account</a>
-                    </li>
-
-                </ul>
-        </nav>
-    </div>
-
+    </nav>
 
     <div class="container-fulid">
         <div class="row">

@@ -5,234 +5,26 @@
     <div class="row">
         <div class="col-8 mx-auto">
 
-            <div class="row">
+            <div class="row" id="posts">
 
-                <div class="col-4 wow bounceIn" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="2s"
-                    data-wow-delay="1s"><img src="https://placehold.jp/200x200.png"
-                        class="rounded-circle d-block mx-auto m-4">
+                {% for project in projects %}
+                <div class='col-4 wow bounceIn' data-wow-iteration='10' data-wow-offset='5' data-wow-duration='2s'
+                    data-wow-delay='1s'><a href="{% url 'app:projects_detail' project.id %}"><img width='200px'
+                            height='200px' src='{{ project.outputimagepath }}'
+                            class='rounded-circle d-block mx-auto m-4'></a>
                 </div>
-
-                <div class="col-4 wow bounceInDown" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="3s"
-                    data-wow-delay="2s"><img src="https://placehold.jp/300x300.png"
-                        class="rounded-circle d-block mx-auto m-4">
-                </div>
-
-                <div class="col-4 wow bounceInUp" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="4s"
-                    data-wow-delay="1s"><img src="https://placehold.jp/200x200.png"
-                        class="rounded-circle d-block mx-auto m-4">
-                </div>
-
-                <div class="col-4 wow rollIn" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="1s"
-                    data-wow-delay="3s"><img src="https://placehold.jp/100x100.png"
-                        class="rounded-circle d-block mx-auto m-4">
-                </div>
-
-                <div class="col-4 wow rotateInDownLeft" data-wow-iteration="10" data-wow-offset="5"
-                    data-wow-duration="2s" data-wow-delay="2s"><img src="https://placehold.jp/300x300.png"
-                        class="rounded-circle d-block mx-auto m-4">
-                </div>
-
-
-
-
-
-                <div class="col-4 wow bounceIn" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="4s"
-                    data-wow-delay="1s"><img src="https://placehold.jp/200x200.png"
-                        class="rounded-circle d-block mx-auto m-4">
-                </div>
-
-                <div class="col-4 wow bounceInDown" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="3s"
-                    data-wow-delay="2s"><img src="https://placehold.jp/300x300.png"
-                        class="rounded-circle d-block mx-auto m-4">
-                </div>
-
-                <div class="col-4 wow bounceInUp" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="2s"
-                    data-wow-delay="1s"><img src="https://placehold.jp/100x100.png"
-                        class="rounded-circle d-block mx-auto m-4">
-                </div>
-
-                <div class="col-4 wow rollIn" data-wow-iteration="10" data-wow-offset="5" data-wow-duration="4s"
-                    data-wow-delay="1s"><img src="https://placehold.jp/200x200.png"
-                        class="rounded-circle d-block mx-auto m-4">
-                </div>
-
-                <div class="col-4 wow rotateInDownLeft" data-wow-iteration="10" data-wow-offset="5"
-                    data-wow-duration="3s" data-wow-delay="2s"><img src="https://placehold.jp/250x250.png"
-                        class="rounded-circle d-block mx-auto m-4">
-                </div>
+                {% endfor %}
 
             </div>
-
         </div>
+
     </div>
-
-</div>
-{% endblock %}
+    {% endblock %}
 
 
-{% block extrajs %}
+    {% block extrajs %}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-<script>new WOW().init();</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script>new WOW().init();</script>
 
-<script>
-    $(function () {
-
-        //ページロード時に全件表示
-        $.ajax({
-            'url': '{% url "app:ajax_post_search" %}',
-            'type': 'GET',
-            'data': {
-                'title': $('#id_title').val(),  // 記事タイトル
-            },
-            'dataType': 'json'
-        }).done(function (data) {
-            // 記事欄を真っ白にする。
-            $('#posts').empty();
-
-            var bjson = JSON.parse(data['projects']);
-
-            console.log(JSON.stringify(bjson));
-            console.log('件数:' + bjson.length);
-
-            for (var i = 0; i < bjson.length; i++) {
-                //$('#posts').append("<p>" + JSON.stringify(bjson[i]["fields"], undefined, "    ") + "</p>");
-                $('#posts').append("<div class='col'><img width='200' height='200' class='rounded-circle' src='" + bjson[i]["fields"]["outputimagepath"] + "'><p>" + bjson[i]["fields"]["title"] + "</p></div>");
-            }
-
-        });
-
-
-        // 送信ボタンで呼ばれる
-        $('#ajax-search-post').on('submit', e => {
-            // デフォルトのイベントをキャンセルし、ページ遷移しないように!
-            e.preventDefault();
-
-            $.ajax({
-                'url': '{% url "app:ajax_post_search" %}',
-                'type': 'GET',
-                'data': {
-                    'title': $('#id_title').val(),  // 記事タイトル
-                },
-                'dataType': 'json'
-            }).done(function (data) {
-                // 記事欄を真っ白にする。
-                $('#posts').empty();
-
-                var bjson = JSON.parse(data['projects']);
-
-                console.log(JSON.stringify(bjson));
-                console.log('件数:' + bjson.length);
-
-                for (var i = 0; i < bjson.length; i++) {
-                    //$('#posts').append("<p>" + JSON.stringify(bjson[i]["fields"], undefined, "    ") + "</p>");
-                    //console.log(JSON.stringify(bjson[i]["fields"], undefined, "    "));
-                    $('#posts').append("<div class='col'><img width='200' height='200' class='rounded-circle' src='" + bjson[i]["fields"]["outputimagepath"] + "'><p>" + bjson[i]["fields"]["title"] + "</p></div>");
-                }
-            });
-        });
-    });
-
-</script>
-
-{% endblock %}
-
-
-<!-- <div class="container">
-    <p>ユーザーのタイムライン</p>
-    <p>ログインしているユーザー => @{{ user.username }}</p>
-
-    <form id="ajax-search-post" action="{% url 'app:ajax_post_search' %}" method="GET">
-        <input type="text" id="id_title">
-        <button type="submit">検索</button>
-    </form>
-
-
-
-    <div class="row" id=posts> -->
-
-
-<!-- <div id="posts" class="col"> -->
-<!-- {% for project in projects %}
-                <a href="{% url 'app:projects_detail' project.id %}">
-                    <img src="{{ project.outputimagepath }}" class="rounded-circle " alt="image"
-                        style="width: 200px; height: 200px; border: solid 1px black;">
-                    <div class="caption">
-                        <p>@{{ project.user.username }}</p>
-                    </div>
-                </a>
-                {% endfor %} -->
-<!-- </div> -->
-
-<!-- </div>
-</div>
-</div> -->
-
-<!-- <script>
-    $(function () {
-
-        //ページロード時に全件表示
-        $.ajax({
-            'url': '{% url "app:ajax_post_search" %}',
-            'type': 'GET',
-            'data': {
-                'title': $('#id_title').val(),  // 記事タイトル
-            },
-            'dataType': 'json'
-        }).done(function (data) {
-            // 記事欄を真っ白にする。
-            $('#posts').empty();
-
-            var bjson = JSON.parse(data['projects']);
-
-            console.log(JSON.stringify(bjson));
-            console.log('件数:' + bjson.length);
-
-            for (var i = 0; i < bjson.length; i++) {
-                //$('#posts').append("<p>" + JSON.stringify(bjson[i]["fields"], undefined, "    ") + "</p>");
-
-
-                $('#posts').append("<div class='col'><img width='200' height='200' class='rounded-circle' src='" + bjson[i]["fields"]["outputimagepath"] + "'><p>" + bjson[i]["fields"]["title"] + "</p></div>");
-
-            }
-
-        });
-
-
-        // 送信ボタンで呼ばれる
-        $('#ajax-search-post').on('submit', e => {
-            // デフォルトのイベントをキャンセルし、ページ遷移しないように!
-            e.preventDefault();
-
-            $.ajax({
-                'url': '{% url "app:ajax_post_search" %}',
-                'type': 'GET',
-                'data': {
-                    'title': $('#id_title').val(),  // 記事タイトル
-                },
-                'dataType': 'json'
-            }).done(function (data) {
-                // 記事欄を真っ白にする。
-                $('#posts').empty();
-
-                var bjson = JSON.parse(data['projects']);
-
-                console.log(JSON.stringify(bjson));
-                console.log('件数:' + bjson.length);
-
-                for (var i = 0; i < bjson.length; i++) {
-                    //$('#posts').append("<p>" + JSON.stringify(bjson[i]["fields"], undefined, "    ") + "</p>");
-                    //console.log(JSON.stringify(bjson[i]["fields"], undefined, "    "));
-
-
-                    $('#posts').append("<div class='col'><img width='200' height='200' class='rounded-circle' src='" + bjson[i]["fields"]["outputimagepath"] + "'><p>" + bjson[i]["fields"]["title"] + "</p></div>");
-
-
-                }
-
-            });
-        });
-
-    });
-
-</script> -->
+    {% endblock %}
