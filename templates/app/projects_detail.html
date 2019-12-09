@@ -35,32 +35,69 @@
                                     <div class="d-flex justify-content-between art-tit">
                                         <!-- 作品文タイトル -->
                                         <p class="art-tit-name">{{ project.title }}</p>
-                                        <p class="art-tit-user">username</p>
-                                    </div><!-- 作品文タイトル -->
+                                    </div>
                                     <div class="art-sen">
                                         <!-- 作品文 -->
-                                        <p class="">作品の説明など.....</p>
-                                    </div><!-- 作品文 -->
-                                </div><!-- 作品文エリア -->
+                                        <p class="">{{ project.comment }}</p>
+                                    </div>
+
+                                    <!-- メッセージがある場合表示 -->
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}<button
+                                            type="button" class="close" data-dismiss="alert" aria-label="閉じる">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button></div>
+                                    {% endfor%}
+                                    {% endif %}
+
+                                </div>
                                 <div class="art-des-share">
                                     <!-- 作品共有 -->
-                                    <a class="btn btn-info mt-2 mb-3 fw-btn" href="#"><i class="far fa-heart"></i></a>
-                                    <a class="btn btn-info mt-2 mb-3 fw-btn" href="#"><i class="far fa-comment"></i></a>
+                                    <a class="btn btn-info mt-2 mb-3 fw-btn" href="{% url 'app:like' project.id %}"><i
+                                            class="far fa-heart"></i></a>
+                                    <p>いいね数{{ like.count }}</p>
+                                    <a class="btn btn-info mt-2 mb-3 fw-btn" href="#"><i class="far fa-comment"
+                                            id="comment-btn"></i></a>
+                                    <p>コメント数{{ cmnt.count }}</p>
                                     <a class="btn btn-info mt-2 mb-3 fw-btn" href="#"><i
                                             class="fas fa-share-alt"></i></a>
                                     <a class="btn btn-info mt-2 mb-3 fw-btn" href="#"><i
                                             class="fas fa-map-marked-alt"></i></a>
-                                </div><!-- 作品共有 -->
-                                <div class="art-des-comment">
-                                    <!-- 作品へのコメント -->
-                                    <p class="art-des-comment-tit">{{ project.comment }}</p>
+                                </div>
 
-                                    <p class="art-des-comment-user">とても素敵な作品ですね！</p>
-                                    <p class="art-des-comment-user">すごい！！</p>
-                                    <p class="art-des-comment-user">綺麗。</p>
-                                    <p class="art-des-comment-user">すごく参考になります。これからも作品楽しみにしています。</p>
-                                    <p class="art-des-comment-user">フォローさせていただきました。</p>
-                                </div><!-- 作品へのコメント -->
+                                {% if request.user == project.user %}
+                                <form method="post" action="{% url 'app:projects_delete' project.id %}">
+                                    {% csrf_token %}
+                                    <button class="btn btn-danger" type="submit"
+                                        onclick='return confirm("本当に削除しますか？");'>削除</button>
+                                </form>
+                                <a href="{% url 'app:projects_update' project.id %}">編集</a>
+                                {% endif %}
+
+                                <!-- コメントエリア -->
+                                <div class="art-des-comment" id="comment-area">
+                                    <!-- 作品へのコメント -->
+                                    {% for c in cmnt %}
+                                    <div>
+                                        <p class="art-des-comment-user">@{{ c.user.username }} {{ c.text }}</p>
+                                    </div>
+                                    {% endfor %}
+
+                                </div>
+
+                                <!-- 投稿者はコメントできない(返信はできる) -->
+                                {% if request.user != project.user %}
+                                <div>
+                                    <form action='{% url "app:comment_ajax" project.id %}' method="POST" id="formdatas">
+                                        {% csrf_token %}
+                                        <p>コメント</p>
+                                        {{ commentform }}
+                                        <button id="postbtns" type="submit">投稿</button>
+                                    </form>
+                                </div>
+                                {% endif %}
+
                             </div><!-- 作品説明 -->
                         </div>
                     </div>
@@ -70,47 +107,9 @@
     </div>
 </div>
 
+{% endblock %}
+{% block extrajs %}
+<script>
 
-
-<!-- <div class="container">
-    <div class="row">
-
-
-        <div class="col mx-auto">
-
-            <div class="row">
-                <div class="col">
-                    <img src="{{ project.outputimagepath }}" class="mt-5 d-block mx-auto" width="80%">
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-9 mx-auto">
-                    <div class="photo-info">
-                        <a href="{% url 'app:users_detail' project.user.id %}">@{{ project.user }}</a>
-                    </div>
-
-                    <h2>{{ project.title }}</h2>
-                    <p>{{ project.comment }}</p>
-
-
-                    <a href="{% url 'map:locationmap' %}" class="">マップへ移動</a>
-                    
-
-                    {% if request.user == project.user %}
-                    <form method="post" action="{% url 'app:projects_delete' project.id %}">{% csrf_token %}
-                        <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
-                    </form>
-                    {% endif %}
-
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</div> -->
-
+</script>
 {% endblock %}

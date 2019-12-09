@@ -127,7 +127,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 # アップロードされた画像はmediaに保存
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'  # ユーザーが生成したコンテンツのurlを表す
+MEDIA_URL = '/media/'
 
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'app:users_timeline' # タイムラインへ

@@ -1,0 +1,393 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+<div class="container-fulid" id="create-bg">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <div class="bg-art">
+                <!-- bg-art -->
+                <div class="row img-up">
+                    <!-- img-up -->
+                    <!-- <div class="col-8 mx-auto img-up-bg">
+                        <div class="col-12 mx-auto img-uparea">
+                        </div>
+                    </div> -->
+                    <div class="col mx-auto mt-5" id="basewrap">
+                        <!-- 額縁 -->
+                        <img src="{% static 'images/frame/frame.png' %}" id="base_area" class="d-block mx-auto"
+                            width="60%" style="cursor: pointer;">
+                        <p>ベース番号-></p>
+                        <p id="selected_base"></p>
+                        <p>スタイル番号-></p>
+                        <p id="style_no"></p>
+
+                        <p>ajax response data</p>
+                        <p id="base"></p>
+                        <p id="style"></p>
+                        <p id="out"></p>
+
+                        <img id="preview" class="d-block mx-auto">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4 mx-auto metal-plate-area">
+                        <div class="d-flex justify-content-between metal-plate">
+                            <p id="title"></p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- bg-art -->
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="col">
+
+            <!-- タブ -->
+            <div class="contener select-img">
+
+                <nav class="row mx-auto tab-width">
+                    <div class="nav col-8 mx-auto tab-triangle-bg" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link col-6 tab tab-bg mx-auto active" id="nav-home-tab" data-toggle="tab"
+                            href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">ベース画像</a>
+                        <a class="nav-item nav-link col-6 tab tab-bg" id="nav-profile-tab" data-toggle="tab"
+                            href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">スタイル画像</a>
+                    </div>
+                </nav>
+
+                <div class="tab-content col-8 mx-auto" id="nav-tabContent">
+                    <div class="tab-pane active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="triangle-space">
+                            <div class="triangle"></div>
+                        </div>
+
+                        <div class="user-list">
+                            <!-- ベース　-->
+
+                            <article id="demo-carousel" class="demo">
+                                <div id="carousel">
+                                    <ul class="flip-items">
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/base/base01.jpg' %}" class="base"
+                                                name="base01">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/base/base02.jpg' %}" class="base"
+                                                name="base02">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/base/base03.jpg' %}" class="base"
+                                                name="base03">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/base/base04.jpg' %}" class="base"
+                                                name="base04">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/base/base05.jpg' %}" class="base"
+                                                name="base05">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                        </div><!-- ベース -->
+
+                    </div><!-- tab-content -->
+
+                    <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="triangle-space2">
+                            <div class="triangle"></div>
+                        </div>
+
+                        <div class="user-list">
+                            <!-- スタイル -->
+
+                            <article id="demo-carousel" class="demo">
+                                <div id="carousel2">
+                                    <ul class="flip-items">
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/style/style06.jpg' %}"
+                                                name="la_muse" class="select_style">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/style/style05.jpg' %}" name="wave"
+                                                class="select_style">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/style/style04.jpg' %}"
+                                                name="udnie" class="select_style">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/style/style03.jpg' %}"
+                                                name="wreck" class="select_style">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/style/style02.jpg' %}"
+                                                name="scream" class="select_style">
+                                        </li>
+                                        <li class="img-trimming">
+                                            <img src="{% static 'images/projectcreate/style/style01.jpg' %}"
+                                                name="rain_princess" class="select_style">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                        </div><!-- スタイル -->
+                    </div>
+                </div>
+            </div><!-- select-img -->
+        </div>
+        <!-- col -->
+    </div>
+    <!-- row -->
+
+    <div class="row">
+        <div class="container">
+
+            <button id="style_change_btn" class="btn btn-primary">スタイル変換</button>
+
+            <p id="id_div_ajax_response">
+                ajax response here
+            </p>
+
+            <div class="col-8 mx-auto">
+                <form class="fm" id="fm2" name="fm_name" action="{% url 'app:projects_create' %}" method="POST"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- {% for field in form.visible_fields %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {% render_field field class="form-control form-control-sm" %}
+                    </div>
+                    {% endfor %} -->
+
+                    <div class="form-group">
+                        <label for="">タイトル</label>
+                        {{ form.title|add_class:"form-control" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="">コメント</label>
+                        {{ form.comment|add_class:"form-control" }}
+                    </div>
+
+                    <!-- hidden field -->
+                    {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                    {% endfor %}
+
+                    <input type="submit" class="btn btn-primary" value="保存"></button>
+                </form>
+
+                <p>位置情報(オプション)</p>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="住所・施設名">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">検索</button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="container-fulid">
+                <div class="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div><!-- /.modal-header -->
+                            <div class="modal-body">
+                                <p>画像処理中...</p>
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div><!-- /.modal-body -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                            </div><!-- /.modal-footer -->
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+            </div>
+
+
+        </div>
+        <!-- col -->
+    </div>
+    <!-- row -->
+
+</div>
+{% endblock %}
+{% block extrajs %}
+
+<script src="{% static 'js/jquery.flipster.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/dropify.js' %}" type="text/javascript"></script>
+
+<script>
+    // 画像クリックでキャンパスに表示
+    $(".base").click(function (event) {
+        $('#selected_base').empty();
+        var btnid = $(this).attr("src");
+        $('#base_area').attr('src', btnid);
+        $('#selected_base').append($(this).attr("src"));
+        console.log($("#selected_base").text());
+    });
+
+    // スタイル選択で番号表示
+    $(".select_style").click(function (event) {
+        $('#style_no').empty();
+        var s = $(this).attr("name");
+        $('#style_no').append(s);
+    });
+</script>
+
+<script>
+    var carousel = $("#carousel").flipster({
+        style: 'carousel',
+        spacing: -0.3,
+        nav: false,
+        buttons: true,
+        loop: true,
+    });
+</script>
+
+<script>
+    var carousel = $("#carousel2").flipster({
+        style: 'carousel',
+        spacing: -0.3,
+        nav: false,
+        buttons: true,
+        loop: true,
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.dropify').dropify();
+    });
+</script>
+
+
+
+
+<!-- ################################################# -->
+
+
+
+<script>
+
+    $(document).ready(function () {
+
+        // 指定部分にドラッグしたときの処理
+        var base = $("#base_area");
+
+        // 指定部分の上に乗っかっているときの処理
+        base.on("dragover", function (e) {
+            e.preventDefault();
+            console.log("DragOver");
+        });
+
+        // 指定部分でドロップしたときの処理
+        base.on("drop", function (e) {
+            console.log("Drop");
+            e.preventDefault();
+            // input type="file"に設定
+            document.getElementById("id_image").files = e.originalEvent.dataTransfer.files;
+            console.log(e.originalEvent.dataTransfer.files);
+
+            // ドロップした画像ファイルのデータはe.originalEvent.dataTransfer.filesに配列で格納される
+            const file = e.originalEvent.dataTransfer.files;
+            const reader = new FileReader();
+
+            // 画像の読み込み
+            reader.readAsDataURL(e.originalEvent.dataTransfer.files[0]);
+
+            // サムネイル作成
+            reader.addEventListener('load', function () {
+                $('#preview').attr('src', reader.result);
+            });
+
+        });
+
+        // スタイル変換押されたらデータを送信
+        $("#style_change_btn").click(function () {
+
+            // モーダル表示
+            $('.modal').modal();
+
+            $('#base').empty();
+            $('#style').empty();
+            $('#out').empty();
+
+            var t = $("#selected_base").text();
+            $.ajax({
+                url: "/test_ajax",
+                method: "GET",
+                // data: new FormData($(".style_form").get(0)),
+                // baseとstyle
+                data: {
+                    'base': $("#selected_base").text(),
+                    'style': $("#style_no").text(),
+                },
+                dataType: "json",
+
+            }).done(function (data) {
+
+                $("#id_div_ajax_response").html(data.msg);
+                $("#id_div_ajax_response").html(data.base);
+
+                console.log(data);
+                $('#base_area').attr('src', data.out);
+
+                // プロジェクト保存用
+                $('#base').html(data.base);
+                $('#style').html(data.style);
+                $('#out').html(data.out);
+
+                document.fm_name.styleimagepath.value = document.getElementById("style").textContent;
+                document.fm_name.baseimagepath.value = document.getElementById("base").textContent;
+                document.fm_name.outputimagepath.value = document.getElementById("out").textContent;
+
+
+                $('.modal').modal('hide');
+
+            }).fail(function () {
+                $('.modal').modal('hide');
+                console.log("error");
+            });
+        });
+
+        //プロジェクト作成フォーム
+        // $(".fm").submit(function (event) {
+        //     event.preventDefault();
+
+        //     document.fm_name.styleimagepath.value = document.getElementById("style").textContent;
+        //     document.fm_name.baseimagepath.value = document.getElementById("base").textContent;
+        //     document.fm_name.outputimagepath.value = document.getElementById("out").textContent;
+
+        //     var fd = new FormData($(".fm").get(0));
+
+        //     $.ajax({
+        //         url: '{% url "app:projects_create" %}',
+        //         method: "POST",
+        //         data: fd,
+        //     }).done(function (data) {
+
+        //     });
+        // });
+    });
+</script>
+{% endblock %}

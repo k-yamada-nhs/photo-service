@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from app.models import Photo, Relationship, UploadImage
+from app.models import Photo, Relationship
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.core import serializers

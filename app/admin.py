@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Photo, Relationship, UploadImage
+from .models import Photo, Relationship, Comnt, Reply, Like
 
 # Register your models here.
 
@@ -12,7 +12,21 @@ class RelationshipAdmin(admin.ModelAdmin):
     list_display = ('id', 'follow', 'follower')
     list_display_links = ('id', 'follow', 'follower')
 
+class ComntAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text')
+    list_display_links = ('id', 'text')
+
+class ReplyAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text')
+    list_display_links = ('id', 'text')
+
+class LikeAdmin(admin.ModelAdmin):
+    list_display = ['id',]
+    list_display_links = ['id',]
+
 
 admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Relationship, RelationshipAdmin)
-admin.site.register(UploadImage)
+admin.site.register(Comnt, ComntAdmin)
+admin.site.register(Reply, ReplyAdmin)
+admin.site.register(Like, LikeAdmin)

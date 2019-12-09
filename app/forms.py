@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Photo, UploadImage
+from .models import Photo, Comnt
 from django import forms
 
 class PhotoForm(ModelForm):
@@ -11,3 +11,8 @@ class PhotoForm(ModelForm):
             'styleimagepath': forms.HiddenInput,
             'outputimagepath': forms.HiddenInput,
         }
+ 
+class CmntForm(ModelForm):
+    class Meta:
+        model = Comnt
+        fields = ['text']
