@@ -24,6 +24,5 @@ urlpatterns = [
     path('comment_ajax/<int:pk>', views.comment_ajax, name='comment_ajax'),
     # いいね
     path('like/<int:pk>', views.like, name='like'),
-    # リアルタイム変換
-    path('realtime_transfer', views.realtime_transfer, name='realtime_transfer'),
+    
 ]

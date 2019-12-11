@@ -1,0 +1,66 @@
+html,body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+body{
+}
+
+a{
+  color: #000;
+}
+
+a:hover{
+  color: #000;
+  text-decoration: none;
+}
+
+a:after{
+  color: #707070;
+}
+
+a:focus, *:focus {
+  outline:none;
+}
+
+/********************** mp-main **********************/
+.mp-main{
+  width: 100%;
+  margin: 0 auto;
+  background-image: url("../image/bg/time-bg-06.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+
+.timeline-line{
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.kurashi img{
+  border-radius: 50%;
+}
+
+.img-l img{
+  width: 250px;
+  height: auto;
+}
+
+.img-m img{
+  width: 175px;
+  height: auto;
+}
+
+.img-s img{
+  width: 125px;
+  height: auto;
+}
+
+
+

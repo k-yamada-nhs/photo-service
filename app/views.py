@@ -49,7 +49,7 @@ def projects_detail(request, pk):
 def projects_delete(request, pk):
     project = get_object_or_404(Photo, pk=pk)
     project.delete()
-    return redirect('app:users_detail', request.user_id)
+    return redirect('app:users_detail', request.user.id)
 
 # プロジェクト更新
 def projects_update(request, pk):
@@ -109,12 +109,7 @@ def test_ajax(request):
         "out": "/static/images/out/" + timestr + ".jpg",
         "msg": "send-ok"
     }
-    
     return JsonResponse(hoge)
-
-# リアルタイムスタイル変換
-def realtime_transfer(request):
-    return render(request, 'app/realtime_transfer.html')
 
 # コメント用
 def comment_ajax(request, pk):
