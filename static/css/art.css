@@ -5,8 +5,6 @@ html,body {
   background: #fff;
 }
 
-body{
-}
 
 a{
   color: #000;
@@ -83,7 +81,16 @@ a:focus, *:focus {
 }
 
 .art-tit-user{
-  font-size: 24px;
+  font-size: 20px;
+}
+
+
+
+
+.art-des-share{}
+
+.share-heart:focus{
+  color: red;
 }
 
 /** 作品説明文 **/
@@ -98,7 +105,26 @@ a:focus, *:focus {
 }
 
 /** 作品コメント **/
-.art-des-comment{}
+.art-des-comment{
+  font-size: 14px;
+}
+
+.art-des-comment-user{
+  display: flex;
+  justify-content: space-between;  
+}
+
+.art-des-comment-user p{
+  margin-top: 0.5rem!important;
+  margin-bottom: 0.5rem!important;
+}
+
+
+.art-des-comment-usercom{
+  color: #7a7a7a;
+}
+
+
 
 /** 作品コメント-見出し **/
 .art-des-comment-tit{

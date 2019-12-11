@@ -1,5 +1,8 @@
 html,body {
   margin: 0;
+  width: 100%;
+  height: 100%;
+  background-size:  cover;                /* 画像のサイズ指定 */
   background: #000;
 }
 
@@ -40,11 +43,26 @@ a:focus, *:focus {
 .bg-img {
   position: absolute;
   top: 0;
-  /* background-image: url("../image/bg/aurora.jpg"); */    /* 背景画像指定 */
   background-size:  cover;                /* 画像のサイズ指定 */
   width: 100%;
   height: 100%;
 }
+
+.top-logo{
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: right;
+  margin-top: 3%;
+  margin-left: 3%;
+  z-index: 999;
+}
+
+.top-logo img{
+  height: 30px;
+  width: auto;
+}
+
 
 .icon{
   position: fixed;
@@ -54,7 +72,6 @@ a:focus, *:focus {
   margin-top: 3%;
   margin-right: 2%;
   z-index: 999;
-  /* background: red; */
 }
 
 .icon i{

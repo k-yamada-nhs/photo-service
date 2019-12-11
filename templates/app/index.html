@@ -21,54 +21,51 @@
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-dark navbar-expand-sm" style="background-color:black;opacity: 0.5;filter:(opacity=50);">
-        <!-- Navbar content -->
-        <a class="navbar-brand" href="{% url 'app:index' %}">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-
-            </ul>
-
-            <ul class="navbar-nav">
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'app:projects_create' %}">プロジェクト作成</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'app:users_timeline' %}">タイムライン</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'app:users_detail' request.user.id %}">マイページ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">マップ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:logout' %}">ログアウト</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:login' %}">ログイン</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:signup' %}">サインイン</a>
-                </li>
-                {% endif %}
-            </ul>
+    <div class="container-fuild bg-img" id="particles">
+        <div class="row line">
+            <div class="col-12">
+                <div class="col-4 button-line">
+                    <h1 class=""><a href="{% url 'app:projects_create' %}" class="">創造の世界を体験する</a></h1>
+                </div>
+            </div>
         </div>
-
-    </nav>
-
-    <div class="container-fulid">
         <div class="row">
-            <div class="col" id="particles" style="width: 100vw;height: 100vh;">
-                <a href="{% url 'app:projects_create' %}">創造の世界を体験する</a>
+            <div class="ml-5 top-logo">
+                <a href="{% url 'app:index' %}"><img src="{% static 'images/site/logo/logo_wh-2.png' %}" alt="logo"></a>
+            </div>
+
+            <div class="col-1 icon">
+                <div class="dropdown">
+                    <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <div class="dropdown-menu signin">
+                        <form class="px-4 py-3">
+                            <div class="form-group">
+                                <label for="exampleDropdownFormEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleDropdownFormEmail1"
+                                    placeholder="email@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleDropdownFormPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleDropdownFormPassword1"
+                                    placeholder="Password">
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    Remember me
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Sign in</button>
+                        </form>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">New around here? Sign up</a>
+                        <a class="dropdown-item" href="#">Forgot password?</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -84,7 +81,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
     <script src="{% static 'js/three.r92.min.js' %}"></script>
     <script src="{% static 'js/vanta.rings.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>

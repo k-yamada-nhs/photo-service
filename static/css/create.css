@@ -3,13 +3,6 @@ html,body {
   width: 100%;
   height: 100%;
   background: #fff;
-  /* background: #FAFAFA; */
-/* 
-  background-image: url("../image/bg/waterfall01.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
- */
 
 }
 
@@ -35,10 +28,6 @@ a:focus, *:focus {
 }
 
 
-.main{
-  /* background: rgba(255,255,255,0.5); *//* 白半透明 */
-  /* background: rgba(0,0,0,0.2); *//* 黒半透明 */
-}
 
 .header-bg{
   background: rgba(0,0,0,0);
@@ -80,6 +69,7 @@ a:focus, *:focus {
   background: #fff;
   border-radius: 0!important;
   border-style: none;
+  text-align: center;
 }
 
 .tab-bg:hover{
@@ -212,17 +202,36 @@ nav .active{
 }
 
 .img-uparea{
-  height: 678px;
+  width: 100%;
+  max-width: 920px;
+  height: 650px;
   max-height: 2480px;
-  min-height: 678px;
+  min-height: 650px;
 
-  background-image: url("../image/frame/frame04.png")!important;
+  background-image: url("../images/frame/frame.png")!important;
   /* background-position: center; */
   background-repeat: no-repeat;
   background-size: 100%;
   vertical-align: bottom;
   box-shadow: inset 0 0 0 0px #000, 0px 5px 5px rgba(0, 0, 0, 0.5);
 }
+
+.dropify-wrapper{
+  max-width: 782px;
+  max-height: 512px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  border: none;
+}
+
+.dropify{}
+
+
+
 
 
 
@@ -256,6 +265,7 @@ nav .active{
 /* プレート部分 */
 
 .metal-plate-area{
+  max-width: 450px;
   background-image: url("../image/bg/plate/metal_01.jpg")!important;
   /* background-position: center; */
   background-repeat: no-repeat;
@@ -264,8 +274,8 @@ nav .active{
   box-shadow: inset 0 0 0 0px #000, 0px 5px 5px rgba(0, 0, 0, 0.5);
   padding-top: 1%;
   padding-bottom: 1%;
-  margin-top: 3%;
-  margin-bottom: 3%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .metal-plate{

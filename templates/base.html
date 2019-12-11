@@ -1,5 +1,4 @@
 {% load static %}
-
 <!doctype html>
 <html lang="ja">
 
@@ -8,19 +7,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
-     integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    -->
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- font -->
+    <!-- fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
         integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
@@ -31,74 +21,94 @@
 
     <!-- original css -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/common.css' %}"> -->
     <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
     <link rel="stylesheet" href="{% static 'css/jquery.flipster.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/create.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dropify.css' %}">
     <link rel="stylesheet" href="{% static 'css/art.css' %}">
-
 
     <title>Photo Service</title>
 </head>
 
 <body class="animsition">
+    <div class="wrap" style="overflow: hidden;">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand navbar-light bg-light shadow">
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-dark navbar-expand-sm" style="background-color:black;opacity: 0.5;filter:(opacity=50);">
-        <!-- Navbar content -->
-        <a class="navbar-brand" href="{% url 'app:index' %}">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <a class="navbar-brand" href="{% url 'app:index' %}">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
 
-            </ul>
+                </ul>
 
-            <ul class="navbar-nav">
-                {% if user.is_authenticated %}
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                    <!-- ログインしてる -->
 
-                <form class="form-inline my-2 my-lg-0" action="{% url 'app:users_timeline' %}" method="GET">
-                    <input type="search" class="form-control mr-sm-2" name="title" placeholder="検索..."
-                        aria-label="検索...">
-                    <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">検索</button>
-                </form>
+                    <!-- 検索 -->
+                    <form class="form-inline my-2 my-lg-0" action="{% url 'app:users_timeline' %}" method="GET">
+                        <input type="search" class="form-control mr-sm-2" name="title" placeholder="検索..."
+                            aria-label="検索...">
+                        <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">検索</button>
+                    </form>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'app:projects_create' %}">プロジェクト作成</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'app:users_timeline' %}">タイムライン</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'app:users_detail' request.user.id %}">マイページ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">マップ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:logout' %}">ログアウト</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:login' %}">ログイン</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:signup' %}">サインイン</a>
-                </li>
+                    <!-- 検索 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
+                    </li>
 
-                {% endif %}
-            </ul>
-        </div>
+                    <!-- 通知 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
+                    </li>
 
-    </nav>
+                    <!-- アカウント -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user mr-2"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item"
+                                href="{% url 'app:users_detail' request.user.id %}">@{{ user.username }}</a>
+                            <a class="dropdown-item" href="{% url 'app:users_detail' request.user.id %}"><i
+                                    class="fas fa-user mr-2"></i>マイページ</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-user-cog mr-2"></i>アカウント設定</a>
+                            <a class="dropdown-item" href="{% url 'accounts:logout' %}"><i
+                                    class="fas fa-sign-out-alt mr-2"></i>ログアウト</a>
+                        </div>
+                    </li>
 
-    <!--container-->
-    {% block content %}
-    {% endblock %}
+                    {% else %}
+                    <!-- ログインしてない -->
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user mr-2"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'accounts:login' %}"><i
+                                    class="fas fa-sign-in-alt mr-2"></i>ログイン</a>
+                            <a class="dropdown-item" href="{% url 'accounts:signup' %}"><i
+                                    class="fas fa-user-plus mr-2"></i>サインアップ</a>
+                        </div>
+                    </li>
+
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+        <!--container-->
+        {% block content %}
+        {% endblock %}
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -48,7 +48,7 @@ function Dropify(element, options) {
         messages: {
             'default': 'ドラック&ドロップ 又は クリックでアップロード',
             'replace': 'Drag and drop or click to replace',
-            'remove':  'Remove',
+            'remove':  '削除',
             'error':   'Ooops, something wrong happended.'
         },
         error: {

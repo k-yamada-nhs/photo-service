@@ -1,111 +1,178 @@
 {% extends 'base.html' %}
-
+{% load widget_tweaks %}
 {% block content %}
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-10 art-main">
+        <div class="col-10 mt-4 mx-auto">
             <div class="row">
-                <div class="col-8 art-left">
-                    <!-- 左側 -->
+                <!-- 左側 -->
+                <div class="col-8">
+
                     <div class="row">
-                        <div class="col-12">
-                            <div class="col-12 art-img">
-                                <!-- 作品画像 -->
-                                <img src="{{ project.outputimagepath }}" alt="作品画像">
-                            </div><!-- 作品画像 -->
+                        <div class="col">
+
+                            <!-- 作品画像 -->
+                            <img src="{{ project.outputimagepath }}" width="100%" class="mx-auto d-block img-fluid"
+                                alt="作品画像">
+
                         </div>
                     </div>
 
-                </div><!-- 左側 -->
+                </div>
 
-                <div class="col-4 art-right">
-                    <!-- 右側 -->
+                <!-- 右側 -->
+                <div class="col-4">
+
+                    <!-- ユーザー名 -->
                     <div class="row">
-                        <div class="col-12">
-                            <div class="art-des">
-                                <!-- 作品説明 -->
-                                <div class="d-flex justify-content-between art-des-tag">
-                                    <!-- 作品タグ -->
-                                    <a href="#" class="art-des-id">@{{ project.user }}</a>
-                                    <a class="btn btn-outline-primary mt-2 mb-3 fw-btn" href="#">フォローする</a>
-                                </div><!-- 作品タグ -->
-                                <div class="art-des-sen">
-                                    <!-- 作品文エリア -->
-                                    <div class="d-flex justify-content-between art-tit">
-                                        <!-- 作品文タイトル -->
-                                        <p class="art-tit-name">{{ project.title }}</p>
-                                    </div>
-                                    <div class="art-sen">
-                                        <!-- 作品文 -->
-                                        <p class="">{{ project.comment }}</p>
-                                    </div>
+                        <div class="col">
 
-                                    <!-- メッセージがある場合表示 -->
-                                    {% if messages %}
-                                    {% for message in messages %}
-                                    <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}<button
-                                            type="button" class="close" data-dismiss="alert" aria-label="閉じる">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button></div>
-                                    {% endfor%}
-                                    {% endif %}
+                            <a href="{% url 'app:users_detail' user.id %}">@{{ project.user }}</a>
 
-                                </div>
-                                <div class="art-des-share">
-                                    <!-- 作品共有 -->
-                                    <a class="btn btn-info mt-2 mb-3 fw-btn" href="{% url 'app:like' project.id %}"><i
-                                            class="far fa-heart"></i></a>
-                                    <p>いいね数{{ like.count }}</p>
-                                    <a class="btn btn-info mt-2 mb-3 fw-btn" href="#"><i class="far fa-comment"
-                                            id="comment-btn"></i></a>
-                                    <p>コメント数{{ cmnt.count }}</p>
-                                    <a class="btn btn-info mt-2 mb-3 fw-btn" href="#"><i
-                                            class="fas fa-share-alt"></i></a>
-                                    <a class="btn btn-info mt-2 mb-3 fw-btn" href="#"><i
-                                            class="fas fa-map-marked-alt"></i></a>
-                                </div>
+                            {% if request.user != project.user %}
+                            <a class="btn btn-outline-primary" href="#">フォローする</a>
+                            {% endif %}
 
-                                {% if request.user == project.user %}
-                                <form method="post" action="{% url 'app:projects_delete' project.id %}">
-                                    {% csrf_token %}
-                                    <button class="btn btn-danger" type="submit"
-                                        onclick='return confirm("本当に削除しますか？");'>削除</button>
-                                </form>
-                                <a href="{% url 'app:projects_update' project.id %}">編集</a>
-                                {% endif %}
-
-                                <!-- コメントエリア -->
-                                <div class="art-des-comment" id="comment-area">
-                                    <!-- 作品へのコメント -->
-                                    {% for c in cmnt %}
-                                    <div>
-                                        <p class="art-des-comment-user">@{{ c.user.username }} {{ c.text }}</p>
-                                    </div>
-                                    {% endfor %}
-
-                                </div>
-
-                                <!-- 投稿者はコメントできない(返信はできる) -->
-                                {% if request.user != project.user %}
-                                <div>
-                                    <form action='{% url "app:comment_ajax" project.id %}' method="POST" id="formdatas">
-                                        {% csrf_token %}
-                                        <p>コメント</p>
-                                        {{ commentform }}
-                                        <button id="postbtns" type="submit">投稿</button>
-                                    </form>
-                                </div>
-                                {% endif %}
-
-                            </div><!-- 作品説明 -->
                         </div>
                     </div>
+
+                    <!-- 作品タイトル -->
+                    <div class="row">
+                        <div class="col">
+                            <p>{{ project.title }}</p>
+                        </div>
+                    </div>
+
+                    <!-- 作成日 -->
+                    <div class="row">
+                        <div class="col">
+                            <p>2019/12/xx</p>
+                        </div>
+                    </div>
+
+
+                    <!-- 作品のコメント -->
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-break">{{ project.comment }}</p>
+
+                            <!-- メッセージがある場合表示 -->
+                            {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}<button type="button"
+                                    class="close" data-dismiss="alert" aria-label="閉じる">
+                                    <span aria-hidden="true">&times;</span>
+                                </button></div>
+                            {% endfor%}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- 共有 -->
+                    <div class="row">
+                        <div class="col">
+
+                            <a class="btn btn-info" href="{% url 'app:like' project.id %}"><i
+                                    class="far fa-heart"></i></a>
+
+                            <button class="btn btn-info" data-toggle="modal" data-target="#commentModal"><i
+                                    class="far fa-comment" id="comment-btn"></i></button>
+
+                            <a class="btn btn-info" href="#"><i class="fas fa-share-alt"></i></a>
+                            <a class="btn btn-info" href="#"><i class="fas fa-map-marked-alt"></i></a>
+                            <p>いいね数{{ like.count }}</p>
+                            <p>コメント数{{ cmnt.count }}</p>
+                        </div>
+                    </div>
+
+
+                    <!-- みんなのコメント -->
+                    <div class="row">
+                        <div class="col">
+                            <!-- 作品へのコメント -->
+                            {% for c in cmnt %}
+                            <div>
+                                <p class="text-break">@{{ c.user.username }} {{ c.text }}(返信)</p>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                    <!-- 作者専用 -->
+                    {% if request.user == project.user %}
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">削除</button>
+                            <a class="btn btn-info" href="{% url 'app:projects_update' project.id %}">編集</a>
+                        </div>
+                    </div>
+                    {% endif %}
+
                 </div><!-- 右側 -->
             </div>
         </div>
     </div>
+
+    <!-- モーダルの設定 -->
+    <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <form action='{% url "app:comment_ajax" project.id %}' method="POST" id="formdatas">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">コメント</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ commentform.text|add_class:"form-control" }}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                        <button type="submit" id="postbtns" class="btn btn-primary">コメントを投稿する</button>
+
+                    </div><!-- /.modal-footer -->
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <form action="{% url 'app:projects_delete' project.id %}" method="POST" id="formdatas">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">投稿削除</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>本当に削除しますか？
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                        <button type="submit" id="postbtns" class="btn btn-primary">削除する</button>
+
+                    </div><!-- /.modal-footer -->
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 </div>
+
+
 
 {% endblock %}
 {% block extrajs %}

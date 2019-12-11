@@ -8,14 +8,5 @@ from django.core import serializers
 
 # Create your views here.
 def locationmap(request):
-    return render(request, 'map/locationmap.html')
-
-def ajax_projectdata(request):
-    projects_to_json = serializers.serialize("json", Photo.objects.all())
-    
-    d = {
-        # 'projects': projects_to_json,
-        'projects': "a",
-    }
-
-    return JsonResponse(d)
+    projects = Photo.objects.all()
+    return render(request, 'map/locationmap.html', {'projects':  projects})

@@ -31,23 +31,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
 
+        var projects = {
+        {% for project in projects %}
+        "{{ project.id }}": {
+            "title": "{{ project.title }}",
+                "comment": "{{ project.comment }}",
+                    "outputimagepath": "{{ project.outputimagepath }}",
+                        "latitude": "{{ project.latitude }}",
+                            "longitude": "{{ project.longitude }}",
+                                "userid": "{{ project.user.id }}",
+                                    "username": "{{ project.user.username }}",
+            },
+        {% endfor %}
+        };
 
-        $.ajax({
-            'url': 'map/ajax_projectdata',
-            'type': 'GET',
-            'dataType': 'json'
+        console.log(projects);
+    </script>
 
-        }).done(function (data) {
-
-            console.log(data);
-        }).fail(function () {
-            console.log("era-");
-        })
-
-
-
-
-
+    <script>
 
         function initMap() {
             var latlng = new google.maps.LatLng(34.808502, 135.639683);//中心の緯度, 経度
