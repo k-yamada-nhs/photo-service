@@ -105,7 +105,7 @@ def test_ajax(request):
     # 画像の保存先のpath
     hoge = {
         "base": base,
-        "style": style,
+        "style": "/static/images/projectcreate/style/" + style + ".jpg",
         "out": "/static/images/out/" + timestr + ".jpg",
         "msg": "send-ok"
     }
