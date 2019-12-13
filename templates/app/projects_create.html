@@ -2,34 +2,170 @@
 {% load widget_tweaks %}
 {% load static %}
 {% block content %}
+
+<div class="box box1 pink lighten-4">
+    <div class="row">
+        <div class="col-8 mx-auto">
+            <p>画像を選択</p>
+            <p id="selected_base">ベース</p>
+            <img src="{% static 'images/site/assets/easel.png' %}" height="600px" class="mx-auto d-block" alt="">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <img src="{% static 'images/projectcreate/base/base05.jpg' %}" width="100px" class="base" name="base01">
+        </div>
+    </div>
+</div>
+<!--box-->
+<div class="box box2">
+    <div class="row">
+        <div class="col-8 mx-auto">
+
+
+            <div class="row">
+                <div class="col">
+                    <p>スタイルを選択</p>
+                    <p id="style_no">スタイル</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4 mb-3">
+                    <img src="{% static 'images/projectcreate/style/wave.jpg' %}"
+                        class="img-fluid z-depth-4 select_style" name="wave" alt="">
+                </div>
+                <div class="col-4 mb-3">
+                    <img src="{% static 'images/projectcreate/style/udnie.jpg' %}"
+                        class="img-fluid z-depth-4 select_style" name="udnie" alt="">
+                </div>
+                <div class="col-4 mb-3">
+                    <img src="{% static 'images/projectcreate/style/wreck.jpg' %}"
+                        class="img-fluid z-depth-4 select_style" name="wreck" alt="">
+                </div>
+                <div class="col-4 mb-3">
+                    <img src="{% static 'images/projectcreate/style/la_muse.jpg' %}"
+                        class="img-fluid z-depth-4 select_style" name="la_muse" alt="">
+                </div>
+                <div class="col-4 mb-3">
+                    <img src="{% static 'images/projectcreate/style/scream.jpg' %}"
+                        class="img-fluid z-depth-4 select_style" name="scream" alt="">
+                </div>
+                <div class="col-4 mb-3">
+                    <img src="{% static 'images/projectcreate/style/rain_princess.jpg' %}"
+                        class="img-fluid z-depth-4 select_style" name="rain_princess" alt="">
+                </div>
+            </div>
+            <button type="button" id="style_change_btn" class="btn rounded-pill btn-amber"><i
+                    class="fas fa-th-list pr-2" aria-hidden="true"></i>スタイル変換</button>
+        </div>
+    </div>
+
+</div>
+<!--box-->
+<div class="box box3 pink lighten-4">
+    <div class="row">
+        <div class="col-8 mx-auto">
+            <div class="row">
+                <div class="col">
+                    <p>AIが生成した絵</p>
+                    <p id="base">base</p>
+                    <p id="style">style</p>
+                    <p id="out">out</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col mx-auto mt-5 mb-5">
+                    <div class="relative mx-auto">
+                        <img src="" alt="" width="800px" class="mx-auto d-block" id="base_area">
+
+                        <img src="{% static 'images/frame/frame.png' %}" class="absolute mx-auto d-block z-depth-4"
+                            width="800px" style="cursor: pointer;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--box-->
+<div class="box box4">
+    <div class="row">
+        <div class="col-8 mx-auto">
+            <p>プロジェクトを保存する</p>
+            <form class="fm" id="fm2" name="fm_name" action="{% url 'app:projects_create' %}" method="POST"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="">タイトル</label>
+                    {{ form.title|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="">コメント</label>
+                    {{ form.comment|add_class:"form-control" }}
+                </div>
+
+                <div class="form-group">
+                    <label for="">緯度</label>
+                    {{ form.latitude|add_class:"form-control" }}
+                </div>
+
+                <div class="form-group">
+                    <label for="">経度</label>
+                    {{ form.longitude|add_class:"form-control" }}
+                </div>
+
+                <!-- hidden field -->
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                <button class="btn btn-primary btn-block my-4 waves-effect waves-light" type="submit">保存</button>
+            </form>
+
+            <p>位置情報(オプション)</p>
+            <div class="input-group">
+                <input type="text" id="address" class="form-control" placeholder="住所・施設名">
+                <span class="input-group-btn">
+                    <input class="btn btn-primary" type="button"
+                        onclick="attrLatLngFromAddress(document.getElementById('address').value)" value="検索">
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<!--box-->
+
 <div class="container-fulid">
 
     <!-- ベース画像領域 -->
-    <div class="row" style="background-color:aliceblue;">
+    <div class="row" style="height: 100vh;">
         <div class="col">
 
             <!-- 額縁 -->
             <div class="row">
                 <div class="col mx-auto mt-5 mb-5">
                     <div class="relative mx-auto">
-                        <img src="{% static 'images/projectcreate/base/base05.jpg' %}" alt="" width="800px"
-                            class="mx-auto d-block" id="base_area">
+                        <img src="" alt="" width="800px" class="mx-auto d-block" id="base_area">
 
-                        <img src="{% static 'images/frame/frame.png' %}" class="absolute mx-auto d-block" width="800px"
-                            style="cursor: pointer;">
+                        <img src="{% static 'images/frame/frame.png' %}" class="absolute mx-auto d-block z-depth-4"
+                            width="800px" style="cursor: pointer;">
                     </div>
                 </div>
             </div>
 
             <!-- 作品プレート -->
-            <div class="row">
+            <div class="row mt-5">
 
                 <div class="col-10 mx-auto">
 
                     <!-- プレート -->
                     <div class="row">
                         <div class="col">
-                            <div class="shadow" style="width: 400px; height: 150px;margin: 0 auto;">
+                            <div class="z-depth-4" style="width: 400px; height: 150px;margin: 0 auto;">
                                 <h4 class="text-center">作品タイトル</h4>
                                 <hr>
                                 <p class="text-center">作者</p>
@@ -149,27 +285,27 @@
                                 <div id="carousel2">
                                     <ul class="flip-items">
                                         <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/style/style06.jpg' %}"
-                                                name="la_muse" class="select_style">
+                                            <img src="{% static 'images/projectcreate/style/la_muse.jpg' %}"
+                                                name="la_muse" class="select_style ">
                                         </li>
                                         <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/style/style05.jpg' %}" name="wave"
+                                            <img src="{% static 'images/projectcreate/style/wave.jpg' %}" name="wave"
                                                 class="select_style">
                                         </li>
                                         <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/style/style04.jpg' %}"
-                                                name="udnie" class="select_style">
+                                            <img src="{% static 'images/projectcreate/style/udnie.jpg' %}" name="udnie"
+                                                class="select_style">
                                         </li>
                                         <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/style/style03.jpg' %}"
-                                                name="wreck" class="select_style">
+                                            <img src="{% static 'images/projectcreate/style/wreck.jpg' %}" name="wreck"
+                                                class="select_style">
                                         </li>
                                         <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/style/style02.jpg' %}"
+                                            <img src="{% static 'images/projectcreate/style/scream.jpg' %}"
                                                 name="scream" class="select_style">
                                         </li>
                                         <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/style/style01.jpg' %}"
+                                            <img src="{% static 'images/projectcreate/style/rain_princess.jpg' %}"
                                                 name="rain_princess" class="select_style">
                                         </li>
                                     </ul>
@@ -188,45 +324,15 @@
     <div class="row">
         <div class="container">
 
-            <button id="style_change_btn" class="btn btn-primary">スタイル変換</button>
-
+            <button type="button" id="style_change_btn" class="btn rounded-pill btn-amber"><i
+                    class="fas fa-th-list pr-2" aria-hidden="true"></i>スタイル変換</button>
             <p id="id_div_ajax_response">
                 ajax response here
             </p>
 
             <!-- PhotoForm -->
             <div class="col-8 mx-auto">
-                <form class="fm" id="fm2" name="fm_name" action="{% url 'app:projects_create' %}" method="POST"
-                    enctype="multipart/form-data">
-                    {% csrf_token %}
 
-                    <div class="form-group">
-                        <label for="">タイトル</label>
-                        {{ form.title|add_class:"form-control" }}
-                    </div>
-                    <div class="form-group">
-                        <label for="">コメント</label>
-                        {{ form.comment|add_class:"form-control" }}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">緯度</label>
-                        {{ form.latitude|add_class:"form-control" }}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">経度</label>
-                        {{ form.longitude|add_class:"form-control" }}
-                    </div>
-
-                    <!-- hidden field -->
-                    {% for hidden in form.hidden_fields %}
-                    {{ hidden }}
-                    {% endfor %}
-
-
-                    <input type="submit" class="btn btn-primary" value="保存"></button>
-                </form>
 
                 <p>位置情報(オプション)</p>
                 <div class="input-group">
@@ -267,43 +373,24 @@
 </div>
 {% endblock %}
 {% block extrajs %}
+<script src="https://cdn.jsdelivr.net/npm/jquery-scrollify@1/jquery.scrollify.min.js"></script>
+<script>
+    $.scrollify({ section: ".box" });
+</script>
+
 
 <script src="{% static 'js/jquery.flipster.min.js' %}" type="text/javascript"></script>
 <script>
     // 画像クリックでキャンパスに表示
     $(".base").click(function (event) {
         $('#selected_base').empty();
-        var btnid = $(this).attr("src");
-        $('#base_area').attr('src', btnid);
         $('#selected_base').append($(this).attr("src"));
-        console.log($("#selected_base").text());
     });
 
     // スタイル選択で番号表示
     $(".select_style").click(function (event) {
         $('#style_no').empty();
-        var s = $(this).attr("name");
-        $('#style_no').append(s);
-    });
-</script>
-
-<script>
-    var carousel = $("#carousel").flipster({
-        style: 'carousel',
-        spacing: -0.3,
-        nav: false,
-        buttons: true,
-        loop: true,
-        scrollwheel: false,
-    });
-
-    var carousel = $("#carousel2").flipster({
-        style: 'carousel',
-        spacing: -0.3,
-        nav: false,
-        buttons: true,
-        loop: true,
-        scrollwheel: false,
+        $('#style_no').append($(this).attr("name"));
     });
 </script>
 
@@ -344,18 +431,16 @@
         $("#style_change_btn").click(function () {
 
             // モーダル表示
-            $('.modal').modal();
+            //$('.modal').modal();
 
             $('#base').empty();
             $('#style').empty();
             $('#out').empty();
 
-            var t = $("#selected_base").text();
             $.ajax({
                 url: "/test_ajax",
                 method: "GET",
-                // data: new FormData($(".style_form").get(0)),
-                // baseとstyle
+
                 data: {
                     'base': $("#selected_base").text(),
                     'style': $("#style_no").text(),
@@ -363,9 +448,6 @@
                 dataType: "json",
 
             }).done(function (data) {
-
-                $("#id_div_ajax_response").html(data.msg);
-                $("#id_div_ajax_response").html(data.base);
 
                 console.log(data);
                 $('#base_area').attr('src', data.out);
@@ -380,14 +462,15 @@
                 document.fm_name.outputimagepath.value = document.getElementById("out").textContent;
 
 
-                $('.modal').modal('hide');
+                //$('.modal').modal('hide');
 
             }).fail(function () {
-                $('.modal').modal('hide');
+                //$('.modal').modal('hide');
                 console.log("error");
             });
         });
 
     });
 </script>
+
 {% endblock %}

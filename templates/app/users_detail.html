@@ -4,112 +4,59 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-10 mp-main mt-4">
+        <div class="col-11 mx-auto mt-2">
             <div class="row">
-                <div class="col-2 mp-left">
+                <div class="col-2">
                     <!-- 左側 -->
 
                     <div class="row">
                         <!-- ユーザアイコン -->
-                        <div class="col-10 mp-usericon">
-                            <img src="{{ user.profile.profileimage.url }}" alt="ユーザーアイコン">
+                        <div class="col">
+                            <img src="{{ user.profile.profileimage.url }}" class="rounded-circle mx-auto d-block mt-3"
+                                height="150px" alt="ユーザーアイコン">
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mx-auto">
                         <!-- ユーザプロフィール -->
-                        <div class="col-10 mp-profile">
-                            <p class="mp-pro-id">@{{ user.username }}</p>
-                            <p class="mp-pro-name">H431公式アカウント</p>
+                        <div class="col">
+                            <p class="mx-auto">@{{ user.username }}</p>
+                            <p class="mx-auto">H431公式アカウント</p>
 
                             <!-- 自分じゃなくてフォローしてない人 -->
                             {% if request.user != user %}
-                            <a class="btn btn-outline-primary mt-2 mb-3 fw-btn" href="#">フォローする</a>
+                            <a class="btn btn-outline-primary" href="#">フォローする</a>
                             {% endif %}
 
-                            <p class="mp-pro-sen">{{ user.profile.comment }}</p>
+                            <p>{{ user.profile.comment }}</p>
 
                             <!-- ログインユーザーだけの機能 -->
                             {% if request.user == user %}
 
                             <!-- 切り替えボタンの設定 -->
-                            <button type="button" class="btn fw-btn btn-secondary col-12" data-toggle="modal"
-                                data-target="#myModal">
-                                <i class="fas fa-cog mr-1"></i>設定
+                            <button type="button" class="btn btn-secondary w-100 mx-auto">
+                                <i class="fas fa-cog mr-2"></i>設定
                             </button>
 
                             <!-- 創造ボタン -->
-                            <a class="btn btn-info mt-2 mb-3 fw-btn" href="{% url 'app:projects_create' %}"><i
-                                    class="fas fa-palette mr-1"></i>創造する</a>
+                            <a class="btn btn-info w-100 mx-auto" href="{% url 'app:projects_create' %}"><i
+                                    class="fas fa-palette mr-2"></i>創造する</a>
 
                             {% endif %}
 
-                            <!-- モーダルの設定 -->
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-                                aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel"><i
-                                                    class="fas fa-cog mr-1"></i>設定</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">アイコン：</label>
-                                                <img src="{{ user.profile.profileimage.url }}" alt="">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">ヘッダー：</label>
-                                                <img src="image/header/header01.jpg" alt="">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">ID：</label>
-                                                <input type="textbox" class="form-control" id="exampleInputPassword1"
-                                                    placeholder="@hal_official" value="">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">ユーザー名：</label>
-                                                <input type="textbox" class="form-control" id="exampleInputPassword1"
-                                                    placeholder="HAL公式アカウント">
-                                            </div>
-
-                                            <form>
-                                                <div class="form-group">
-                                                    <label for="message-text">自己紹介：</label>
-                                                    <textarea class="form-control" id="message-text"></textarea>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">閉じる</button>
-                                            <button type="button" class="btn btn-primary">変更を保存</button>
-                                        </div><!-- /.modal-footer -->
-
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
 
                         </div>
                     </div><!-- ユーザプロフィール -->
 
 
-                </div><!-- 左側 -->
+                </div>
 
-                <div class="col-10 right">
+                <div class="col-10" style="margin: 0; padding: 0; background-color: #EEEEEE;">
                     <!-- 右側 -->
                     <div class="row">
-                        <div class="col-12 mp-header">
+                        <div class="col-12">
                             <!-- ヘッダー画像 -->
-                            <img src="{% static 'images/header01.jpg' %}" alt="ヘッダー画像">
+                            <img src="{% static 'images/header01.jpg' %}" alt="ヘッダー画像" width="100%" class="img-fluid">
                         </div><!-- ヘッダー画像 -->
                         <div class="col-12 menutab">
                             <!-- タブ -->
@@ -153,13 +100,46 @@
                                                 <div class="row">
 
                                                     {% for project in projects %}
-                                                    <div class="col-md-4 g-img">
-                                                        <div class="card mb-4 box-shadow">
+                                                    <div class="col-md-4">
+
+                                                        <!-- Card -->
+                                                        <div class="card mb-3">
+
+                                                            <!-- Card image --><a
+                                                                href="{% url 'app:projects_detail' project.id %}"><img
+                                                                    class="card-img-top"
+                                                                    src="{{ project.outputimagepath }}"
+                                                                    alt="Card image cap">
+                                                            </a>
+
+                                                            <!-- Card content -->
+                                                            <div class="card-body">
+
+                                                                <!-- Title -->
+                                                                <h4 class="card-title"><a>Card title</a></h4>
+                                                                <!-- Text -->
+                                                                <p class="card-text">Some quick example text to build on
+                                                                    the card title and make up the bulk of the card's
+                                                                    content.</p>
+
+                                                            </div>
+
+                                                            <!-- Card footer -->
+                                                            <div class="card-footer text-muted text-center">
+                                                                <i class="far fa-heart"></i> 100
+                                                                <i class="far fa-comment-dots"></i> 100
+                                                            </div>
+
+                                                        </div>
+                                                        <!-- Card -->
+
+
+                                                        <!-- <div class="card mb-4 box-shadow">
                                                             <a href="{% url 'app:projects_detail' project.id %}"> <img
                                                                     class="card-img-top"
                                                                     src="{{ project.outputimagepath }}"
                                                                     alt="Galleryimages"></a>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     {% endfor %}
 
