@@ -6,7 +6,8 @@
         <div class="col text-center">
             <p class="display-4 text-light index_text" style="margin-top: 100px;">AI Camvas example text example text
             </p>
-            <a class="btn btn-elegant btn-lg" style="margin-top: 100px;">創造の世界を体験する</a>
+            <a href="{% url 'app:projects_create' %}" class="btn btn-elegant btn-lg"
+                style="margin-top: 100px;">創造の世界を体験する</a>
         </div>
     </div>
 </div>
@@ -27,7 +28,7 @@
                 <div class="col-4">
                     <h3>1</h3>
                     <p>画像を選択します</p>
-                    <img src="{% static 'images/projectcreate/style/wave.jpg' %}" class="img-fluid" alt="">
+                    <img src="{% static 'images/site/assets/base.jpg' %}" class="img-fluid" alt="">
                 </div>
                 <div class="col-4">
                     <h3>2</h3>
@@ -36,16 +37,15 @@
                 </div>
                 <div class="col-4">
                     <h3>3</h3>
-                    <p>AIが画像を変換します</p>
-                    <img src="{% static 'images/projectcreate/style/wave.jpg' %}" class="img-fluid" alt="">
+                    <p>AI Canvasが画像を変換します</p>
+                    <img src="{% static 'images/site/assets/out.jpg' %}" class="img-fluid" alt="">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col text-right mt-4">
-                    <a href="" class="btn btn-deep-purple">創造の世界を体験する</a>
+                    <a href="{% url 'app:projects_create' %}" class="btn btn-deep-purple">創造の世界を体験する</a>
                 </div>
-
             </div>
 
         </div>
@@ -67,27 +67,59 @@
                 </div>
 
             </div>
+
             <div class="row">
+                {% for project in projects %}
                 <div class="col-4 mb-3">
-                    <img src="{% static 'images/projectcreate/style/wave.jpg' %}" class="img-fluid" alt="">
-                </div>
-                <div class="col-4 mb-3">
-                    <img src="{% static 'images/projectcreate/style/wave.jpg' %}" class="img-fluid" alt="">
-                </div>
-                <div class="col-4 mb-3">
-                    <img src="{% static 'images/projectcreate/style/wave.jpg' %}" class="img-fluid" alt="">
-                </div>
 
-                <div class="col-4">
-                    <img src="{% static 'images/projectcreate/style/wave.jpg' %}" class="img-fluid" alt="">
-                </div>
-                <div class="col-4">
-                    <img src="{% static 'images/projectcreate/style/wave.jpg' %}" class="img-fluid" alt="">
-                </div>
-                <div class="col-4">
-                    <img src="{% static 'images/projectcreate/style/wave.jpg' %}" class="img-fluid" alt="">
-                </div>
 
+                    <!-- Card -->
+                    <div class="card  mb-3">
+
+                        <!-- Card image -->
+                        <div class="view overlay">
+                            <img class="card-img-top " src="{{ project.outputimagepath }}" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask waves-effect rgba-white-slight"></div>
+                            </a>
+                        </div>
+
+                        <!-- Card content -->
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-3">
+                                    <img src="{{ project.user.profile.profileimage.url }}" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-9">
+                                    <p>@{{ project.user.username }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <!-- Title -->
+                                    <h4 class="card-title">Card title</h4>
+                                    <!-- Text -->
+                                    <p class="card-text">Some quick example text to build on the
+                                        card title and make up the bulk of the card's content.
+                                    </p>
+                                    <!-- Button -->
+                                    <a href="{% url 'app:projects_detail' project.id %}"
+                                        class="btn btn-primary">Button</a>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <!-- Card -->
+
+
+
+                </div>
+                {% endfor %}
             </div>
 
             <div class="row mb-3">
@@ -101,13 +133,6 @@
     </div>
 </div>
 <!--box-->
-<div class="box box4">
-    <div class="row">
-        <div class="col">
-            <h2>保存</h2>
-        </div>
-    </div>
-</div>
 
 
 {% endblock %}

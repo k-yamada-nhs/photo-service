@@ -18,7 +18,9 @@ from django.db.models import Q
 
 # トップ
 def index(request):
-    return render(request, 'app/index.html')
+
+    projects = Photo.objects.all()
+    return render(request, 'app/index.html', {'projects': projects})
 
 # プロジェクト作成
 @login_required

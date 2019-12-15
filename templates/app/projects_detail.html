@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 {% block content %}
 
-<div class="container-fluid">
+<div class="box box1">
     <div class="row" style="height: 100vh;">
         <div class="col-11 mt-4 mx-auto">
             <div class="row">
@@ -59,8 +59,8 @@
 
                     <!-- 作品タイトル -->
                     <div class="row">
-                        <div class="col">
-                            <p>{{ project.title }}</p>
+                        <div class="col mt-3">
+                            <h3 class="text-left">{{ project.title }}</h3>
                         </div>
                     </div>
 
@@ -93,21 +93,21 @@
                     <div class="row">
                         <div class="col-3 mx-auto">
 
-                            <a href="{% url 'app:like' project.id %}"><i class="far fa-heart" data-toggle="tooltip"
-                                    data-placement="top" title="いいね"></i></a>
+                            <a href="{% url 'app:like' project.id %}"><i class="far fa-heart text-dark"
+                                    data-toggle="tooltip" data-placement="top" title="いいね"></i></a>
                         </div>
                         <div class="col-3 mx-auto">
 
-                            <a href="#"><i class="far fa-comment-dots" id="comment-btn" data-toggle="modal"
+                            <a href="#"><i class="far fa-comment-dots text-dark" id="comment-btn" data-toggle="modal"
                                     data-target="#commentModal"></i></a>
 
                         </div>
                         <div class="col-3 mx-auto">
-                            <a href="#"><i class="fas fa-share-alt"></i></a>
+                            <a href="#"><i class="fas fa-share-alt  text-dark"></i></a>
                         </div>
                         <div class="col-3 mx-auto">
-                            <a href="#"><i class="fas fa-map-marked-alt" data-toggle="tooltip" data-placement="top"
-                                    title="マップへ移動"></i></a>
+                            <a href="#"><i class="fas fa-map-marked-alt  text-dark " data-toggle="tooltip"
+                                    data-placement="top" title="マップへ移動"></i></a>
                         </div>
 
                     </div>
@@ -126,7 +126,7 @@
                             <!-- 作品へのコメント -->
                             {% for c in cmnt %}
                             <div>
-                                <p class="text-break">@{{ c.user.username }} {{ c.text }}(返信)</p>
+                                <p>@{{ c.user.username }} {{ c.text }}(返信)</p>
                             </div>
                             {% endfor %}
 
@@ -156,7 +156,9 @@
 
                 <form action='{% url "app:comment_ajax" project.id %}' method="POST" id="formdatas">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">コメント</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">コメント<i
+                                class="far fa-comment-dots text-dark ml-2"></i>
+                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -164,7 +166,7 @@
                     <div class="modal-body">
                         {% csrf_token %}
                         <div class="form-group">
-                            {{ commentform.text|add_class:"form-control" }}
+                            {{ commentform.text|add_class:"form-control"|attr:"placeholder:コメントを入力してください" }}
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -205,8 +207,6 @@
     </div><!-- /.modal -->
 
 </div>
-
-
 
 {% endblock %}
 {% block extrajs %}
