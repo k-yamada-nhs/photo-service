@@ -59,13 +59,10 @@
                                 <input class="form-control mr-sm-2" autocomplete="off" name="title" type="text"
                                     placeholder="Search" aria-label="Search">
                             </div>
-                            <!-- <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button> -->
+
+                            <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
+
                         </form>
-
-                        <!-- 検索 -->
-                        <li class="nav-item">
-
-                        </li>
 
                         <!-- 通知 -->
                         <li class="nav-item">
@@ -80,34 +77,30 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-user"></i>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-secondary"
-                                aria-labelledby="navbarDropdownMenuLink-55">
-                                <a class="dropdown-item waves-effect waves-light" href="#">@{{ user.username }}</a>
+
+                            <div class="dropdown-menu dropdown-menu-right p-2">
+                                <p class="dropdown-header">@{{ user.username }}</p>
                                 <a class="dropdown-item waves-effect waves-light"
                                     href="{% url 'app:users_detail' request.user.id %}"><i
-                                        class="fas fa-user mr-2"></i>マイページ</a>
+                                        class="fas fa-user mr-2 text-dark"></i>マイページ</a>
                                 <a class="dropdown-item waves-effect waves-light" href="#"><i
-                                        class="fas fa-user-cog mr-2"></i>アカウント設定</a>
+                                        class="fas fa-user-cog mr-2 text-dark"></i>アカウント設定</a>
                                 <a class="dropdown-item waves-effect waves-light" href="{% url 'accounts:logout' %}"><i
-                                        class="fas fa-sign-out-alt mr-2"></i>ログアウト</a>
+                                        class="fas fa-sign-out-alt mr-2 text-dark"></i>ログアウト</a>
                             </div>
                         </li>
 
                         {% else %}
                         <!-- ログインしてない -->
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-user mr-2"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{% url 'accounts:login' %}"><i
-                                        class="fas fa-sign-in-alt mr-2"></i>ログイン</a>
-                                <a class="dropdown-item" href="{% url 'accounts:signup' %}"><i
-                                        class="fas fa-user-plus mr-2"></i>サインアップ</a>
-                            </div>
-                        </li>
+                        <a href="{% url 'accounts:login' %}"
+                            class="btn btn-outline-white btn-md btn-rounded my-2 my-sm-0 ml-3">
+                            Log In
+                        </a>
+
+                        <a href="{% url 'accounts:signup' %}" class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3">
+                            Sign Up
+                        </a>
 
                         {% endif %}
                     </ul>

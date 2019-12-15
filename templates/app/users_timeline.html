@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="container-fulid">
+
+
+<div class="box box1 peach-gradient">
     <div class="row">
         <div class="col-8 mx-auto">
 
@@ -17,14 +19,16 @@
 
             </div>
         </div>
-
     </div>
-    {% endblock %}
+</div>
 
 
-    {% block extrajs %}
+{% endblock %}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-    <script>new WOW().init();</script>
 
-    {% endblock %}
+{% block extrajs %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script>new WOW().init();</script>
+
+{% endblock %}

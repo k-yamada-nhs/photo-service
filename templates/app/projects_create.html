@@ -3,21 +3,27 @@
 {% load static %}
 {% block content %}
 
-<div class="box box1 pink lighten-4">
-    <div class="row">
-        <div class="col-8 mx-auto">
-            <p>画像を選択</p>
-            <p id="selected_base">ベース</p>
-            <img src="{% static 'images/site/assets/easel.png' %}" height="600px" class="mx-auto d-block" alt="">
-
-        </div>
-    </div>
-
+<div class="box box1">
     <div class="row">
         <div class="col">
-            <img src="{% static 'images/projectcreate/base/base05.jpg' %}" width="100px" class="base" name="base01">
+            <h2 class="text-center">画像を選択してください</h2 class="text-center">
+            <p id="selected_base">ベース</p>
         </div>
     </div>
+
+    <!-- <div class="row">
+        <div class="col-10 mx-auto">
+            <div class="bases">
+                <ul>
+                    <li><img src="{% static 'images/projectcreate/base/base01.jpg' %}" width="700px" /></li>
+                    <li><img src="{% static 'images/projectcreate/base/base02.jpg' %}" width="700px" /></li>
+                    <li><img src="{% static 'images/projectcreate/base/base03.jpg' %}" width="700px" /></li>
+                    <li><img src="{% static 'images/projectcreate/base/base04.jpg' %}" width="700px" /></li>
+
+                </ul>
+            </div>
+        </div>
+    </div> -->
 </div>
 <!--box-->
 <div class="box box2">
@@ -27,35 +33,54 @@
 
             <div class="row">
                 <div class="col">
-                    <p>スタイルを選択</p>
+                    <h2 class="text-center">スタイルを選択してください</h2 class="text-center">
                     <p id="style_no">スタイル</p>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-4 mb-3">
+                <div class="col-4 mb-3 view overlay">
                     <img src="{% static 'images/projectcreate/style/wave.jpg' %}"
                         class="img-fluid z-depth-4 select_style" name="wave" alt="">
+                    <div class="mask flex-center waves-effect waves-light rgba-black-strong">
+                        <p class="white-text">神奈川沖浪裏<br>葛飾北斎</p>
+
+                    </div>
                 </div>
-                <div class="col-4 mb-3">
+                <div class="col-4 mb-3 view overlay">
                     <img src="{% static 'images/projectcreate/style/udnie.jpg' %}"
                         class="img-fluid z-depth-4 select_style" name="udnie" alt="">
+                    <div class="mask flex-center waves-effect waves-light rgba-black-strong">
+                        <p class="white-text">Udnie</p>
+                    </div>
                 </div>
-                <div class="col-4 mb-3">
+                <div class="col-4 mb-3 view overlay">
                     <img src="{% static 'images/projectcreate/style/wreck.jpg' %}"
                         class="img-fluid z-depth-4 select_style" name="wreck" alt="">
+                    <div class="mask flex-center waves-effect waves-light rgba-black-strong">
+                        <p class="white-text">Wreck</p>
+                    </div>
                 </div>
-                <div class="col-4 mb-3">
+                <div class="col-4 mb-3 view overlay">
                     <img src="{% static 'images/projectcreate/style/la_muse.jpg' %}"
                         class="img-fluid z-depth-4 select_style" name="la_muse" alt="">
+                    <div class="mask flex-center waves-effect waves-light rgba-black-strong">
+                        <p class="white-text">La_mse</p>
+                    </div>
                 </div>
-                <div class="col-4 mb-3">
+                <div class="col-4 mb-3 view overlay">
                     <img src="{% static 'images/projectcreate/style/scream.jpg' %}"
                         class="img-fluid z-depth-4 select_style" name="scream" alt="">
+                    <div class="mask flex-center waves-effect waves-light rgba-black-strong">
+                        <p class="white-text">The Scream<br>Edvard Munch</p>
+                    </div>
                 </div>
-                <div class="col-4 mb-3">
+                <div class="col-4 mb-3 view overlay">
                     <img src="{% static 'images/projectcreate/style/rain_princess.jpg' %}"
                         class="img-fluid z-depth-4 select_style" name="rain_princess" alt="">
+                    <div class="mask flex-center waves-effect waves-light rgba-black-strong">
+                        <p class="white-text">Strong overlay</p>
+                    </div>
                 </div>
             </div>
             <button type="button" id="style_change_btn" class="btn rounded-pill btn-amber"><i
@@ -70,7 +95,12 @@
         <div class="col-8 mx-auto">
             <div class="row">
                 <div class="col">
-                    <p>AIが生成した絵</p>
+                    <h2 class="text-center">AIが生成した絵</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+
                     <p id="base">base</p>
                     <p id="style">style</p>
                     <p id="out">out</p>
@@ -81,9 +111,6 @@
                 <div class="col mx-auto mt-5 mb-5">
                     <div class="relative mx-auto">
                         <img src="" alt="" width="800px" class="mx-auto d-block" id="base_area">
-
-                        <img src="{% static 'images/frame/frame.png' %}" class="absolute mx-auto d-block z-depth-4"
-                            width="800px" style="cursor: pointer;">
                     </div>
                 </div>
             </div>
@@ -95,291 +122,155 @@
 <div class="box box4">
     <div class="row">
         <div class="col-8 mx-auto">
-            <p>プロジェクトを保存する</p>
-            <form class="fm" id="fm2" name="fm_name" action="{% url 'app:projects_create' %}" method="POST"
-                enctype="multipart/form-data">
-                {% csrf_token %}
 
-                <div class="form-group">
-                    <label for="">タイトル</label>
-                    {{ form.title|add_class:"form-control" }}
-                </div>
-                <div class="form-group">
-                    <label for="">コメント</label>
-                    {{ form.comment|add_class:"form-control" }}
+            <div class="row">
+                <div class="col">
+                    <h2 class="text-center">作品にタイトルをつけてください
+                    </h2>
                 </div>
 
-                <div class="form-group">
-                    <label for="">緯度</label>
-                    {{ form.latitude|add_class:"form-control" }}
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <form class="fm" id="fm2" name="fm_name" action="{% url 'app:projects_create' %}" method="POST"
+                        enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label for="">タイトル</label>
+                            {{ form.title|add_class:"form-control" }}
+                        </div>
+                        <div class="form-group">
+                            <label for="">コメント</label>
+                            {{ form.comment|add_class:"form-control" }}
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-indigo" data-toggle="modal" data-target="#basicExampleModal"><i
+                                    class="fas fa-map-marker-alt"></i>位置情報を追加する</button>
+                            <p>※写真を撮影した場所を追加するとマップに反映されます</p>
+                        </div>
+
+                        <!-- <div class="form-group">
+                            <label for="">緯度</label>
+                            {{ form.latitude|add_class:"form-control" }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">経度</label>
+                            {{ form.longitude|add_class:"form-control" }}
+                        </div> -->
+
+                        <!-- hidden field -->
+                        {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                        {% endfor %}
+                        <button class="btn btn-purple btn-block my-4 waves-effect waves-light"
+                            type="submit">プロジェクトを保存する</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box box5">
+    <div class="row">
+        <div class="col-8 mx-auto">
+            <div class="row">
+                <div class="col">
+                    <h2 class="text-center">作品が完成しました！
+                    </h2>
+
                 </div>
 
-                <div class="form-group">
-                    <label for="">経度</label>
-                    {{ form.longitude|add_class:"form-control" }}
+            </div>
+
+            <div class="row">
+                <div class="col mx-auto mt-5 mb-5">
+                    <div class="mx-auto">
+                        <img src="" alt="" width="800px" class="mx-auto d-block" id="base_area">
+
+                        <img src="{% static 'images/frame/frame.png' %}" class="mx-auto d-block z-depth-4" width="800px"
+                            style="cursor: pointer;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col mx-auto">
+                    <p>
+                        プレート
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-right">
+                    <a href="{% url 'app:users_detail' request.user.id %}" class="btn btn-unique">マイページへ戻る</a>
                 </div>
 
-                <!-- hidden field -->
-                {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-                {% endfor %}
-                <button class="btn btn-primary btn-block my-4 waves-effect waves-light" type="submit">保存</button>
-            </form>
-
-            <p>位置情報(オプション)</p>
-            <div class="input-group">
-                <input type="text" id="address" class="form-control" placeholder="住所・施設名">
-                <span class="input-group-btn">
-                    <input class="btn btn-primary" type="button"
-                        onclick="attrLatLngFromAddress(document.getElementById('address').value)" value="検索">
-                </span>
             </div>
         </div>
     </div>
 </div>
 <!--box-->
 
-<div class="container-fulid">
-
-    <!-- ベース画像領域 -->
-    <div class="row" style="height: 100vh;">
-        <div class="col">
-
-            <!-- 額縁 -->
-            <div class="row">
-                <div class="col mx-auto mt-5 mb-5">
-                    <div class="relative mx-auto">
-                        <img src="" alt="" width="800px" class="mx-auto d-block" id="base_area">
-
-                        <img src="{% static 'images/frame/frame.png' %}" class="absolute mx-auto d-block z-depth-4"
-                            width="800px" style="cursor: pointer;">
-                    </div>
-                </div>
+<!-- Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">撮影場所の検索</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <div class="modal-body">
 
-            <!-- 作品プレート -->
-            <div class="row mt-5">
 
-                <div class="col-10 mx-auto">
-
-                    <!-- プレート -->
-                    <div class="row">
-                        <div class="col">
-                            <div class="z-depth-4" style="width: 400px; height: 150px;margin: 0 auto;">
-                                <h4 class="text-center">作品タイトル</h4>
-                                <hr>
-                                <p class="text-center">作者</p>
-                                <p class="text-center">(登録日~)</p>
-                            </div>
-                        </div>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input type="text" id="address" class="form-control form-control-lg" placeholder="住所・施設名">
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <p id="selected_base">ベース番号-></p>
-
-                            <p id="style_no">スタイル番号-></p>
+                    <button class="btn btn-amber" type="button"
+                        onclick="attrLatLngFromAddress(document.getElementById('address').value)">検索</button>
+                </form>
 
 
-                            <p>ajax response data</p>
-                            <p id="base"></p>
-                            <p id="style"></p>
-                            <p id="out"></p>
-                        </div>
-                    </div>
-                </div>
             </div>
-
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                <button type="button" class="btn btn-primary">場所を追加</button>
+            </div>
         </div>
 
     </div>
-
-
-
-    <!-- 画像選ぶ領域 -->
-    <div class="row" style="background-color: black;">
-
-        <div class="col">
-            <!-- <div class=" my-flipster">
-                <ul>
-
-                    <li><img src="{% static 'images/projectcreate/base/base02.jpg' %}" class="base" name="base05"></li>
-                    <li><img src="{% static 'images/projectcreate/base/base02.jpg' %}" class="base" name="base05"></li>
-                    <li><img src="{% static 'images/projectcreate/base/base02.jpg' %}" class="base" name="base05"></li>
-                    <li><img src="{% static 'images/projectcreate/base/base02.jpg' %}" class="base" name="base05"></li>
-                    <li><img src="{% static 'images/projectcreate/base/base02.jpg' %}" class="base" name="base05"></li>
-                    <li><img src="{% static 'images/projectcreate/base/base02.jpg' %}" class="base" name="base05"></li>
-
-
-                </ul>
-            </div> -->
-            <!-- タブ -->
-
-            <div class="contener select-img">
-
-                <nav class="row mx-auto tab-width">
-                    <div class="nav col-8 mx-auto tab-triangle-bg" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link col-6 tab tab-bg mx-auto active" id="nav-home-tab" data-toggle="tab"
-                            href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">ベース画像</a>
-                        <a class="nav-item nav-link col-6 tab tab-bg" id="nav-profile-tab" data-toggle="tab"
-                            href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">スタイル画像</a>
-                    </div>
-                </nav>
-
-
-                <div class="tab-content col-8 mx-auto" id="nav-tabContent">
-                    <div class="tab-pane active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <div class="triangle-space">
-                            <div class="triangle"></div>
-                        </div>
-
-                        <div class="user-list">
-
-                            <article id="demo-carousel" class="demo">
-                                <div id="carousel">
-                                    <ul class="flip-items">
-                                        <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/base/base05.jpg' %}" class="base"
-                                                name="base01">
-                                        </li>
-                                        <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/base/base02.jpg' %}" class="base"
-                                                name="base02">
-                                        </li>
-                                        <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/base/base03.jpg' %}" class="base"
-                                                name="base03">
-                                        </li>
-                                        <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/base/base04.jpg' %}" class="base"
-                                                name="base04">
-                                        </li>
-                                        <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/base/base05.jpg' %}" class="base"
-                                                name="base05">
-                                        </li>
-
-                                        <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/base/sen.jpg' %}" class="base"
-                                                name="base05">
-                                        </li>
-                                        <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/base/hito.jpg' %}" class="base"
-                                                name="base05">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-
-                        </div>
-
-                    </div>
-
-                    <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <div class="triangle-space2">
-                            <div class="triangle"></div>
-                        </div>
-
-                        <div class="user-list">
-
-                            <article id="demo-carousel" class="demo">
-                                <div id="carousel2">
-                                    <ul class="flip-items">
-                                        <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/style/la_muse.jpg' %}"
-                                                name="la_muse" class="select_style ">
-                                        </li>
-                                        <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/style/wave.jpg' %}" name="wave"
-                                                class="select_style">
-                                        </li>
-                                        <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/style/udnie.jpg' %}" name="udnie"
-                                                class="select_style">
-                                        </li>
-                                        <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/style/wreck.jpg' %}" name="wreck"
-                                                class="select_style">
-                                        </li>
-                                        <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/style/scream.jpg' %}"
-                                                name="scream" class="select_style">
-                                        </li>
-                                        <li class="img-trimming">
-                                            <img src="{% static 'images/projectcreate/style/rain_princess.jpg' %}"
-                                                name="rain_princess" class="select_style">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- col -->
-    </div>
-    <!-- row -->
-
-    <div class="row">
-        <div class="container">
-
-            <button type="button" id="style_change_btn" class="btn rounded-pill btn-amber"><i
-                    class="fas fa-th-list pr-2" aria-hidden="true"></i>スタイル変換</button>
-            <p id="id_div_ajax_response">
-                ajax response here
-            </p>
-
-            <!-- PhotoForm -->
-            <div class="col-8 mx-auto">
-
-
-                <p>位置情報(オプション)</p>
-                <div class="input-group">
-                    <input type="text" id="address" class="form-control" placeholder="住所・施設名">
-                    <span class="input-group-btn">
-                        <input class="btn btn-primary" type="button"
-                            onclick="attrLatLngFromAddress(document.getElementById('address').value)" value="検索">
-                    </span>
-                </div>
-            </div>
-
-            <div class="container-fulid">
-                <div class="modal" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p>画像処理中...</p>
-                                <div class="spinner-border text-primary" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
+</div>
+
 {% endblock %}
 {% block extrajs %}
 <script src="https://cdn.jsdelivr.net/npm/jquery-scrollify@1/jquery.scrollify.min.js"></script>
+<script src="{% static 'js/jquery.flipster.min.js' %}" type="text/javascript"></script>
+
 <script>
     $.scrollify({ section: ".box" });
 </script>
 
+<script>
+    $(document).ready(function () {
 
-<script src="{% static 'js/jquery.flipster.min.js' %}" type="text/javascript"></script>
+        $(".bases").flipster({
+            style: 'flat',
+            spacing: -0.25,
+            scrollwheel: false,
+            buttons: true,
+
+        });
+    });
+</script>
+
 <script>
     // 画像クリックでキャンパスに表示
     $(".base").click(function (event) {

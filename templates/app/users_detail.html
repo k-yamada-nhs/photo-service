@@ -20,12 +20,12 @@
                     <div class="row mx-auto">
                         <!-- ユーザプロフィール -->
                         <div class="col">
-                            <p class="mx-auto">@{{ user.username }}</p>
-                            <p class="mx-auto">H431公式アカウント</p>
+                            <h4 class="text-center m-3">@{{ user.username }}</h4>
 
                             <!-- 自分じゃなくてフォローしてない人 -->
                             {% if request.user != user %}
-                            <a class="btn btn-outline-primary" href="#">フォローする</a>
+                            <a class="btn btn-sm btn-outline-primary w-100 mx-auto" href="#"><i
+                                    class="fas fa-plus"></i>フォローする</a>
                             {% endif %}
 
                             <p>{{ user.profile.comment }}</p>
@@ -33,20 +33,19 @@
                             <!-- ログインユーザーだけの機能 -->
                             {% if request.user == user %}
 
-                            <!-- 切り替えボタンの設定 -->
+                            <!-- 設定 -->
                             <button type="button" class="btn btn-secondary w-100 mx-auto">
                                 <i class="fas fa-cog mr-2"></i>設定
                             </button>
 
                             <!-- 創造ボタン -->
-                            <a class="btn btn-info w-100 mx-auto" href="{% url 'app:projects_create' %}"><i
+                            <a class="btn btn-amber w-100 mx-auto" href="{% url 'app:projects_create' %}"><i
                                     class="fas fa-palette mr-2"></i>創造する</a>
 
                             {% endif %}
 
-
                         </div>
-                    </div><!-- ユーザプロフィール -->
+                    </div>
 
 
                 </div>
@@ -57,174 +56,245 @@
                         <div class="col-12">
                             <!-- ヘッダー画像 -->
                             <img src="{% static 'images/header01.jpg' %}" alt="ヘッダー画像" width="100%" class="img-fluid">
-                        </div><!-- ヘッダー画像 -->
-                        <div class="col-12 menutab">
+                        </div>
+                        <div class="col-12 mt-3">
                             <!-- タブ -->
-                            <nav class="row mx-auto tab-width">
-                                <div class="nav col-12 mx-auto tab-triangle-bg" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link col-4 tab tab-bg mx-auto active" id="nav-home-tab"
-                                        data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"
+                            <ul class="nav nav-tabs nav-justified mb-3" id="myTab" role="tablist">
+                                <!-- ギャラリー -->
+                                <li class="nav-item">
+                                    <a class="text-dark nav-link active" id="home-tab" data-toggle="tab" href="#home"
+                                        role="tab" aria-controls="home"
                                         aria-selected="true">Gallery({{ projects.count }})</a>
-                                    <a class="nav-item nav-link col-4 tab tab-bg" id="nav-profile-tab" data-toggle="tab"
-                                        href="#nav-profile" role="tab" aria-controls="nav-profile"
-                                        aria-selected="false">follower({{ followers.count }})</a>
-                                    <a class="nav-item nav-link col-4 tab tab-bg" id="nav-contact-tab" data-toggle="tab"
-                                        href="#nav-contact" role="tab" aria-controls="nav-contact"
-                                        aria-selected="false">follow({{ follows.count }})</a>
-                                </div>
-                            </nav>
+                                </li>
+                                <!-- フォロー -->
+                                <li class="nav-item">
+                                    <a class="text-dark nav-link" id="profile-tab" data-toggle="tab" href="#profile"
+                                        role="tab" aria-controls="profile"
+                                        aria-selected="false">Follow({{ follows.count }})</a>
+                                </li>
+                                <!-- フォロワー -->
+                                <li class="nav-item">
+                                    <a class="text-dark nav-link" id="contact-tab" data-toggle="tab" href="#contact"
+                                        role="tab" aria-controls="contact"
+                                        aria-selected="false">Follower({{ followers.count }})</a>
+                                </li>
+                                <!-- タイムライン -->
+                                <li class="nav-item">
+                                    <a class="text-dark nav-link" id="timeline-tab" data-toggle="tab" href="#timeline"
+                                        role="tab" aria-controls="timeline" aria-selected="false">Timeline</a>
+                                </li>
 
-                            <div class="tab-content col-12 mx-auto" id="nav-tabContent">
-                                <div class="tab-pane active" id="nav-home" role="tabpanel"
-                                    aria-labelledby="nav-home-tab">
-                                    <div class="triangle-space">
-                                        <div class="triangle"></div>
+                                <!-- いいねした -->
+                                <li class="nav-item">
+                                    <a class="text-dark nav-link" id="timeline-tab" data-toggle="tab" href="#timeline"
+                                        role="tab" aria-controls="timeline" aria-selected="false">Liked</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                    aria-labelledby="home-tab">
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <!-- message -->
+                                            {% if messages %}
+                                            <ul class="messages_ul">
+                                                {% for message in messages %}
+                                                <li class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible"
+                                                    role="alert"><button type="button" class="close"
+                                                        data-dismiss="alert" aria-label="Close"><span
+                                                            aria-hidden="true">&times;</span></button>{{ message }}
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                            {% endif %}
+                                        </div>
                                     </div>
 
-                                    <div class="d-flex justify-content-between user-list">
-                                        <!-- home -->
-                                        <div class="album">
-                                            <div class="container">
-                                                <!-- message -->
-                                                {% if messages %}
-                                                <ul class="messages_ul">
-                                                    {% for message in messages %}
-                                                    <li class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible"
-                                                        role="alert"><button type="button" class="close"
-                                                            data-dismiss="alert" aria-label="Close"><span
-                                                                aria-hidden="true">&times;</span></button>{{ message }}
-                                                    </li>
-                                                    {% endfor %}
-                                                </ul>
-                                                {% endif %}
-                                                <div class="row">
+                                    <div class="row">
 
-                                                    {% for project in projects %}
-                                                    <div class="col-md-4">
+                                        {% for project in projects %}
+                                        <div class="col-4">
 
-                                                        <!-- Card -->
-                                                        <div class="card mb-3">
+                                            <!-- Card -->
+                                            <div class="card mb-3">
 
-                                                            <!-- Card image --><a
-                                                                href="{% url 'app:projects_detail' project.id %}"><img
-                                                                    class="card-img-top"
-                                                                    src="{{ project.outputimagepath }}"
-                                                                    alt="Card image cap">
-                                                            </a>
+                                                <!-- Card image -->
+                                                <div class="view overlay">
+                                                    <img class="card-img-top " src="{{ project.outputimagepath }}"
+                                                        alt="Card image cap">
+                                                    <a href="{% url 'app:projects_detail' project.id %}">
+                                                        <div class="mask waves-effect rgba-white-slight"></div>
+                                                    </a>
+                                                </div>
 
-                                                            <!-- Card content -->
-                                                            <div class="card-body">
+                                                <!-- Card content -->
+                                                <div class="card-body">
 
-                                                                <!-- Title -->
-                                                                <h4 class="card-title"><a>Card title</a></h4>
-                                                                <!-- Text -->
-                                                                <p class="card-text">Some quick example text to build on
-                                                                    the card title and make up the bulk of the card's
-                                                                    content.</p>
+                                                    <!-- Title -->
+                                                    <h4 class="card-title"><a>Card title</a></h4>
+                                                    <!-- Text -->
+                                                    <p class="card-text">Some quick example text to build on
+                                                        the card title and make up the bulk of the card's
+                                                        content.</p>
 
-                                                            </div>
+                                                </div>
 
-                                                            <!-- Card footer -->
-                                                            <div class="card-footer text-muted text-center">
-                                                                <i class="far fa-heart"></i> 100
-                                                                <i class="far fa-comment-dots"></i> 100
-                                                            </div>
+                                                <!-- Card footer -->
+                                                <div class="card-footer text-muted text-right">
+                                                    <i class="far fa-heart mr-2"></i>100
+                                                    <i class="far fa-comments"></i>100
+                                                </div>
 
+                                            </div>
+                                            <!-- Card -->
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                                    <div class="row">
+
+                                        <!-- follow -->
+                                        {% for follow in follows %}
+                                        <div class="col-6">
+                                            <div class="row m-1 rounded z-depth-3">
+                                                <div class="col-3">
+                                                    <img class="rounded img-fluid"
+                                                        src="{{ follow.follower.profile.profileimage.url }}"
+                                                        alt="ユーザアイコン">
+                                                </div>
+                                                <div class="col-9">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <a class="text-dark"
+                                                                href="{% url 'app:users_detail' follow.follower.id %}">{{ follow.follower.username }}</a>
                                                         </div>
-                                                        <!-- Card -->
-
-
-                                                        <!-- <div class="card mb-4 box-shadow">
-                                                            <a href="{% url 'app:projects_detail' project.id %}"> <img
-                                                                    class="card-img-top"
-                                                                    src="{{ project.outputimagepath }}"
-                                                                    alt="Galleryimages"></a>
-                                                        </div> -->
                                                     </div>
-                                                    {% endfor %}
-
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <a class="btn btn-primary btn-sm" href="#">フォローしています</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <p>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。実際に使用する際は、文章をカスタマイズしてください。
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div><!-- user-list follow-->
-                                </div><!-- tab content -->
-
-                                <div class="tab-pane" id="nav-profile" role="tabpanel"
-                                    aria-labelledby="nav-profile-tab">
-                                    <div class="triangle-space2">
-                                        <div class="triangle"></div>
+                                        {% endfor %}
                                     </div>
 
-                                    <div class="d-flex justify-content-between user-list">
+                                </div>
+                                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
+                                    <div class="row">
                                         <!-- follower -->
                                         {% for follower in followers %}
-                                        <div class="col-md-6">
-                                            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-                                                <img class="card-img-right flex-auto d-none d-lg-block card-img"
-                                                    src="{{ follower.follow.profile.profileimage.url }}" alt="ユーザアイコン">
-                                                <div class="card-body d-flex flex-column align-items-start">
-                                                    <h3 class="mb-0">
-                                                        <a class="mr-3 text-dark"
-                                                            href="{% url 'app:users_detail' follower.follow.id %}">{{ follower.follow.username }}</a>
-                                                        <a class="btn btn-outline-primary btn-follow"
-                                                            href="#">フォローする</a>
-                                                    </h3>
-                                                    <div class="d-flex w-100 mt-2">
-                                                        <div class="mb-1 text-muted mr-3">{{ follower.follow.username }}
+                                        <div class="col-6">
+                                            <div class="row  row m-1 rounded z-depth-3">
+                                                <div class="col-3">
+                                                    <img class="rounded img-fluid"
+                                                        src="{{ follower.follow.profile.profileimage.url }}"
+                                                        alt="ユーザアイコン">
+                                                </div>
+                                                <div class="col-9">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <a
+                                                                href="{% url 'app:users_detail' follower.follow.id %}">{{ follower.follow.username }}</a>
                                                         </div>
-                                                        <div class="mb-1 mt-1 text-muted follow-mark">フォローされています</div>
                                                     </div>
-                                                    <p class="card-text mb-auto">
-                                                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。実際に使用する際は、文章をカスタマイズしてください。
-                                                    </p>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <a class="btn btn-outline-primary btn-sm"
+                                                                href="#">フォローする</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <p>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。実際に使用する際は、文章をカスタマイズしてください。
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         {% endfor %}
-
                                     </div>
+
                                 </div>
 
-                                <div class="tab-pane" id="nav-contact" role="tabpanel"
-                                    aria-labelledby="nav-contact-tab">
-                                    <div class="triangle-space3">
-                                        <div class="triangle"></div>
-                                    </div>
+                                <div class="tab-pane fade" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
 
-                                    <div class="d-flex justify-content-between user-list">
+                                    <div class="row">
+                                        {% for project in projects %}
+                                        <div class="col-4">
 
-                                        <!-- user-list follow-->
-                                        {% for follow in follows %}
-                                        <div class="col-md-6">
-                                            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-                                                <img class="card-img-right flex-auto d-none d-lg-block card-img"
-                                                    src="{{ follow.follower.profile.profileimage.url }}" alt="ユーザアイコン">
-                                                <div class="card-body d-flex flex-column align-items-start">
-                                                    <h3 class="mb-0">
-                                                        <a class="mr-3 text-dark"
-                                                            href="{% url 'app:users_detail' follow.follower.id %}">{{ follow.follower.username }}</a>
-                                                        <a class="btn btn-primary btn-follow" href="#">フォロー中</a>
-                                                    </h3>
-                                                    <div class="d-flex w-100 mt-2">
-                                                        <div class="mb-1 text-muted mr-3">{{ follow.follower.username }}
-                                                        </div>
-                                                        <div class="mb-1 mt-1 text-muted follow-mark">フォローされています</div>
-                                                    </div>
-                                                    <p class="card-text mb-auto">
-                                                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。実際に使用する際は、文章をカスタマイズしてください。
-                                                    </p>
+
+                                            <!-- Card -->
+                                            <div class="card  mb-3">
+
+                                                <!-- Card image -->
+                                                <div class="view overlay">
+                                                    <img class="card-img-top" src="{{ project.outputimagepath }}"
+                                                        alt="Card image cap">
+                                                    <a href="#!">
+                                                        <div class="mask rgba-white-slight"></div>
+                                                    </a>
                                                 </div>
+
+                                                <!-- Card content -->
+                                                <div class="card-body">
+
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <img src="{{ project.user.profile.profileimage.url }}"
+                                                                class="img-fluid" alt="">
+                                                        </div>
+                                                        <div class="col-9">
+                                                            <p>@{{ project.user.username }}</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <!-- Title -->
+                                                            <h4 class="card-title">Card title</h4>
+                                                            <!-- Text -->
+                                                            <p class="card-text">Some quick example text to build on the
+                                                                card title and make up the bulk of the card's content.
+                                                            </p>
+                                                            <!-- Button -->
+                                                            <a href="{% url 'app:projects_detail' project.id %}"
+                                                                class="btn btn-primary">Button</a>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
                                             </div>
+                                            <!-- Card -->
+
+
+
                                         </div>
                                         {% endfor %}
-
                                     </div>
+
+
                                 </div>
+
                             </div>
-                        </div><!-- タブ -->
+                        </div>
                     </div>
-                </div><!-- 右側 -->
+                </div>
             </div>
         </div>
     </div>
