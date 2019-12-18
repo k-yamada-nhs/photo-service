@@ -4,7 +4,8 @@
 <div class="box box1">
     <div class="row" id="index_bg" style="height: 100%;">
         <div class="col text-center">
-            <p class="display-4 text-light index_text" style="margin-top: 100px;">AI Camvas example text example text
+            <p class="display-4 text-light index_text" style="margin-top: 100px; text-align: center;">
+                AI Camvas example text example text
             </p>
             <a href="{% url 'app:projects_create' %}" class="btn btn-elegant btn-lg"
                 style="margin-top: 100px;">創造の世界を体験する</a>
@@ -17,7 +18,7 @@
 
             <div class="row">
                 <div class="col">
-                    <h2>AI Canvasの使い方</h2>
+                    <h4>AI Canvasの使い方</h4>
                     <p>
                         説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト
                     </p>
@@ -26,20 +27,20 @@
             </div>
             <div class="row">
                 <div class="col-4">
-                    <h3>1</h3>
-                    <p>画像を選択します</p>
+                    <h4>1.画像を選択します</h4>
+
                     <img src="{% static 'images/site/assets/base.jpg' %}" style="object-fit: cover; height: 400px;"
                         class="img-fluid z-depth-3 rounded" alt="">
                 </div>
                 <div class="col-4">
-                    <h3>2</h3>
-                    <p>スタイルを選択します</p>
+                    <h3>2.スタイルを選択します</h3>
+
                     <img src="{% static 'images/projectcreate/style/wave.jpg' %}"
                         style="object-fit: cover; height: 400px;" class="img-fluid z-depth-3 rounded" alt="">
                 </div>
                 <div class="col-4">
-                    <h3>3</h3>
-                    <p>AI Canvasが画像を変換します</p>
+                    <h4>3.AI Canvasが画像を変換します</h4>
+
                     <img src="{% static 'images/site/assets/out.jpg' %}" style="object-fit: cover; height: 400px;"
                         class="img-fluid z-depth-3 rounded" alt="">
                 </div>
@@ -151,7 +152,7 @@
             //繰り返し
             loop: true,
             // アニメーションの間隔時間
-            minDisplayTime: 300,
+            minDisplayTime: 1000,
             // アニメーション開始までの遅延時間
             initialDelay: 0,
             // アニメーションの自動スタート
@@ -160,7 +161,7 @@
             // 開始時のアニメーション設定
             in: {
                 // エフェクトの指定
-                effect: 'flipInY',
+                effect: 'fadeInLeftBig',
                 // 遅延時間の指数
                 delayScale: 1.5,
                 // 文字ごとの遅延時間

@@ -163,20 +163,20 @@
                         {% csrf_token %}
 
                         <div class="form-group">
-                            <label for="">タイトル</label>
-                            {{ form.title|add_class:"form-control" }}
+                            {{ form.title|add_class:"form-control"|attr:"placeholder:タイトル" }}
                         </div>
                         <div class="form-group">
-                            <label for="">コメント</label>
-                            {{ form.comment|add_class:"form-control" }}
+                            {{ form.comment|add_class:"form-control"|attr:"placeholder:コメント" }}
                         </div>
 
                         <div class="form-group">
-                            <button class="btn btn-indigo" data-toggle="modal" data-target="#basicExampleModal"><i
+                            <button onclick="loadModal();return false;" class="btn btn-indigo"><i
                                     class="fas fa-map-marker-alt"></i>位置情報を追加する</button>
                             <p>※写真を撮影した場所を追加するとマップに反映されます</p>
                         </div>
 
+                        <p id="latitude">緯度</p>
+                        <p id="longitude">経度</p>
                         <!-- <div class="form-group">
                             <label for="">緯度</label>
                             {{ form.latitude|add_class:"form-control" }}
@@ -282,6 +282,14 @@
     $.scrollify({ section: ".box" });
 </script>
 
+<!-- モーダル -->
+<script>
+    function loadModal() {
+        $('#basicExampleModal').modal('show');
+    };
+</script>
+
+<!-- flipster -->
 <script>
     $(document).ready(function () {
 
@@ -324,11 +332,15 @@
                 var lat = results[0].geometry.location.lat();
                 var lng = results[0].geometry.location.lng();
 
-                $('#id_latitude').val('');
-                $('#id_longitude').val('');
+                $('#latitude').text('');
+                $('#longitude').text('');
+
+                console.log(lat);
+                console.log(lng);
                 //domに追加
-                $('#id_latitude').val(lat);
-                $('#id_longitude').val(lng);
+
+                $('#latitude').text(lat);
+                $('#longitude').text(lng);
 
 
             } else {

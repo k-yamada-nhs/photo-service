@@ -114,7 +114,8 @@
                                     <div class="row">
 
                                         {% for project in projects %}
-                                        <div class="col-4">
+                                        <div class="col-4 wow bounceIn" data-wow-offset='5' data-wow-duration='2s'
+                                            data-wow-delay='1s'>
 
                                             <!-- Card -->
                                             <div class="card mb-3">
@@ -134,9 +135,7 @@
                                                     <!-- Title -->
                                                     <h4 class="card-title"><a>Card title</a></h4>
                                                     <!-- Text -->
-                                                    <p class="card-text">Some quick example text to build on
-                                                        the card title and make up the bulk of the card's
-                                                        content.</p>
+                                                    <p class="card-text">{{ project.comment }}</p>
 
                                                 </div>
 
@@ -299,4 +298,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+{% block extrajs %}
+<script>new WOW().init();</script>
+
 {% endblock %}
