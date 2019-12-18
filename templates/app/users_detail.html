@@ -98,15 +98,15 @@
                                         <div class="col">
                                             <!-- message -->
                                             {% if messages %}
-                                            <ul class="messages_ul">
-                                                {% for message in messages %}
-                                                <li class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible"
-                                                    role="alert"><button type="button" class="close"
-                                                        data-dismiss="alert" aria-label="Close"><span
-                                                            aria-hidden="true">&times;</span></button>{{ message }}
-                                                </li>
-                                                {% endfor %}
-                                            </ul>
+
+                                            {% for message in messages %}
+                                            <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible"
+                                                role="alert"><button type="button" class="close" data-dismiss="alert"
+                                                    aria-label="Close"><span
+                                                        aria-hidden="true">&times;</span></button>{{ message }}
+                                            </div>
+                                            {% endfor %}
+
                                             {% endif %}
                                         </div>
                                     </div>

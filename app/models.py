@@ -16,9 +16,9 @@ class Photo(models.Model):
     # 出力
     outputimagepath = models.CharField(max_length=150)
     # 緯度
-    latitude = models.CharField(max_length=150, null=True)
+    latitude = models.CharField(max_length=150, null=True, blank=True)
     # 経度
-    longitude = models.CharField(max_length=150, null=True)
+    longitude = models.CharField(max_length=150, null=True, blank=True)
     # ユーザーインスタンスを削除した際投稿も削除
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # 作成日
