@@ -6,6 +6,9 @@
     top: 0;
     left: 0;
 }
+#plate{
+    background: linear-gradient(#F3E19F, #EDD176);
+}
 
 #area {
     /* make the body fits our viewport */
