@@ -4,11 +4,19 @@
 <div class="box box1">
     <div class="row" id="index_bg" style="height: 100%;">
         <div class="col text-center">
-            <p class="display-4 text-light index_text" style="margin-top: 100px; text-align: center;">
+            <p class="display-4 text-light index_text" style="margin-top: 100px;">
                 AI Camvas example text example text
             </p>
-            <a href="{% url 'app:projects_create' %}" class="btn btn-elegant btn-lg"
-                style="margin-top: 100px;">創造の世界を体験する</a>
+            <p class="text-light index_text2"
+                style="margin-top: 10px; margin-bottom: 0; font-size: 3rem; background-color: rgba(0,0,0,0.5);">
+                想像力で成長させろ！
+            </p>
+            <p class="text-light index_text2"
+                style="margin-top: 0; padding: 0;font-size: 3rem; background-color: rgba(0,0,0,0.5);">
+                AIが作り出す、夢にまで見たあの世界！
+            </p>
+            <a href="{% url 'app:projects_create' %}" class="btn btn-elegant btn-lg animated bounceInUp slow"
+                style="margin-top: 20px;">創造の世界を体験する</a>
         </div>
     </div>
 </div>
@@ -27,19 +35,19 @@
             </div>
             <div class="row">
                 <div class="col-4">
-                    <h4>1.画像を選択します</h4>
+                    <h4 class="indexh4">1.画像を選択します</h4 class="indexh4">
 
                     <img src="{% static 'images/site/assets/base.jpg' %}" style="object-fit: cover; height: 400px;"
                         class="img-fluid z-depth-3 rounded" alt="">
                 </div>
                 <div class="col-4">
-                    <h3>2.スタイルを選択します</h3>
+                    <h4 class="indexh4">2.スタイルを選択します</h4>
 
                     <img src="{% static 'images/projectcreate/style/wave.jpg' %}"
                         style="object-fit: cover; height: 400px;" class="img-fluid z-depth-3 rounded" alt="">
                 </div>
                 <div class="col-4">
-                    <h4>3.AI Canvasが画像を変換します</h4>
+                    <h4 class="indexh4">3.AIが画像を変換します</h4 class="indexh4">
 
                     <img src="{% static 'images/site/assets/out.jpg' %}" style="object-fit: cover; height: 400px;"
                         class="img-fluid z-depth-3 rounded" alt="">
@@ -83,7 +91,7 @@
                         <!-- Card image -->
                         <div class="view overlay">
                             <img class="card-img-top " src="{{ project.outputimagepath }}" alt="Card image cap">
-                            <a href="#!">
+                            <a href="{% url 'app:projects_detail' project.id %}">
                                 <div class="mask waves-effect rgba-white-slight"></div>
                             </a>
                         </div>
@@ -92,25 +100,23 @@
                         <div class="card-body">
 
                             <div class="row">
-                                <div class="col-3">
-                                    <img src="{{ project.user.profile.profileimage.url }}" class="img-fluid" alt="">
+                                <div class="col-3 mb-3">
+                                    <img src="{{ project.user.profile.profileimage.url }}"
+                                        class="img-fluid rounded-circle" alt="">
                                 </div>
                                 <div class="col-9">
-                                    <p>@{{ project.user.username }}</p>
+                                    <h6 class="tex-left">@{{ project.user.username }}</h6>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
                                     <!-- Title -->
-                                    <h4 class="card-title">Card title</h4>
+                                    <h4 class="card-title">{{ project.title }}</h4>
                                     <!-- Text -->
-                                    <p class="card-text">Some quick example text to build on the
-                                        card title and make up the bulk of the card's content.
+                                    <p class="card-text">{{ project.comment }}
                                     </p>
-                                    <!-- Button -->
-                                    <a href="{% url 'app:projects_detail' project.id %}"
-                                        class="btn btn-primary">Button</a>
+
                                 </div>
                             </div>
 
@@ -162,6 +168,39 @@
             in: {
                 // エフェクトの指定
                 effect: 'fadeInLeftBig',
+                // 遅延時間の指数
+                delayScale: 1.5,
+                // 文字ごとの遅延時間
+                delay: 50,
+                // true:アニメーションをすべての文字に同時適用
+                sync: false,
+
+            },
+
+            // 終了時のアニメーション設定
+            out: {
+                effect: 'hinge',
+                delayScale: 1.5,
+                delay: 50,
+                sync: false,
+                shuffle: false
+            }
+        });
+
+        $('.index_text2').textillate({
+            //繰り返し
+            loop: false,
+            // アニメーションの間隔時間
+            minDisplayTime: 1000,
+            // アニメーション開始までの遅延時間
+            initialDelay: 500,
+            // アニメーションの自動スタート
+            autoStart: true,
+
+            // 開始時のアニメーション設定
+            in: {
+                // エフェクトの指定
+                effect: 'fadeIn',
                 // 遅延時間の指数
                 delayScale: 1.5,
                 // 文字ごとの遅延時間
