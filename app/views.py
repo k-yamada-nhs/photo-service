@@ -19,7 +19,7 @@ from django.db.models import Q
 # トップ
 def index(request):
 
-    projects = Photo.objects.all()
+    projects = Photo.objects.all()[:6]
     return render(request, 'app/index.html', {'projects': projects})
 
 # プロジェクト作成
@@ -31,8 +31,12 @@ def projects_create(request):
             photo = form.save(commit=False)
             photo.user = request.user
             photo.save()
-            messages.success(request, "投稿が完了しました")
-            return redirect('app:users_detail', pk=request.user.pk)
+            #messages.success(request, "投稿が完了しました")
+            #return redirect('app:users_detail', pk=request.user.pk)
+            d = {
+                'msg': 'ok',
+            }
+            return JsonResponse(d)
     else:
         form = PhotoForm()
     return render(request, 'app/projects_create.html', {'form': form})
@@ -80,10 +84,11 @@ def users_timeline(request):
 
         # キーワード検索
         projects = Photo.objects.filter(title__icontains=keyword)
+        
     else:
         
         # 自分の作品とフォローしてる人の作品
-        projects = Photo.objects.filter(Q(user=request.user) | Q(user=request.user))
+        projects = Photo.objects.all()
     
     return render(request, 'app/users_timeline.html', {'projects': projects})
 

@@ -4,17 +4,25 @@
 
 
 <div class="box box1">
-    <div class="row mt-3" style="height: 100vh;">
+    <div class="row mt-3">
         <div class="col">
 
-            <div class="row" id="posts">
+            <div class="row">
 
+                {% if projects.count != 0 %}
                 {% for project in projects %}
                 <div style="margin: 0; padding: 0;" class='col-4 wow bounceIn' data-wow-offset='5'
                     data-wow-duration='2s' data-wow-delay='1s'><a href="{% url 'app:projects_detail' project.id %}"><img
-                            class="img-fluid" src='{{ project.outputimagepath }}' class='mx-auto m-4'></a>
+                            class="img-fluid" style="object-fit: cover; height: 400px;"
+                            src='{{ project.outputimagepath }}' class='mx-auto m-4'></a>
                 </div>
                 {% endfor %}
+                {% else %}
+                <div class="col">
+                    <p>作品が見つかりませんでした
+                    </p>
+                </div>
+                {% endif %}
 
             </div>
         </div>

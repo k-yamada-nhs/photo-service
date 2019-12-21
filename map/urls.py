@@ -1,6 +1,6 @@
-from django.conf.urls import url
+from django.urls import path
 from . import views
-app_name = "map"
+app_name = 'map'
 urlpatterns = [
-    url('', views.locationmap, name='locationmap'),
+    path('location/<int:pk>', views.locationmap, name='locationmap'),
 ]

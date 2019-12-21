@@ -1,39 +1,23 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ja">
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        html {
-            height: 100%
-        }
+<div class="container-fluid" style="margin: 0; padding: 0;">
+    <div id="map" style="width: 100%; height: 100vh;"></div>
+</div>
 
-        body {
-            height: 100%
-        }
+{% endblock %}
+{% block extrajs %}
+<script>
+    var mapicon = "{% static 'images/site/assets/camera.png' %}";
 
-        #map {
-            height: 100%;
-            width: 100%
-        }
-    </style>
-</head>
-
-<body>
-
-
-    <div id="map"></div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-
-        var projects = {
+    var map;
+    var marker = [];
+    var infoWindow = [];
+    var markerData = [
         {% for project in projects %}
-        "{{ project.id }}": {
+    {
+        "id": "{{ project.id }}",
             "title": "{{ project.title }}",
                 "comment": "{{ project.comment }}",
                     "outputimagepath": "{{ project.outputimagepath }}",
@@ -41,238 +25,232 @@
                             "longitude": "{{ project.longitude }}",
                                 "userid": "{{ project.user.id }}",
                                     "username": "{{ project.user.username }}",
-            },
-        {% endfor %}
-        };
+        },
+    {% endfor %}
+    ];
+    console.log(markerData);
 
-        console.log(projects);
-    </script>
+    function initMap() {
 
-    <script>
+        //地図の作成
+        var mapLatLng = new google.maps.LatLng(markerData[0]['latitude'], markerData[0]['longitude']);
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: mapLatLng,
+            styles: [{
+                "featureType": "administrative.country",
+                "elementType": "geometry.fill",
+                "stylers": [{
+                    "saturation": "7"
+                }, {
+                    "lightness": "15"
+                }]
+            }, {
+                "featureType": "administrative.province",
+                "elementType": "all",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            }, {
+                "featureType": "landscape",
+                "elementType": "all",
+                "stylers": [{
+                    "saturation": -100
+                }, {
+                    "lightness": 65
+                }, {
+                    "visibility": "on"
+                }]
+            }, {
+                "featureType": "landscape.man_made",
+                "elementType": "all",
+                "stylers": [{
+                    "visibility": "off"
+                }, {
+                    "saturation": "2"
+                }, {
+                    "lightness": "-65"
+                }]
+            }, {
+                "featureType": "landscape.natural",
+                "elementType": "all",
+                "stylers": [{
+                    "visibility": "simplified"
+                }]
+            }, {
+                "featureType": "poi",
+                "elementType": "all",
+                "stylers": [{
+                    "saturation": -100
+                }, {
+                    "lightness": 51
+                }, {
+                    "visibility": "off"
+                }]
+            }, {
+                "featureType": "poi.business",
+                "elementType": "all",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            }, {
+                "featureType": "poi.government",
+                "elementType": "all",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            }, {
+                "featureType": "poi.medical",
+                "elementType": "all",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            }, {
+                "featureType": "road",
+                "elementType": "geometry.fill",
+                "stylers": [{
+                    "visibility": "on"
+                }]
+            }, {
+                "featureType": "road",
+                "elementType": "labels",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            }, {
+                "featureType": "road",
+                "elementType": "labels.text.fill",
+                "stylers": [{
+                    "lightness": "-100"
+                }, {
+                    "saturation": "-100"
+                }, {
+                    "gamma": "0.00"
+                }, {
+                    "color": "#000000"
+                }]
+            }, {
+                "featureType": "road.highway",
+                "elementType": "all",
+                "stylers": [{
+                    "saturation": -100
+                }, {
+                    "visibility": "simplified"
+                }]
+            }, {
+                "featureType": "road.arterial",
+                "elementType": "all",
+                "stylers": [{
+                    "saturation": -100
+                }, {
+                    "lightness": 30
+                }, {
+                    "visibility": "on"
+                }]
+            }, {
+                "featureType": "road.local",
+                "elementType": "all",
+                "stylers": [{
+                    "saturation": -100
+                }, {
+                    "lightness": "4"
+                }, {
+                    "visibility": "on"
+                }]
+            }, {
+                "featureType": "transit",
+                "elementType": "all",
+                "stylers": [{
+                    "saturation": -100
+                }, {
+                    "visibility": "simplified"
+                }]
+            }, {
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [{
+                    "hue": "#ffff00"
+                }, {
+                    "lightness": -25
+                }, {
+                    "saturation": -97
+                }]
+            }, {
+                "featureType": "water",
+                "elementType": "labels",
+                "stylers": [{
+                    "visibility": "on"
+                }, {
+                    "lightness": -25
+                }, {
+                    "saturation": -100
+                }]
+            }],
+        });
 
-        function initMap() {
-            var latlng = new google.maps.LatLng(34.808502, 135.639683);//中心の緯度, 経度
-
-            var imgpath = "{% static 'images/udnie.jpg' %}";
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 10,//ズームの調整
-                center: latlng,//上で設定した中心
-                styles: [
-                    {
-                        "elementType": "labels",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            },
-                            {
-                                "color": "#f49f53"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "landscape",
-                        "stylers": [
-                            {
-                                "color": "#f9ddc5"
-                            },
-                            {
-                                "lightness": -7
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road",
-                        "stylers": [
-                            {
-                                "color": "#813033"
-                            },
-                            {
-                                "lightness": 43
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.business",
-                        "stylers": [
-                            {
-                                "color": "#645c20"
-                            },
-                            {
-                                "lightness": 38
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "water",
-                        "stylers": [
-                            {
-                                "color": "#1994bf"
-                            },
-                            {
-                                "saturation": -69
-                            },
-                            {
-                                "gamma": 0.99
-                            },
-                            {
-                                "lightness": 43
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road.local",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                            {
-                                "color": "#f19f53"
-                            },
-                            {
-                                "weight": 1.3
-                            },
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "lightness": 16
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.business"
-                    },
-                    {
-                        "featureType": "poi.park",
-                        "stylers": [
-                            {
-                                "color": "#645c20"
-                            },
-                            {
-                                "lightness": 39
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.school",
-                        "stylers": [
-                            {
-                                "color": "#a95521"
-                            },
-                            {
-                                "lightness": 35
-                            }
-                        ]
-                    },
-                    {},
-                    {
-                        "featureType": "poi.medical",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                            {
-                                "color": "#813033"
-                            },
-                            {
-                                "lightness": 38
-                            },
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {},
-                    {},
-                    {},
-                    {},
-                    {},
-                    {},
-                    {},
-                    {},
-                    {},
-                    {},
-                    {},
-                    {
-                        "elementType": "labels"
-                    },
-                    {
-                        "featureType": "poi.sports_complex",
-                        "stylers": [
-                            {
-                                "color": "#9e5916"
-                            },
-                            {
-                                "lightness": 32
-                            }
-                        ]
-                    },
-                    {},
-                    {
-                        "featureType": "poi.government",
-                        "stylers": [
-                            {
-                                "color": "#9e5916"
-                            },
-                            {
-                                "lightness": 46
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "transit.station",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "transit.line",
-                        "stylers": [
-                            {
-                                "color": "#813033"
-                            },
-                            {
-                                "lightness": 22
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "transit",
-                        "stylers": [
-                            {
-                                "lightness": 38
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road.local",
-                        "elementType": "geometry.stroke",
-                        "stylers": [
-                            {
-                                "color": "#f19f53"
-                            },
-                            {
-                                "lightness": -10
-                            }
-                        ]
-                    },
-                    {},
-                    {},
-                    {}
-                ],
+        for (var i = 0; i < markerData.length; i++) {
+            markeLatLng = new google.maps.LatLng(markerData[i]['latitude'], markerData[i]['longitude']);
+            marker[i] = new google.maps.Marker({
+                position: markeLatLng,
+                map: map
             });
-            var marker = new google.maps.Marker({
-                position: latlng,
-                map: map,
+
+            marker[i].setOptions({// TAM 東京のマーカーのオプション設定
                 icon: {
-                    url: imgpath,
-                    scaledSize: new google.maps.Size(100, 70)
+                    url: mapicon // マーカーの画像を変更
                 }
             });
+
+            infoWindow[i] = new google.maps.InfoWindow({
+                content: '<div class="sample"><p>' + markerData[i]['title'] + '</p><a href="http://127.0.0.1:8000/projects/' + markerData[i]["id"] + '"><img src="../..' + markerData[i]["outputimagepath"] + '" width="200px" height="auto"></a></div>'
+            });
+            infoWindow[i].open(map, marker[i]);
+            markerEvent(i);
         }
-    </script>
-    <script async defer
-        src="http://maps.google.com/maps/api/js?key=AIzaSyBvwSzoVar00cOjgEaOhR1NmtyNcdRJeyo&language=ja&callback=initMap"></script>
 
+        function markerEvent(i) {
+            marker[i].addListener('click', function () {
+                infoWindow[i].open(map, marker[i]);
+            });
+        }
+        // var point;
+        // var marker;
+        // var mid;
+        // var mtitle;
+        // var mpath;
+        // for (var i = 0; i <= Object.keys(projects).length; i++) {
+        //     mid = projects[i]["id"];
+        //     console.log(mid);
+        //     mtitle = projects[i]["title"];
+        //     console.log(mtitle);
+        //     mpath = projects[i]["outputimagepath"];
+        //     point = new google.maps.LatLng(projects[i]["latitude"], projects[i]["longitude"]); // 緯度経度のデータ作成
+        //     marker =
+        //         create_maker(point,
+        //             "<div class='mapbox'><div class='mapheader'>" + mtitle + "</div><div class='mapbody'><a href='http://127.0.0.1:8000/projects/" + mid + "'><img src='.." + mpath + "' height='140px' width='210px' /></a></div></div>"
+        //         );
+        // }
 
-</body>
+        // function create_maker(latlng, html) {
+        //     var infowindow = new google.maps.InfoWindow();
+        //     var marker = new google.maps.Marker({
+        //         position: latlng,
+        //         map: map,
+        //         icon: {
+        //             url: imgpath,
+        //             scaledSize: new google.maps.Size(50, 50)
+        //         }
+        //     });
+        //     // マーカーをマウスオーバーした時の処理
+        //     google.maps.event.addListener(marker, "mouseover", function () {
+        //         infowindow.setContent(html);
+        //         infowindow.open(map, marker);
+        //     });
+        // }
+    }
 
-</html>
+</script>
+<script
+    src="http://maps.google.com/maps/api/js?key=AIzaSyBvwSzoVar00cOjgEaOhR1NmtyNcdRJeyo&language=ja&callback=initMap"></script>
+
+{% endblock %}

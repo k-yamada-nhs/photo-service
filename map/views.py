@@ -7,6 +7,6 @@ from django.http import JsonResponse
 from django.core import serializers
 
 # Create your views here.
-def locationmap(request):
+def locationmap(request, pk):
     projects = Photo.objects.all()
     return render(request, 'map/locationmap.html', {'projects':  projects})
