@@ -236,15 +236,16 @@
                                         <div class="col-4">
 
 
+
                                             <!-- Card -->
                                             <div class="card  mb-3">
 
                                                 <!-- Card image -->
                                                 <div class="view overlay">
-                                                    <img class="card-img-top" src="{{ project.outputimagepath }}"
+                                                    <img class="card-img-top " src="{{ project.outputimagepath }}"
                                                         alt="Card image cap">
-                                                    <a href="#!">
-                                                        <div class="mask rgba-white-slight"></div>
+                                                    <a href="{% url 'app:projects_detail' project.id %}">
+                                                        <div class="mask waves-effect rgba-white-slight"></div>
                                                     </a>
                                                 </div>
 
@@ -252,36 +253,30 @@
                                                 <div class="card-body">
 
                                                     <div class="row">
-                                                        <div class="col-3">
+                                                        <div class="col-3 mb-3">
                                                             <img src="{{ project.user.profile.profileimage.url }}"
-                                                                class="img-fluid" alt="">
+                                                                class="img-fluid rounded-circle" alt="">
                                                         </div>
                                                         <div class="col-9">
-                                                            <p>@{{ project.user.username }}</p>
+                                                            <h6 class="tex-left">@{{ project.user.username }}</h6>
                                                         </div>
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col">
                                                             <!-- Title -->
-                                                            <h4 class="card-title">Card title</h4>
+                                                            <h4 class="card-title">{{ project.title }}</h4>
                                                             <!-- Text -->
-                                                            <p class="card-text">Some quick example text to build on the
-                                                                card title and make up the bulk of the card's content.
+                                                            <p class="card-text">{{ project.comment }}
                                                             </p>
-                                                            <!-- Button -->
-                                                            <a href="{% url 'app:projects_detail' project.id %}"
-                                                                class="btn btn-primary">Button</a>
+
                                                         </div>
                                                     </div>
-
 
                                                 </div>
 
                                             </div>
                                             <!-- Card -->
-
-
 
                                         </div>
                                         {% endfor %}
